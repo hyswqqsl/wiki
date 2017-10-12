@@ -1,10 +1,12 @@
 # 水位站接口设计
+### 一. 涉及对象
 
 <div align="center">
    <img src="http://112.124.104.190:10001/soft/wiki/uploads/cc01c724b094a678eeeb2595409764fd/station.png" width="680px" />
 </div>
 
-### 一. 后台stationCtroller接口 
+
+### 二. 后台stationCtroller接口 
 >
 1. **获取测站列表包括分享的测站:/list,GET**
     * 返回：OK(jsonObjectList)
@@ -66,19 +68,19 @@
     * 参数：instanceId：测站编码
     * 返回：OK(订单对象):成功；FAIL:参数错误
 
-### 三. 前台与检测系统的接口
+### 四. 前台与检测系统的接口
 >
 1. 取得宏电数据：www.qingqingshuili.cn:8080/irtu/{code} GET
 2. 取得仪表数据：www.qingqingshuili.cn:8080/sensor/{code} GET
 3. 取得仪表报警日志：www.qingqingshuili.cn:8080/sensor_warning/{code} GET
     
-### 四. 后台调用检测系统接口
+### 五. 后台调用检测系统接口
 >
 1. 取得仪表列表：www.qingqingshuili.cn:8080/sensor，GET
     * 参数：token
     * 返回：OK(仪表列表)
 
-### 五. 相关后台实体类
+### 六. 相关后台实体类
 ```java
 // 测站
 public class Station extends BaseEntity {
@@ -144,5 +146,6 @@ public class Camera {
     private String info;    
 }
 ```
+
 
 
