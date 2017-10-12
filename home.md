@@ -26,23 +26,6 @@ qxwz(千寻位置),bim(bim协同)这两个权限附加在项目上，每次进�
 
 ### 四. 套餐限制
 每种套餐都有限制，分为空间数、项目数、子账号数、全景数、千寻连接数，这些连接时都要判断是否超过限制，后台标签使用切面方式控制；由于前台的文件是由浏览器直接上传到阿里云的，因此文件上传、下载、删除需要先访问后台接口，判断是否允许上传，上传完文件再访问后台接口，告诉后台上传了多大的文件，让后台记录空间数变化；删除文件后也要访问后台接口，让后台记录空间数变化,同时记录日志；空间数只是限制阿里云空间大小，但是阿里云收费除了空间大小外，还有流量费，为了防止用户恶意操作浪费流量，还要限制流量使用，上传和下载流量最大是空间大小的10倍。
->
-1. 空间数
-    * 后台标签:IsAllowUploadFile,判断了空间数是否超过限制，上传流量是否超过限制，感觉不用定义标签,IsAllowDownloadFile，判断了下载流量是否超限，感觉不用定义标签
-    * 是否允许上传接口:project/isAllowUpload GET,返回：ok 允许上传，no_allow 不允许上传
-    * 记录上传文件接口:project/uploadFile POST,参数：projectId，fileName，fileSize,返回：ok:记录上传成功
-    * 是否允许下载接口:project/isAllowDownload GET,返回：ok 允许下载，no_allow 不允许下载
-    * 记录下载文件接口:project/downloadFile POST，参数：projectId, fileName，fileSize,返回：ok:记录上传成功
-    * 记录删除文件接口:projec/deleteFile POST,参数：projectId，fileName, fileSize,返回：ok：记录删除成功
-2. 项目数
-    * project/new接口，加入判断用户是否可以新建项目，后台使用的是IsAllowCreateProject标签，感觉不用定义标签
-3. 子账号数
-    * user/invite接口，加入判断用户是否可以邀请子账号，后台使用的IsAllowCreateAccount标签，感觉不用定义标签
-4. 全景数
-    * interest/savePanorama接口，加入判断用户是否可以新建全景，后台使用IsPano标签，感觉不用定义标签
-    * interest/savePanoramas接口，这是批量添加全景，下次迭代一个全景里可以添加多个场景图片，所以和单个全景添加一样处理
-5. 千寻连接数
-    * qxwz/getAccount接口，加入判断用户是否有权限连接千寻，连接数是否超过限制，后台使用IsFindCM标签，感觉不用定义标签
 
 ### 五. 后台标签
 1. 综上所述，后台标签大部分只用一次，就不需要定义了
