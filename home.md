@@ -1,8 +1,10 @@
-## 青清水利第九次迭代
+## 青清水利第九次迭代接口设计
 ### 涉及接口
 
 [套餐接口设计](http://www.qingqingshuili.net:10001/soft/wiki/wikis/package) |
+[认证接口设计](http://www.qingqingshuili.net:10001/soft/wiki/wikis/certity) |
 [水位站接口设计](http://www.qingqingshuili.net:10001/soft/wiki/wikis/station)
+
 
 
 ### 一. 用户权限
@@ -36,8 +38,3 @@ qxwz(千寻位置),bim(bim协同)这两个权限附加在项目上，每次进�
 用户消息，用户购买，续费，升级套餐成功，被分享查看项目，被取消查看项目，被分享查看测站，被取消查看测站,本次迭代暂不考虑。
 子账号消息，被邀请成为子账号，被解绑子账号，被分享(查看，编辑)项目，被取消查看或编辑项目。
 本次迭代,本次迭代暂不考虑。
-
-
-
-
-
