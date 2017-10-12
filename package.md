@@ -1,4 +1,13 @@
 ## 套餐接口设计
+
+![package](/uploads/698c785380709211e98c097ccb282ea7/package.png)
+
+![createPackage_ali](/uploads/33a0228e9e7cd9fd2917ae274c952929/createPackage_ali.png)
+
+![createPackage_weixin](/uploads/3e9cea4eba50dd08d328457ce8a0a14b/createPackage_weixin.png)
+
+
+
 ### 套餐过期
 套餐过期后，所有操作都不能进行，如建立项目、绑定子账号、编辑项目要素、上传文件、上传工程布置、地图上绘图、编辑水文站、不能上传外业勘测数据，这些涉及到的操作都要判断套餐是否过期，这些操作后台上都加上判断套餐未过期标签IsExpire，返回EXPIRE类型的消息；前台根据用户下的套餐对象状态，也进行限制，不用到后台验证，提高效率，涉及到的接口有：
 >
