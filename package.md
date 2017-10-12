@@ -1,14 +1,101 @@
 ## 套餐接口设计
 
-![package](/uploads/698c785380709211e98c097ccb282ea7/package.png)
+<div align="center">
+   <img src="http://112.124.104.190:10001/soft/wiki/uploads/698c785380709211e98c097ccb282ea7/package.png" width="680px" />
+   
+   <img src="http://112.124.104.190:10001/soft/wiki/uploads/33a0228e9e7cd9fd2917ae274c952929/createPackage_ali.png" width="680px" />
+   
+   <img src="http://112.124.104.190:10001/soft/wiki/uploads/3e9cea4eba50dd08d328457ce8a0a14b/createPackage_weixin.png" width="680px" />
+</div>
 
-![createPackage_ali](/uploads/33a0228e9e7cd9fd2917ae274c952929/createPackage_ali.png)
+### 一. tradeController 订单控制层
+>
+1. 套餐购买:在点击'提交订单'时调用， /trade/createPackage POST
+    * 参数：packageType：欲购买的配置类型
+    * 返回：OK(订单对象):订单建立成功，跳转到支付界面，EXIST：有未处理的订单，UNKNOWN:不符合购买条件，NOCERTIFY:未认证
+2. 配置续费: 在点击'提交订单'时调用，/trade/renewPackage POST 
+    * 参数：唯一标识：instanceId
+    * 返回：OK(订单对象):订单建立成功，跳转到支付界面，EXIST：有未处理的订单，UNKNOWN:未知错误
+3. 配置升级： 在点击'提交订单'时调用，/trade/updatePackage POST
+    * 参数：唯一标识：instanceId,预升级的配置：packageType
+    * 返回：OK(订单对象):订单建立成功，跳转到支付界面，EXIST：有未处理的订单，UNKNOWN:未知错误
+4. 获取用户订单列表: 获取订单列表 /trade/lists GET
+    * 参数：
+    * 返回：OK(订单列表)，UNKNOWN:未知错误
+5. 用户获取订单详情 /trade/trade/{outTradeNo} GET
+    * 参数：outTradeNo:
+    * 返回：OK(订单对象)，UNKNOWN:如果是用户，需要判断是不是自己的订单，如果不是，返回UNKNOWN
+6. 管理员获取订单详情 /trade/admin/trade/{outTradeNo} GET
+    * 参数：outTradeNo
+    * 返回：OK(订单对象)
+7. 删除订单 /trade/remove POST
+    * 参数：outTradeNo
+    * 返回：OK:删除成功，FAIL:未支付，交易中的订单，不能删除；UNKNOWN:需要判断是不是自己的订单，如果不是，返回UNKNOWN
+    * 注意：订单并不是真实删除，只是改变删除状态
+8. 关闭订单 /trade/close POST
+    * 参数：outTradeNo
+    * 返回：OK:关闭成功，UNKNOWN:需要判断是不是自己的订单，如果不是，返回UNKNOWN
 
-![createPackage_weixin](/uploads/3e9cea4eba50dd08d328457ce8a0a14b/createPackage_weixin.png)
+### 二. turnoverController 流水控制层
+>
+1. 管理员获取流水 /turnover/admin/lists GET
+   * 参数：begin:开始时间,long型，end：结束时间，long型
+   * 返回：OK(流水列表)
 
+### 三.  WXPayController 微信支付控制层
+>
+1. 获取微信支付信息:订单生产成功后，前台跳转到支付界面，调用此接口获得微信支付二维码，/wxPay/unifiedOrderPay/{outTradeNo} GET 
+    * 参数：outTradeNo:订单号
+    * 返回：OK(qrCode 二维码支付地址，需前台生成二维码):成功,FAIL:参数验证失败
+2. payNotice: 微信主动发送的支付成功回调 
+    * 成功后发出短信提醒
+3. 管理员获取微信订单状态：wxPay/admin/queryTrade/{outTradeNo} ??
+    * 参数:outTradeNo:订单号
+    * 返回：OK(tradeState:微信订单状态)
+4. 管理员根据微信订单更新订单: wxPay/admin/refreshTrade POST
+    * 成功后发出短信提醒
+    * 参数：outTradeNo
+    * 返回：OK
 
+### 四. aliPayController 支付宝控制层
+>
+1. 获取支付宝信息:订单生产成功后，前台跳转到支付界面，调用此接口获得支付页面，/aliPay/pcPay/{outTradeNo} GET 
+    * 参数：outTradeNo:订单号
+    * 返回：直接将完整的表单html输出到页面
+2. payNotice:支付宝主动发送的支付成功回调
+    * 成功后发出短信提醒
+3. 管理员取支付宝订单状态：alyPay/admin/queryTrade/{outTradeNo}
+    * 参数:outTradeNo:订单号
+    * 返回：OK(tradeState:订单状态)    
+    * 参数:outTradeNo:订单号
+    * 返回：OK(tradeState:订单状态)         
+<pre>
+    // ACQ.SYSTEM_ERROR	系统错误重新发起请求
+    // ACQ.INVALID_PARAMETER	参数无效检查请求参数，修改后重新发起请求
+    // ACQ.TRADE_NOT_EXIST  查询的交易不存在  检查传入的交易号是否正确，修改后重新发起请求
+    // WAIT_BUYER_PAY（交易创建，等待买家付款）
+    // TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）
+    // TRADE_SUCCESS（交易支付成功）
+    // TRADE_FINISHED（交易结束，不可退款）
+</pre>
+4. 管理员根据支付宝订单更新订单: aliPay/admin/refreshTrade POST
+    * 成功后发出短信提醒
+    * 参数：outTradeNo
+    * 返回：OK
+       
+### 五. modelControlelr 模板控制层
+>
+1 配置列表: /model/packages GET
+    * 参数：无
+    * 返回：OK(水利云配置列表),list方式
 
-### 套餐过期
+### 六. packageController 水利云配置控制层
+>
+1. 获取用户当前配置：/package/getPackage ,每次重新取，还是配置购买，升级后由前台动态更新
+    * 参数：无
+    * 返回：OK(当前配置对象)
+
+### 七. 套餐过期
 套餐过期后，所有操作都不能进行，如建立项目、绑定子账号、编辑项目要素、上传文件、上传工程布置、地图上绘图、编辑水文站、不能上传外业勘测数据，这些涉及到的操作都要判断套餐是否过期，这些操作后台上都加上判断套餐未过期标签IsExpire，返回EXPIRE类型的消息；前台根据用户下的套餐对象状态，也进行限制，不用到后台验证，提高效率，涉及到的接口有：
 >
 1. 建立项目，project/new POST
@@ -43,7 +130,7 @@
 30. 是否有bim协同权限：project/isAllowBim,GET
 
 
-### 套餐限制
+### 八. 套餐限制
 
 每种套餐都有限制，分为空间数、项目数、子账号数、全景数、千寻连接数，这些连接时都要判断是否超过限制，后台标签使用切面方式控制；由于前台的文件是由浏览器直接上传到阿里云的，因此文件上传、下载、删除需要先访问后台接口，判断是否允许上传，上传完文件再访问后台接口，告诉后台上传了多大的文件，让后台记录空间数变化；删除文件后也要访问后台接口，让后台记录空间数变化,同时记录日志；空间数只是限制阿里云空间大小，但是阿里云收费除了空间大小外，还有流量费，为了防止用户恶意操作浪费流量，还要限制流量使用，上传和下载流量最大是空间大小的10倍。
 
@@ -67,4 +154,123 @@
 7. 全景数，interest/savePanorama接口，加入判断全景数超限
 8. 批量添加全景，interest/savePanoramas接口，加入判断全景数超限
 9. 千寻连接接口，qxwz/getAccount接口，加入判断套餐是否过期，是否有千寻连接权限，判断连接数是否超限
+
+### 九. 相关实体类
+
+```
+// 配置
+public class Package extends BaseEntity{
+    /** 套餐类型 */
+    private CommonEnum.PackageType type;
+    /** 到期时间 */
+    private Date expireDate;
+    /** 当前总空间使用情况 */
+    private long curSpaceNum;
+    /** 当前流量使用情况 */
+    private long curTrafficNum;
+    /** 唯一标识 */
+    private String instanceId;
+    // 目前项目数
+    private long curProjectNum;
+    // 目前子账号数
+    private long curAccountNum;
+
+    private User user;
+}
+// 订单
+public class Trade extends BaseEntity{
+    /** 订单号 */
+    private String outTradeNo;
+    /** 支付日期 */
+    private Date payDate;
+    /** 支付类型（微信、支付宝） */
+    private PayType payType;
+    /** 服务类型 */
+    private Type type;
+    /** 购买类型（首次，续费）*/
+    private BuyType buyType;
+    /** 订单状态 */
+    private Status status;
+    /** 订单价格(分) */
+    private long price;
+    /** 服务唯一编码 */
+    private String instanceId;
+    /** 三类商品type整合 */
+    private BaseType baseType;
+    /** 有效时间 */
+    private int validTime;
+    /** 备注 */
+    private String remark;
+    /** Goods下载地址 */
+    private String downloadUrl;
+    /** Goods个数 */
+    private int goodsNum;
+    /** 退款日期 */
+    private Date refundDate;
+    // 删除状态
+    private boolean deleteStatus;
+
+    private User user;
+
+    // 配置类型
+    public enum BaseType{
+        TEST,
+        EXPERIENCE,
+        YOUTH,
+        SUN,
+        SUNRISE
+    }
+
+    public enum PayType{
+        /** 微信 */
+        WX,
+        /** 支付宝 */
+        ALI;
+    }
+
+    public enum BuyType{
+        /** 首次购买 */
+        FIRST,
+        /** 续费 */
+        RENEW,
+        /** 升级 */
+        UPDATE
+    }
+
+    public enum Status{
+        /** 未支付 */
+        NOPAY,
+        /** 已支付 */
+        PAY,
+        /** 已关闭 */
+        CLOSE,
+        /** 已撤销 */
+        REVERSE,
+        /** 已退款 */
+        REFUND
+    }
+
+    public enum Type{
+        /** 套餐 */
+        PACKAGE,
+        /** 测站 */
+        STATION,
+        /** 数据服务 */
+        GOODS
+    }
+}
+// 流水
+public class Turnover extends BaseEntity{
+    /** 流水号 */
+    private String turboverNo;
+    /** 订单号 */
+    private String outTradeNo;
+    /** 支付状态 */
+    private Type type;
+    /** 价格 */
+    private long price;
+    /** 余额 */
+    private long balance;
+}
+```
 
