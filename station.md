@@ -56,7 +56,7 @@
 15. **测站分享：shares，POST**
     * 参数：userIds:欲分享的用户(id用‘，’隔开)，sensorIds:欲分享的测站(id用‘，’隔开)
     * 返回：OK
-16. 取消测站分享：/station/unShare POST
+16. **取消测站分享：/station/unShare POST**
     * 参数：Long sensorId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
     * 返回：OK
     * 后台修改内容,station实体类添加share字段，在实体Station包下增加Share,ShareVisit类，和project分享的实体类Share,ShareVisit类似
@@ -80,7 +80,7 @@
     
 ### 五. 后台调用检测系统接口
 >
-1. 取得仪表列表：www.qingqingshuili.cn:8080/sensor，GET
+1. **取得仪表列表：www.qingqingshuili.cn:8080/sensors，GET ??**
     * 参数：token
     * 返回：OK(仪表列表)
 
@@ -150,6 +150,3 @@ public class Camera {
     private String info;    
 }
 ```
-
-
-
