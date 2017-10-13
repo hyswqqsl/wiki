@@ -108,9 +108,9 @@
 8. 是否允许上传接口:project/isAllowUpload GET,返回：ok 允许上传，no_allow 不允许上传
 9. 保存单元下的复合单元列表,element/elementGroup POST
 10. 添加要素数据,element/makeElementDataGroup POST
-11. 用户邀请子账号,user/account/invite 应为POST
-12. 解除水利云账号的绑定,user/account/unbind POST
-13. 新建坐标线面,地图上绘图,field/createShape POST
+11. **用户邀请子账号,user/account/invite 应为POST ??**
+12. **解除水利云账号的绑定,user/account/unbind POST ??**
+13. 新建坐标线面,地图上绘图,field/createShape POST 
 14. 编辑坐标线面,地图上绘图,field/editShape POST
 15. 新建建築物，地图上绘图,field/createBuild POST
 16. 编辑建筑物,地图上绘图,field/editBuild POST
