@@ -67,8 +67,8 @@
     * 购买成功后可以使用一个月
     * 参数：stationType:欲购买的测站类型
     * 返回：OK(订单对象):成功;FAIL:参数错误
-2. **测站续费:renewStation,POST**
-    * 测站续费每次一年，成功后修改测站到期时间
+2. **测站服务续费:renewStationService,POST ??**
+    * 测站服务续费每次一年，成功后修改测站到期时间
     * 参数：instanceId：测站编码
     * 返回：OK(订单对象):成功；FAIL:参数错误
 
@@ -150,3 +150,6 @@ public class Camera {
     private String info;    
 }
 ```
+
+
+
