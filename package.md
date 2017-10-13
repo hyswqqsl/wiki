@@ -106,10 +106,10 @@
 6. 将多个项目的一个权限分享给一个子账号,project/cooperateSim POST
 7. 向项目的业主和负责人发送短信,project/sendMessage POST
 8. 是否允许上传接口:project/isAllowUpload GET,返回：ok 允许上传，no_allow 不允许上传
-9. 保存单元下的复合单元列表,element/saveElementGroup POST
+9. 保存单元下的复合单元列表,element/elementGroup POST
 10. 添加要素数据,element/makeElementDataGroup POST
 11. **用户邀请子账号,user/invite GET ?? 应为POST**
-12. 解除公众号与水利云账号的绑定,user/unbind POST
+12. ~~解除公众号与水利云账号的绑定,user/unbind POST~~
 13. 新建坐标线面,地图上绘图,field/createShape POST
 14. 编辑坐标线面,地图上绘图,field/editShape POST
 15. 新建建築物，地图上绘图,field/createBuild POST
