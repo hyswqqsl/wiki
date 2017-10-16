@@ -52,12 +52,12 @@
 14. **监测取得测站参数：getParamters，GET**
     * 这是监测系统取得所有已改变的参数列表
     * 参数：token
-    * 返回：OK：返回包含仪表编码和参数，格式：`{code:xx,paramter:{xx}}`
+    * 返回：OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：`[{instanceId:xx,sensors:[{code:xx},{code:xx}],参数1:值1,参数2:值2}, {...}]`
 15. **测站分享：shares，POST**
-    * 参数：userIds:欲分享的用户(id用‘，’隔开)，sensorIds:欲分享的测站(id用‘，’隔开)
+    * 参数：userIds:欲分享的用户(id用‘，’隔开)，stationIds:欲分享的测站(id用‘，’隔开)
     * 返回：OK
 16. **取消测站分享：/station/unShare POST**
-    * 参数：Long sensorId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
+    * 参数：Long stationId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
     * 返回：OK
     * 后台修改内容,station实体类添加share字段，在实体Station包下增加Share,ShareVisit类，和project分享的实体类Share,ShareVisit类似
 
