@@ -49,7 +49,7 @@
     * 有问题，请求token应该放在这个控制层，而不是sensorController??
     * 参数：
     * 返回：OK(token字符串)
-14. **监测取得仪表列表：getParamters，GET**
+14. **监测取得测站参数：getParamters，GET**
     * 这是监测系统取得所有已改变的参数列表
     * 参数：token
     * 返回：OK：返回包含仪表编码和参数，格式：`{code:xx,paramter:{xx}}`
