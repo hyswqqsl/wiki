@@ -76,7 +76,7 @@
 >
 1. 取得宏电数据：www.qingqingshuili.cn:8080/irtu/{code} GET
 2. 取得仪表数据：www.qingqingshuili.cn:8080/sensor/{code} GET
-3. 取得仪表报警日志：www.qingqingshuili.cn:8080/sensor_warning/{code} GET
+3. 取得仪表报警日志：www.qingqingshuili.cn:8080/station/warning/{instanceId} GET ??
     
 ### 五. 后台调用检测系统接口
 >
