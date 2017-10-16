@@ -14,10 +14,10 @@
 ### 三. 测站共享设计 StationController
 >
 1. 多测站多用户共享：/station/shares POST
-    * 参数：String stationIds,欲分享的仪表，用逗号隔开，示例("12,34,24");String userId,分享的目标用户,用逗号隔开，示例("12,34,24")
+    * 参数：String userIds,分享的目标用户,用逗号隔开，示例("12,34,24"),String stationIds,欲分享的仪表，用逗号隔开，示例("12,34,24");
     * OK,成功返回
 2. 取消测站分享：/station/unShare POST
-    * 参数：Long sensorId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
+    * 参数：Long stationId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
 3. 后台修改内容,station实体类添加share字段，在实体Station包下增加Share,ShareVisit类，和project分享的实体类Share,ShareVisit类似
 
 
