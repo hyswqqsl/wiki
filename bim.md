@@ -24,9 +24,9 @@ unity程序发布为webgl后，可以接收到前台发送的参数，使用的�
 ```
 {D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}
 ```
-浏览器上个URL格式为：
+浏览器上的URL格式为：
 
 ```
-http://xxxx.com/webgl/xiaol?parameter="{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}"
+http://xxxx.com/webgl/xiaolc?parameter="{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}"
 ```
 
