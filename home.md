@@ -6,10 +6,14 @@
 [水位站接口设计](http://112.124.104.190:10001/soft/wiki/wikis/station) |
 [千寻位置接口设计](http://112.124.104.190:10001/soft/wiki/wikis/qxwz) |
 [分享接口设计](http://112.124.104.190:10001/soft/wiki/wikis/share) |
-[BIM参数传递](http://112.124.104.190:10001/soft/wiki/wikis/bim)
+[BIM参数传递](http://112.124.104.190:10001/soft/wiki/wikis/bim) |
+[其他接口设计](http://112.124.104.190:10001/soft/wiki/wikis/other) |
 
-### 一. 用户权限
-用户分为simple(默认),identity(实名认证),company(企业认证)，用户一旦注册，即拥有simple角色，一旦完成实名认证即拥有identity角色，完成企业认证即拥有company角色。**每月运行定时任务**对认证进行验证是否过期，如果过期将认证状态改为过期，同时移除用户的identity角色或company角色。前台可以利用角色控制显示：
+### 一. 用户角色
+用户分为simple(默认),identity(实名认证),company(企业认证)，用户一旦注册，即拥有simple角色，一旦完成实名认证即拥有identity角色，完成企业认证即拥有company角色。**每月运行定时任务**对认证进行验证是否过期，如果过期将认证状态改为过期，同时移除用户的identity角色或company角色。前台可以利用角色控制显示；同时增加用户web登录和phone登录角色。
+
+所以用户分为user:simple,user:identity,user:company,user:web
+没有user:web角色不能删除项目，网页上绘图，上传全景
 > 
 1. 拥有identity角色的，才能购买套餐，才能对套餐升级和续费
 2. 拥有identity角色的，才能购买测站和续费
