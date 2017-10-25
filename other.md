@@ -6,7 +6,7 @@
     * 参数：key:文件路径,bucketName:bucket名
     * 返回：OK：内容是{url：访问地址}，如果文件不存在没有内容
 2. 取得文件列表：objectFiles，GET
-    * 参数：treePath？？:文件夹路径
+    * 参数：id:文件夹路径
     * 返回：OK：取得成功，数据是文件列表
 
 ### 二. fieldController接口(filed)，坐标转换
@@ -20,15 +20,6 @@
 3. 工程布置坐标WGS84导出：writeExcel,GET
     * 参数：projectId:项目id；type：design或field
     * 返回：直接下载
-    
-    
-```
-    @RequiresAuthentication
-    @RequiresRoles(value = {"user:simple","account:simple"}, logical = Logical.OR)
-    @RequestMapping(value = "/build", method = RequestMethod.GET)
-    public @ResponseBody Message uploadBuild??(@RequestParam long id) {
-```
-
 
 ```
 	/**
