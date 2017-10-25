@@ -1,5 +1,5 @@
 ## 坐标转换,全景等操作接口设计
-### ossController接口
+### 一. ossController接口
 >
 1. 取得文件访问url：getFileUrl，GET
     * 返回的文件url有效期30分钟
@@ -9,7 +9,7 @@
     * 参数：treePath？？:文件夹路径
     * 返回：OK：取得成功，数据是文件列表
 
-### fieldController接口(filed)，坐标转换
+### 二. fieldController接口(filed)，坐标转换
 >
 1. 工程布置坐标导入：coordinateFile, POST
     * 参数：projectId？？:项目id，baseLevelType:基准面类型，WGS84Type:WGS84坐标格式，   commonPointStr:公共点json，[{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]
@@ -68,7 +68,7 @@
 
 ```
 
-### 全景和兴趣点接口,interestController
+### 三. 全景和兴趣点接口,interestController
 基础兴趣点操作，全景审核，个人兴趣点功能从用户移到管理员，所有涉及到以上操作的路径都增加/admin/：
 >
 1. 保存基础兴趣点:saveBaseInterest改为admin/saveBaseInterest
