@@ -12,10 +12,10 @@
 ### 二. fieldController接口(filed)，坐标转换
 >
 1. 工程布置坐标导入：coordinateFile, POST
-    * 参数：projectId？？:项目id，baseLevelType:基准面类型，WGS84Type:WGS84坐标格式，   commonPointStr:公共点json，[{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]
+    * 参数：projectId？？:项目id，baseLevelType:基准面类型，WGS84Type:WGS84坐标格式，   commonPointStr:公共点json，[{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]
     * 返回：OK：上传成功；FAIL：上传失败:坐标文件或格式错误;EXIST：中心坐标点(行政区)未选择；EXPIRED：您当前的套餐已过期，请重新购买
 2. 四参数或七参数解算：coordinate/parameter/caculate, POST
-    * 参数：commonPointStr:公共点json，[{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyz:{x:12.43,y:34.343,z:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]
+    * 参数：commonPointStr:公共点json，[{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]
     * 返回：OK:解算成功，数据是解算结果，七参数{a:xx,b:xx,c:xx,d:xx,e:xx,f:xx}，四参数？？;FAIL:参数错误
 3. 工程布置坐标WGS84导出：writeExcel,GET
     * 参数：projectId:项目id；type：design或field
