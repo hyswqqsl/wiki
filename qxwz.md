@@ -17,7 +17,7 @@
     * 参数：userName:千寻账号；password:千寻密码;timeout:过期时间
     * 返回：OK:发送成功;FAIL:添加失败
 6. 删除千寻账号：/qxwz/admin/delete/{id},DELETE
-    * 参数：userName:千寻账号；password:千寻密码;timeout:过期时间
+    * 参数：id:千寻id
     * 返回：OK:发送成功;FAIL:添加失败
 7. 获取千寻列表：/qxwz/admin/lists, GET
     * 参数：
