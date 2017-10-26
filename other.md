@@ -79,13 +79,12 @@
     * 参数：id:项目id; iconType:图标类型
     * 返回：OK:保存成功；FAIL:保存失败
 
-
-
 ```java
+    projct.java:
     /**
      * 项目图标类型
      */
-    public enum ProjectIconType {
+    public enum IconType {
         STYLE_0,
         STYLE_1,
         STYLE_2,
