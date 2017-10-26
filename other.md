@@ -59,7 +59,7 @@
 
 ```
 
-### 三. 全景和兴趣点接口,interestController
+### 三. 全景和兴趣点接口,interestController(/interest)
 基础兴趣点操作，全景审核，个人兴趣点功能从用户移到管理员，所有涉及到以上操作的路径都增加/admin/：
 >
 1. 保存基础兴趣点:saveBaseInterest改为admin/saveBaseInterest
@@ -72,5 +72,26 @@
 8. 全景审核通过:panoramaReviewSuccess改为admin/panoramaReviewSuccess
 9. 个人兴趣点审核未通过:interestReviewFail改为admin/interestReviewFail
 10. 全景审核未通过:panoramaReviewFail改为admin/panoramaReviewFail
+
+### 四. 项目操作接口,projectController(/project)
+> 
+1. 项目图标类型定制保存：iconType/update,POST
+    * 参数：id:项目id; iconType:图标类型
+    * 返回：OK:保存成功；FAIL:保存失败
+
+
+
+```java
+    /**
+     * 项目图标类型
+     */
+    public enum ProjectIconType {
+        STYLE_0,
+        STYLE_1,
+        STYLE_2,
+        STYLE_3,
+        STYLE_4,
+        STYLE_5
+    }```
 
 
