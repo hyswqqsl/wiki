@@ -85,9 +85,12 @@
        
 ### 五. modelControlelr 模板控制层
 >
-1 配置列表: /model/packages GET
+1. 套餐模板列表: /model/packages, GET
     * 参数：无
-    * 返回：OK(水利云配置列表),list方式
+    * 返回：OK(套餐模板列表),list方式
+2. 测站模板列表：/model/stations, GET
+    * 参数：无
+    * 返回：OK(测站模板列表),list方式
 
 ### 六. packageController 水利云配置控制层
 >
