@@ -76,7 +76,8 @@
 >
 1. 取得宏电数据：www.qingqingshuili.cn:8080/irtu/{code} GET
 2. 取得仪表数据：www.qingqingshuili.cn:8080/sensor/{code} GET
-3. 取得仪表报警日志：www.qingqingshuili.cn:8080/station/warning/{instanceId} GET ??
+3. 取得重点河流数据：www.qingqingshuili.cn:8080/sensor/{code} GET
+4. 取得仪表报警日志：www.qingqingshuili.cn:8080/station/warning/{instanceId} GET ??
     
 ### 五. 后台调用检测系统接口
 >
@@ -121,6 +122,19 @@ public class Station extends BaseEntity {
 
     /** 河底高程*/
     private Double bottomElevation;
+}
+/**
+ * 测站类型
+ */
+public enum StationType{
+    /** 水文站 */
+    HYDROLOGIC_STATION,
+    /** 雨量站 */
+    RAINFALL_STATION,
+    /** 水位站 */
+    WATER_LEVEL_STATION,
+    /** 水质站 */
+    WATER_QUALITY_STATION
 }
 // 仪表
 public class Sensor extends BaseEntity {
