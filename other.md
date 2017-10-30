@@ -68,7 +68,9 @@
 		// 35:23:45
 		DEGREE_MINUTE_SECOND_1,
 		// 35^o23'45''
-		DEGREE_MINUTE_SECOND_2;
+		DEGREE_MINUTE_SECOND_2,
+		// 平面坐标
+		PLANE_COORDINATE;		
 		public static WGS84Type valueOf(int ordinal) {
 			if (ordinal < 0 || ordinal >= values().length) {
 				throw new IndexOutOfBoundsException("Invalid ordinal");
