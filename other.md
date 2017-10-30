@@ -34,6 +34,7 @@
 3. 七参数解算：coordinate/parameter/seven/caculate, POST
     * 参数：
     * projectId:项目id
+    * baseLevelType:基准面类型
     * commonPointStr:公共点json，[{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}},{xyh:{x:12.43,y:34.343,h:65.343},blh:{b: 34.34,l:343.4,h:324.34}}]，三组点
     * 返回:
     * OK:解算成功，数据是解算结果，七参数{X:12.2,Y:12.4,Z:12.7,K:12.6,EX:12.5,EY:17.65,EZ:12.5}
