@@ -29,4 +29,21 @@ unity程序发布为webgl后，可以接收到前台发送的参数，使用的�
 ```
 http://xxxx.com/webgl/xiaolc?parameter="{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}"
 ```
+### 二. 检查井
+检查井参数在后台定义是这样的：
+
+```
+    <attribeGroup alias="15" status="normal" name="控制尺寸">
+        <dimension name="设计标高" alias="D15BG" unit="m" type="number"/>
+        <dimension name="井深h" alias="D151" unit="m" type="number"/>
+        <dimension name="直径d" alias="D152" unit="m" type="number"/>
+        <dimension name="壁厚t" alias="D153" unit="m" type="number"/>
+    </attribeGroup>
+```
+前台会把参数以json方式发给BIM，格式如下：
+
+```
+{D15BG:xx,D151:xx,D152:xx,D153:xx}
+```
+
 
