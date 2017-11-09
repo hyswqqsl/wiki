@@ -40,7 +40,9 @@
 7. 管理员
     - **千寻账号新建时时间输入不方便**
     - 流水查询失败
-8. 待定：页面反馈功能
+8. 其他
+    - http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css 改为本地加载
+9. 待定：页面反馈功能
 
 
 
