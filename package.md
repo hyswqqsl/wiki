@@ -35,7 +35,7 @@
 8. 关闭订单 /trade/close POST
     * 参数：outTradeNo
     * 返回：OK:关闭成功，UNKNOWN:需要判断是不是自己的订单，如果不是，返回UNKNOWN
-9.** 订单remark属性：{"type":"UPDATE","oldType":"青春版","newType":"朝阳版", expireDate:过期时间(long)}**
+9. ** 订单remark属性：{"type":"UPDATE","oldType":"青春版","newType":"朝阳版", expireDate:过期时间(long)}**
         
 ### 二. turnoverController 流水控制层
 >
