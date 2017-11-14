@@ -112,7 +112,7 @@
 7. 向项目的业主和负责人发送短信,project/sendMessage POST
 8. 是否允许上传接口:project/isAllowUpload GET,返回：ok 允许上传，no_allow 不允许上传
 9. 保存单元下的复合单元列表,element/elementGroup POST
-    **id参数名字参数projectId**
+    * **id参数名字参数projectId**
 10. 添加要素数据,element/makeElementDataGroup POST
 11. 用户邀请子账号,user/account/invite 应为POST
 12. 解除水利云账号的绑定,user/account/unbind POST
