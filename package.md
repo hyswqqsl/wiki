@@ -141,7 +141,7 @@
 
 >
 1. 向后台报告上传文件信息，project/reportUploadFileInfo POST
-	  * **增加projectId**
+    * **增加projectId**
     * 根据文件大小更改空间使用情况，根据文件名记录上传日志(本迭代暂不考虑)
     * 参数：projectId,项目id，fileNames,上传的一批文件名，多个用‘,’隔开，fileSize，上传的一批文件总大小
     * 返回：OK,附加数据是{fileSize:文件大小}，将文件大小回传给前台，FAIL，参数错误
