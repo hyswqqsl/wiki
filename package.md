@@ -134,6 +134,7 @@
 28. 千寻连接接口，qxwz/getAccount接口
 29. 是否有千寻连接权限：qxwz/isAllowQxwz,GET
 30. 是否有bim协同权限：project/isAllowBim,GET
+    - **增加projectId** 
 
 ### 八. 套餐限制
 
@@ -141,11 +142,10 @@
 
 >
 1. 向后台报告上传文件信息，project/reportUploadFileInfo POST
-    * **增加projectId**
     * 根据文件大小更改空间使用情况，根据文件名记录上传日志(本迭代暂不考虑)
     * 参数：projectId,项目id，fileNames,上传的一批文件名，多个用‘,’隔开，fileSize，上传的一批文件总大小
     * 返回：OK,附加数据是{fileSize:文件大小}，将文件大小回传给前台，FAIL，参数错误
-2. **向后台报告下载文件信息，project/reportDownloadFileInfo POST ??**
+2. **向后台报告下载文件信息，project/reportDownloadFileInfo POST**
     * 根据文件大小更改空间使用情况，根据文件名记录下载日志(本迭代暂不考虑)
     * 参数：projectId,项目id，fileName,下载文件名，多个用‘,’隔开，fileSize，下载文件大小
     * 返回：OK,附加数据是{fileSize:文件大小}，将文件大小回传给前台，FAIL，参数错误 
