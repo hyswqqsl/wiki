@@ -154,12 +154,12 @@
     * 参数：projectId
     * 返回：OK 允许上传
     * **EXPIRED 套餐过期**
-    * **NO_ALLOW 不允许下载**
+    * **NO_ALLOW 空间已满或流量用尽**
 4. 是否允许下载接口:project/isAllowDownload GET   
     * 判断上传流量是否超限
     * 参数： projectId
     * 返回：OK 允许下载
-    * NO_ALLOW 不允许下载
+    * **NO_ALLOW 空间已满或流量用尽**
 5. 新建项目，project/new接口，加入判断项目数超限
 6. 子账号数，user/invite接口，加入判断子账号数超限
 7. 全景数，interest/savePanorama接口，加入判断全景数超限
