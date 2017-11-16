@@ -29,7 +29,22 @@
     * baseLevelType:基准面类型
     * WGS84Type:WGS84坐标格式
     * 返回：直接下载
-
+3. 编辑建筑物:editBuild,POST
+    * 这个接口用在两处，1是工程布置处，2是地图上编辑，两个地方的参数不用，后台都能处理
+    * 参数：
+    * 1 工程布置：
+    * projectId:项目id
+    * id:建筑物id
+    * attribes:数组，包含{alias:xx,value:xx}格式的一系列属性
+    * 2 地图上编辑
+    * projectId:项目id
+    * id:建筑物id
+    * type:建筑物类型
+    * remark:建筑物备注
+    * 返回：
+    * OK：保存成功
+    * FAIL：保存失败
+    * EXIST:建筑物不存在
 ```
 	/**
 	 * 坐标转换基准面类型
