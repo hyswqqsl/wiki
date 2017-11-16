@@ -241,11 +241,11 @@ public class Trade extends BaseEntity{
 
     public enum BuyType{
         /** 首次购买 */
-        FIRST,
+        BUY,
         /** 续费 */
         RENEW,
         /** 升级 */
-        UPDATE
+        UPGRADE
     }
 
     public enum Status{
