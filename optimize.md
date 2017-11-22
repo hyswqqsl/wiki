@@ -35,22 +35,22 @@
     * 返回：OK:发送成功,FAIL:email不合法，EXIST：邮箱不存在
 7. 注册用户：/account/register
     * 参数：**name:真实姓名**，password:密码，验证码：verification:验证码
-    * 返回：OK:注册成功，INVALID:验证码过期，FAIL:验证码错误  
+    * 返回：OK:注册成功，INVALID:请重新获取验证码，FAIL:验证码错误  
 8. 手机找回密码: /account/changePassword 改为 /account/phone/getbackPassord，忘记密码时找回密码 ??
     * 参数：verification:验证码;passord:重设的密码; 
-    * 返回：OK:修改成功，INVALID:验证码过期，FAIL:验证码错误
+    * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误
 9. email找回密码:/account/email/getbackPassord，忘记密码时找回密码
     * 参数：verification:验证码;passord:重设的密码;   
-    * 返回：OK:修改成功，INVALID:验证码过期，FAIL:验证码错误 
+    * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
 10. 修改密码:在基本资料的修改密码处点击保存时调用， /account/updatePassword POST
     * 参数：oldPassword:当前密码，newPassword：新密码
     * 返回：OK:修改成功，UNKNOWN:当前密码错误
 11. 修改密保手机：在基本资料的密保手机处点击保存时调用， /account/changePhone 改为 /account/updatePhone POST ??
     * 参数：verification:验证码
-    * 返回：OK:修改成功，INVALID:验证码过期，FAIL:验证码错误 
+    * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
 12. 绑定邮箱：在基本资料里的绑定邮箱处点击保存时调用，/account/updateEmail POST
     * 参数：verification:验证码
-    * 返回：OK:修改成功，INVALID:验证码过期，FAIL:验证码错误 
+    * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
 13. 获取子账号信息：在基本资料的基本信息处显示，/account/getAccount GET
     * 参数：
     * 返回：OK(用户对象)，包含昵称、手机号，身份认证状态，企业认证状态，绑定微信的昵称，微信openid等
@@ -65,7 +65,7 @@
 20. web端验证码登录：/account/loginByVerifyCode 改为 /account/web/loginByVerify POST ??
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：password:密码；verification:验证码
-    * 返回：OK(用户对象):登录成功；FAIL：密码或验证码错误；UNKNOWN:用户已锁定；INVALID:验证码过期
+    * 返回：OK(用户对象):登录成功；FAIL：密码或验证码错误；UNKNOWN:用户已锁定；INVALID:请重新获取验证码
 21. 判断输入的用户密码是否正确：/account/checkPassword,POST
     * 进入账号管理时，要求输入密码，保证安全
     * 参数：password:密码
@@ -159,6 +159,7 @@ public class AccountMessage extends BaseEntity{
 #### 用户在项目编辑页面，可以查看此项目的日志，ProjectController接口：
 1. 取得项目日志：/project/elementLog/{projectId}，GET
     - 根据项目id取得项目所有日志，包括要素和文件
+    - 为保证效率，项目日志最多返回500条
     - 参数：
     - projectId:项目id
     - 返回：
@@ -186,6 +187,7 @@ public class ProjectLog extends BaseEntity {
 	}
 }
 ```
+
 ### 六. 套餐详情
 在当前套餐界面，显示套餐各项已使用/最大数量,各项是：
 - 子账号数
@@ -197,7 +199,8 @@ public class ProjectLog extends BaseEntity {
 
 ![QQ20171122-143851_2x](/uploads/7196cfa265f9df24d3b8ab73f35b8bae/QQ20171122-143851_2x.png)
 
-所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义：
+所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义，存储统计日志每一小时生成一个，用户可以按时间段查询，有UserController提供查询接口：
+
 
 ```
 // 存储日志
@@ -221,20 +224,20 @@ public class StorageCountLog extends BaseEntity {
     /** 用户id */
     private long userId;
     /** 完成后的空间数 */
-    private long spaceCount;
+    private long curSpaceNum;
     /** 上传大小 */
     private long uploadCount;
     /** 下载大小 */
     private long downloadCount;
     /** 完成后的流量数 */
-    private long trafficCount;
+    private long curTrafficNum;
 }
 ```
 StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有1小时左右的延时。
 ### 七. 地图定制图例
 https://developers.google.cn/maps/documentation/javascript/adding-a-legend?hl=zh-cn
 ### 八. 前台gulp压缩html和js
-### 讨论一下
+### 九. 讨论一下
 -  帮助文档，点击左上角logo，显示帮助列表
 -  反馈意见，审核
 
