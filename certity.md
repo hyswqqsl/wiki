@@ -80,7 +80,7 @@
 19. 微信公众号自动登录：/user/wechat/autoLogin POST
     * 参数：code：微信公众号回传的标识码
     * 返回：OK(用户对象):登录成功；EXIST:用户不存在
-20.web端验证码登录：/user/web/loginByVerify POST
+20. web端验证码登录：/user/web/loginByVerify POST
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：password:密码；verification:验证码
     * 返回：OK(用户对象):登录成功；FAIL：密码或验证码错误；UNKNOWN:用户已锁定；INVALID:请重新获取验证码
