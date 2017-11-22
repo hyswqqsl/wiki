@@ -199,6 +199,8 @@ public class ProjectLog extends BaseEntity {
 
 ![QQ20171122-143851_2x](/uploads/7196cfa265f9df24d3b8ab73f35b8bae/QQ20171122-143851_2x.png)
 
+![QQ20171122-151615_2x](/uploads/32c5f832616cfb6336c8de6c51ca12d0/QQ20171122-151615_2x.png)
+
 所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义，存储统计日志每一小时生成一个，用户可以按时间段查询，有UserController提供查询接口：
 
 
