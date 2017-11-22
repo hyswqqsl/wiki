@@ -151,10 +151,12 @@ public class AccountMessage extends BaseEntity{
 
 日志目前只需保存项目操作，分为要素和文件，由于用户只能编辑自己的项目，子账号能编辑协同给他的项目，所以在内容里记录“用户或子账号”操作了那个要素，在描述里记录要素的alias，参考下面的例子：
 
-- 要素content：子账号-测试人13028710999,于2016-08-25 19:42:03修改要素：招投标--业主通讯录--建设单位，招投标--业主通讯录--建设单位法人，招投标--业主通讯录--联系电话，
-- 文件content:用户于2016-08-26 15:33:12上传文件：初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
-- 文件content:用户于2016-08-26 15:33:12下载文件：初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
+- 要素content：招投标--业主通讯录--建设单位，招投标--业主通讯录--建设单位法人，招投标--业主通讯录--联系电话，
+- 文件content:初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
+- 文件content:初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
 - 由于用户可以随时看到项目日志，所以协同处就不需要显示是否已编辑了，不需要在开机构建这个编辑信息了
+- 后台构建时，要根据子账号id构建子账号名字
+
 
 #### 用户在项目编辑页面，可以查看此项目的日志，ProjectController接口：
 1. 取得项目日志：/project/elementLog/{projectId}，GET
@@ -172,18 +174,26 @@ public class ProjectLog extends BaseEntity {
 	/** 内容 */
 	private String content;
 	/** 项目id */
-	private Long projectId;
+	private long projectId;
+	/** 子账号id */
+	private long accountId;
 	/** 类型 */
 	private Type type;
+	/** 阶段 
+	 * 8个阶段，用于在取消且协同时构建是否编辑操作
+	*/
+	private CooperateVisit.Type cooperateType;
 
 	/**
 	 * 类型
  	 */
 	public enum Type {
-		// 项目要素
+		// 项目要素修改
 		ELEMENT,
-		// 项目文件
-		FILE
+		// 项目文件上传
+		FILE_UPLOAD,
+		// 项目文件下载
+		FILE_DOWNLOAD
 	}
 }
 ```
@@ -197,11 +207,13 @@ public class ProjectLog extends BaseEntity {
 
 ![QQ20171122-143138_2x](/uploads/47aecd8954f2d7dd10dc1be8b1d12050/QQ20171122-143138_2x.png)
 
-![QQ20171122-151239_2x](/uploads/493af3c19eec611ec0cfbba43bc2d61a/QQ20171122-151239_2x.png)
+![QQ20171122-143851_2x](/uploads/7196cfa265f9df24d3b8ab73f35b8bae/QQ20171122-143851_2x.png)
 
 ![QQ20171122-151615_2x](/uploads/32c5f832616cfb6336c8de6c51ca12d0/QQ20171122-151615_2x.png)
 
-所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义，存储统计日志每一小时生成一个，StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有1小时左右的延时。
+所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每2小时统计一次，生成2条统计记录，每条统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义。
+
+StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有2小时左右的延时。StorageCountLog由后台开机时构建，每次构建一个月的，每1小时1条记录，共有720条左右记录，定时任务生成1条记录，就从缓存中删除一条最旧的记录，保证日志有720条。
 
 #### 用户可以按时间段查询，UserController提供查询接口：
 
@@ -214,7 +226,7 @@ public class ProjectLog extends BaseEntity {
     - OK：查询成功，data内容是日志列表
 
 ```
-// 存储日志
+// 存储日志-存数据库
 public class StorageLog extends BaseEntity {
 
     /** 用户id */
@@ -228,7 +240,7 @@ public class StorageLog extends BaseEntity {
     /** 完成后的流量数 */
     private long curTrafficNum;
 }
-// 存储统计日志
+// 存储统计日志-动态构建
 public class StorageCountLog extends BaseEntity {
 
     // createDate就是记录时间，定义在BaseEntity中
