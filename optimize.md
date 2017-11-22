@@ -201,8 +201,15 @@ public class ProjectLog extends BaseEntity {
 
 ![QQ20171122-151615_2x](/uploads/32c5f832616cfb6336c8de6c51ca12d0/QQ20171122-151615_2x.png)
 
-所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义，存储统计日志每一小时生成一个，用户可以按时间段查询，有UserController提供查询接口：
+所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义，存储统计日志每一小时生成一个，StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有1小时左右的延时。用户可以按时间段查询，有UserController提供查询接口：
 
+1. 取得存储统计日志：/user/storageCountLog, GET
+    - 存储统计日志时间以小时为单位,默认显示一周的数据
+    - 如果没有日志记录，返回空数据
+    - 参数：
+    - begin:查询开始时间，end:查询结束时间
+    - 返回：
+    - OK：查询成功，data内容是日志列表
 
 ```
 // 存储日志
@@ -235,7 +242,7 @@ public class StorageCountLog extends BaseEntity {
     private long curTrafficNum;
 }
 ```
-StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有1小时左右的延时。
+
 ### 七. 地图定制图例
 https://developers.google.cn/maps/documentation/javascript/adding-a-legend?hl=zh-cn
 ### 八. 前台gulp压缩html和js
