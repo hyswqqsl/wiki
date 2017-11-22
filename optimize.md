@@ -154,7 +154,7 @@ public class AccountMessage extends BaseEntity{
 - 要素content：子账号-测试人13028710999,于2016-08-25 19:42:03修改要素：招投标--业主通讯录--建设单位，招投标--业主通讯录--建设单位法人，招投标--业主通讯录--联系电话，
 - 文件content:用户于2016-08-26 15:33:12上传文件：初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
 - 文件content:用户于2016-08-26 15:33:12下载文件：初设(实施)--设计文件--附件上传--文件上传，上传：水文地质.rar
-
+- 由于用户可以随时看到项目日志，所以协同处就不需要显示是否已编辑了，不需要在开机构建这个编辑信息了
 
 #### 用户在项目编辑页面，可以查看此项目的日志，ProjectController接口：
 1. 取得项目日志：/project/elementLog/{projectId}，GET
@@ -191,23 +191,52 @@ public class ProjectLog extends BaseEntity {
 - 子账号数
 - 项目数
 - 全景数
-但是空间使用情况、流量使用情况需要按照图形方式，显示历史使用情况，参见下图：
+但是空间使用情况、流量使用情况需要按照图形曲线，显示历史使用情况，参见下图：
 
 ![QQ20171122-143138_2x](/uploads/47aecd8954f2d7dd10dc1be8b1d12050/QQ20171122-143138_2x.png)
 
 ![QQ20171122-143851_2x](/uploads/7196cfa265f9df24d3b8ab73f35b8bae/QQ20171122-143851_2x.png)
 
+所以设计一个存储空间日志StorageLog，保存每次上传,下载操作涉及的文件大小，完成后的空间大小，完成后的流量大小；为了让用户看到上面的曲线，需要后台运行定时任务，每1小时统计一次，统计1小时内的StorageLog中累积的数据,存储到StorageCountLog中，参见下面的类定义：
 
+```
+// 存储日志
+public class StorageLog extends BaseEntity {
+
+    /** 用户id */
+    private long userId;
+    /** 完成后的空间数 */
+    private long curSpaceNum;
+    /** 上传大小 */
+    private long uploadSize;
+    /** 下载大小 */
+    private long downloadSize;
+    /** 完成后的流量数 */
+    private long curTrafficNum;
+}
+// 存储统计日志
+public class StorageCountLog extends BaseEntity {
+
+    // createDate就是记录时间，定义在BaseEntity中
+    /** 用户id */
+    private long userId;
+    /** 完成后的空间数 */
+    private long spaceCount;
+    /** 上传大小 */
+    private long uploadCount;
+    /** 下载大小 */
+    private long downloadCount;
+    /** 完成后的流量数 */
+    private long trafficCount;
+}
+```
+StorageCountLog日志在套餐详情中，由用户查看，由于日志由定时任务统计，所以统计结果会有1小时左右的延时。
 ### 七. 地图定制图例
 https://developers.google.cn/maps/documentation/javascript/adding-a-legend?hl=zh-cn
 ### 八. 前台gulp压缩html和js
 ### 讨论一下
 -  帮助文档，点击左上角logo，显示帮助列表
 -  反馈意见，审核
-
-
-
-
 
 
 
