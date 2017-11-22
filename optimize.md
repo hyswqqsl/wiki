@@ -197,7 +197,7 @@ public class ProjectLog extends BaseEntity {
 
 ![QQ20171122-143138_2x](/uploads/47aecd8954f2d7dd10dc1be8b1d12050/QQ20171122-143138_2x.png)
 
-![QQ20171122-143851_2x](/uploads/7196cfa265f9df24d3b8ab73f35b8bae/QQ20171122-143851_2x.png)
+![QQ20171122-151239_2x](/uploads/493af3c19eec611ec0cfbba43bc2d61a/QQ20171122-151239_2x.png)
 
 ![QQ20171122-151615_2x](/uploads/32c5f832616cfb6336c8de6c51ca12d0/QQ20171122-151615_2x.png)
 
