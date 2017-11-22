@@ -193,6 +193,10 @@ public class ProjectLog extends BaseEntity {
 - 全景数
 但是空间使用情况、流量使用情况需要按照图形方式，显示历史使用情况，参见下图：
 
+![QQ20171122-142910_2x](/uploads/c56b53da41a0cc31c4893971fff485f8/QQ20171122-142910_2x.png)
+
+![QQ20171122-142932_2x](/uploads/fc0f0529d2722ad648840a550b55d3d4/QQ20171122-142932_2x.png)
+
 
 ### 七. 地图定制图例
 https://developers.google.cn/maps/documentation/javascript/adding-a-legend?hl=zh-cn
