@@ -261,8 +261,10 @@ public class StorageCountLog extends BaseEntity {
 https://developers.google.cn/maps/documentation/javascript/adding-a-legend?hl=zh-cn
 ### 八. 前台gulp压缩html和js
 ### 九. 讨论一下
--  帮助文档，点击左上角logo，显示帮助列表
--  反馈意见，审核
+- 帮助文档，点击左上角logo，显示帮助列表
+- 反馈意见，审核
+- BIM协助
+- 菲菲优化界面
 
 
 
