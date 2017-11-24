@@ -27,7 +27,7 @@ unity程序发布为webgl后，可以接收到前台发送的参数，使用的�
 浏览器上的URL格式为：
 
 ```
-http://xxxx.com/webgl/xiaolc?parameter="{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}"
+http://xxxx.com/webgl/xiaolc?type=xiaolc&parameter={D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}
 ```
 ### 二. 检查井
 检查井参数在后台定义是这样的：
@@ -43,7 +43,7 @@ http://xxxx.com/webgl/xiaolc?parameter="{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55
 前台会把参数以json方式发给BIM，格式如下：
 
 ```
-{D15BG:xx,D151:xx,D152:xx,D153:xx}
+http://xxxx.com/webgl/xiaolc?type=jcj&parameter={D15BG:xx,D151:xx,D152:xx,D153:xx}
 ```
 
 
