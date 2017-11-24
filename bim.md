@@ -19,11 +19,7 @@ unity程序发布为webgl后，可以接收到前台发送的参数，使用的�
         <dimension name="底板厚度t" alias="D55" unit="m" type="number"/>
    </attribeGroup>
 ```
-前台会把参数以json方式发给BIM，格式如下：
 
-```
-{D5BG:xx,D51:xx,D52:xx,D53:xx,D54:xx,D55:xx}
-```
 浏览器上的URL格式为：
 
 ```
