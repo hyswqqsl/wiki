@@ -188,6 +188,7 @@ public class AccountMessage extends BaseEntity{
     - 返回：
     - OK：成功，data是日志列表，包含日志类中所有属性
     - EXIST：项目不存在 
+
 ```
 public class ProjectLog extends BaseEntity {
 
