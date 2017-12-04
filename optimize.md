@@ -98,7 +98,8 @@ public class UserMessage extends BaseEntity {
 		// 分享项目
 		SHARE_PROJECT,
 		// 分享测站
-		SHARE_STATION
+		SHARE_STATION,
+
 	}
 
 	/**
@@ -159,11 +160,12 @@ public class AccountMessage extends BaseEntity{
 
 
 #### 用户在项目编辑页面，可以查看此项目的日志，ProjectController接口：
-1. 取得项目日志：/project/elementLog/{projectId}，GET
+1. 取得项目日志：/project/elementLog，GET
     - 根据项目id取得项目所有日志，包括要素和文件
     - 为保证效率，项目日志最多返回500条
     - 参数：
     - projectId:项目id
+    - timeArea:日志时间范围,ComminEnum.TimeArea
     - 返回：
     - OK：成功，data是日志列表，包含日志类中所有属性
     - EXIST：项目不存在
@@ -195,6 +197,23 @@ public class ProjectLog extends BaseEntity {
 		// 项目文件下载
 		FILE_DOWNLOAD
 	}
+}
+
+public ComminEnum {
+    ...
+    /**
+     * 时间范围
+     */
+    public enum TimeArea {
+        // 一周
+        WEEK,
+        // 一月
+        MONTH,
+        // 三月
+        THREE_MONTH,
+        // 一年
+        YEAR
+    }
 }
 ```
 
