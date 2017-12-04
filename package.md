@@ -143,11 +143,19 @@
 >
 1. 向后台报告上传文件信息，project/reportUploadFileInfo POST
     * 根据文件大小更改空间使用情况，根据文件名记录上传日志(本迭代暂不考虑)
-    * 参数：projectId,项目id，fileNames,上传的一批文件名，多个用‘,’隔开，fileSize，上传的一批文件总大小
+    * 参数：
+    * projectId:项目id
+    * fileNames:上传的一批文件名，多个用‘,’隔开
+    * fileSize:上传的一批文件总大小
+    * alias:要素别名
     * 返回：OK,附加数据是{fileSize:文件大小}，将文件大小回传给前台，FAIL，参数错误
 2. 向后台报告下载文件信息，project/reportDownloadFileInfo POST
     * 根据文件大小更改空间使用情况，根据文件名记录下载日志(本迭代暂不考虑)
-    * 参数：projectId,项目id，fileName,下载文件名，多个用‘,’隔开，fileSize，下载文件大小
+    * 参数：
+    * projectId,项目id
+    * fileName,下载文件名，多个用‘,’隔开
+    * fileSize，下载文件大小
+    * alias:要素别名
     * 返回：OK,附加数据是{fileSize:文件大小}，将文件大小回传给前台，FAIL，参数错误 
 3. 是否允许上传接口:project/isAllowUpload GET
     * 不仅要判断空间数是否超限，判断上传流量是否超限，还要判断套餐是否过期，只要符合以上任一条件，即返回no_allow
