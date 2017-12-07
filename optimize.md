@@ -100,7 +100,7 @@ public class UserMessage extends BaseEntity {
 		// 分享测站
 		SHARE_STATION,
 		// 子账号解绑企业
-		INVITE_ACCOUNT,
+		UNBIND_USER,
 		// 认证
 		CERTIFY    
 	}
@@ -133,7 +133,9 @@ public class AccountMessage extends BaseEntity{
      * 类型
      */
     public enum Type {
-        UNBIND_USER,
+        // 邀请或解绑子账号
+        INVITE_ACCOUNT,
+        // 协同项目
         COOPERATE_PROJECT
     }
 
