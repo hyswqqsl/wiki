@@ -6,15 +6,15 @@
 1. 取得全景数据：panorama/{instanceId},GET
     * 参数：instanceId
     * 返回：
-        OK：取得全景数据，data包含全景中所有属性
-        DATA_NOEXIST：全景不存在，找不到instanceId
-        FAIL：取得全景数据出错
+    - OK：取得全景数据，data包含全景中所有属性
+    - DATA_NOEXIST：全景不存在，找不到instanceId
+    - FAIL：取得全景数据出错
 2. 取得全景加载xml：panorama/tour.xml,GET
     * 参数：instanceId
     * 返回：
-        正常情况，使用response写xml到页面
-        全景不存在，使用response写xml到页面，但xml中节点下标识错误(按照前后台错误码)：
-        全景下没有场景，xml中节点下标识错误(按照前后台错误码)：
+    - 正常情况，使用response写xml到页面
+    - 全景不存在，使用response写xml到页面，但xml中节点下标识错误(按照前后台错误码)
+    - 全景下没有场景，xml中节点下标识错误(按照前后台错误码)：
 ```
 <krpano version="1.19">
     <error>4021，全景不存在</error>
@@ -24,7 +24,7 @@
 3. 取得全景皮肤xml：panorama/vtourskin.xml,GET
     * 参数：无
     * 返回：
-        xml在后台，读取出来，使用response写xml到页面
+    - xml在后台，读取出来，使用response写xml到页面
 
 ## 新建全景
 >
@@ -53,11 +53,16 @@ thumbUrl: qqslImage上的图片缩略图
 instanceId: 唯一编码，用于生产场景名
 ```
     * 参数：
-        name: 全景名称
-        info: 全景描述
-        isShare: 布尔值，是否共享
-        coor: 坐标，从地图上读取，使用“102.323,36.454,1233.23”的格式
-        region: 行政区，从地图上读取的坐标转换而来
-        images: [{name:图片名，originUrl: qqsl上阿里云上的原地址},...]
+    - name: 全景名称
+    - info: 全景描述
+    - isShare: 布尔值，是否共享
+    - coor: 坐标，从地图上读取，使用“102.323,36.454,1233.23”的格式
+    - region: 行政区，从地图上读取的坐标转换而来
+    - images: [{name:图片名，originUrl: qqsl上阿里云上的原地址},...]
+    * 返回
+    - OK: 新建成功
+    - PANORAMA_IMAGE_NOT_EXIST: 下载图片失败
+    - PANORAMA_SLICE_ERROE: 切图失败
+    - FAIL：场景新建失败 
         
 
