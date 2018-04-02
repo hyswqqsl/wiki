@@ -29,13 +29,13 @@
 ## 新建全景
 >
 1. 新建全景：panorama/add,POST
-    新建全景过程，请查看设计文档流程图。使用id/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/{时间戳}，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/{唯一编码}；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。
+    新建全景过程，请查看设计文档流程图。使用userId/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/{时间戳}，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/{唯一编码}；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。
     然后在数据库中添加全景表：
 ```
  name: 全景名称
  info: 全景描述
  instanceId: 唯一编码,使用生产的唯一编码
- thumbUrl: 缩略图,rama/{userid}/{唯一编码}/{images[0].src}thumb.jpg
+ thumbUrl: 缩略图,qqslimage/panorama/{userid}/{场景唯一编码}/{图片唯一编码}/thumb.jpg
  isShare: 布尔值，是否共享
  coor: 坐标，从地图上读取，使用“102.323,36.454,1233.23”的格式
  region: 行政区，从地图上读取的坐标转换而来    
