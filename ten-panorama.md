@@ -35,7 +35,7 @@
  name: 全景名称
  info: 全景描述
  instanceId: 唯一编码,使用生产的唯一编码
- thumbUrl: 缩略图,qqslimage/panorama/{userid}/{场景唯一编码}/{图片唯一编码}/thumb.jpg
+ thumbUrl: 缩略图,qqslimage/panorama/{userid}/{场景唯一编码}/{第一个图片的唯一编码}/thumb.jpg
  isShare: 布尔值，是否共享
  coor: 坐标，从地图上读取，使用“102.323,36.454,1233.23”的格式
  region: 行政区，从地图上读取的坐标转换而来    
