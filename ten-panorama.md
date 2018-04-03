@@ -1,6 +1,10 @@
 # 全景接口设计
 设计PanoramaController控制层，把以前在InterestController中关于全景的代码删除。所有接口起始名字都是/panorama。
 请注意：4000(PARAMETER_ERROR参数错误)，表示服务器收到的参数不合法，这个错误每个接口都可能发生，就不每个接口写了。
+
+![panorama-class](/uploads/7a05362e3467a8cea7770307d7ec701c/panorama-class.png)
+
+
 ## 查看全景
 >
 1. 取得全景数据：panorama/{instanceId},GET
