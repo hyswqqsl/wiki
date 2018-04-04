@@ -32,7 +32,7 @@
 ## 新建全景
 >
 1. 取得直传token: oss/directToken,GET
-    这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考：https://help.aliyun.com/knowledge_detail/39535.html， https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
+    这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
 2. 新建全景：panorama/add,POST
     新建全景过程，请查看设计文档流程图。使用userId/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/{时间戳}，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。
     然后在数据库中添加全景表：
