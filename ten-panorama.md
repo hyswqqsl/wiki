@@ -32,7 +32,7 @@
 ## 新建全景
 >
 1. 取得直传token: oss/directToken,GET
-    这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id，具体算法下载java源码。还有两个网址可以参考：https://help.aliyun.com/knowledge_detail/39535.html，https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。
+    这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考：https://help.aliyun.com/knowledge_detail/39535.html， https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。
 
 ```
     // 这是js已经调通的生成directToken的代码
