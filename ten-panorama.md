@@ -4,8 +4,6 @@
 
 ![panorama-class](/uploads/e56230899240ea156d6ebe97029b6cab/panorama-class.jpg)
 
-
-
 ## 查看全景
 >
 1. 取得全景数据：panorama/{instanceId},GET
@@ -33,8 +31,31 @@
 
 ## 新建全景
 >
-1. 新建全景：panorama/add,POST
-    新建全景过程，请查看设计文档流程图。使用userId/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/{时间戳}，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/{唯一编码}；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。
+1. 取得直传token: oss/directToken,GET
+    这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id，具体算法下载java源码。还有两个网址可以参考：https://help.aliyun.com/knowledge_detail/39535.html，https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。
+
+```
+    // 这是js已经调通的生成directToken的代码
+    oss_token.OSSAccessKeyId = "XXX";
+    oss_token.OSSAccessKey = "XXX";
+    var policyTxt = {
+        "expiration": "2020-01-01T12:00:00.000Z",
+        "conditions": [
+            {"bucket": "qqsl" },
+            ["content-length-range", 0, 1048576000],
+            ["starts-with", "$key", "panorama/"]
+        ]
+    };
+    // 返回给前台的
+    oss_token.policy = Base64.encode(JSON.stringify(policyTxt));
+    var signatureTxt = Crypto.HMAC(Crypto.SHA1, oss_token.policy, oss_token.OSSAccessKey, { asBytes: true }) ;
+    oss_token.signature = Crypto.util.bytesToBase64(signatureTxt);
+    oss_token.host = "oss-cn-hangzhou.aliyuncs.com";
+    oss_token.prefix = 'panorama/';
+```
+
+2. 新建全景：panorama/add,POST
+    新建全景过程，请查看设计文档流程图。使用userId/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/{时间戳}，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。
     然后在数据库中添加全景表：
 ```
  name: 全景名称
@@ -70,4 +91,8 @@ instanceId: 唯一编码，用于生产场景名
         - PANORAMA_SLICE_ERROE: 切图失败
         - FAIL：场景新建失败 
         
+
+
+
+
 
