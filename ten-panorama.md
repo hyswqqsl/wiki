@@ -70,6 +70,25 @@ instanceId: 唯一编码，用于生产场景名
         - PANORAMA_SLICE_ERROE: 切图失败
         - FAIL：场景新建失败 
         
+```
+    // 这是js已经调通的生成directToken的代码
+    oss_token.OSSAccessKeyId = "XXX";
+    oss_token.OSSAccessKey = "XXX";
+    var policyTxt = {
+        "expiration": "2020-01-01T12:00:00.000Z",
+        "conditions": [
+            {"bucket": "qqsl" },
+            ["content-length-range", 0, 1048576000],
+            ["starts-with", "$key", "panorama/"]
+        ]
+    };
+    // 返回给前台的
+    oss_token.policy = Base64.encode(JSON.stringify(policyTxt));
+    var signatureTxt = Crypto.HMAC(Crypto.SHA1, oss_token.policy, oss_token.OSSAccessKey, { asBytes: true }) ;
+    oss_token.signature = Crypto.util.bytesToBase64(signatureTxt);
+    oss_token.host = "oss-cn-hangzhou.aliyuncs.com";
+    oss_token.prefix = 'panorama/';
+```
 
 
 
