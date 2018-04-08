@@ -95,8 +95,8 @@ instanceId: 唯一编码，用于生产场景名
 ```
 前台新建全景时传递的参数示例：
 {"name":"全景名称1111111111","info":"全景描述2222222222222222","coor":"103.77645101765913,36.05377593481913,0","isShare":"true","region":"中国甘肃省兰州市七里河区兰工坪南街190号 邮政编码: 730050",
-"images":[{"originUrl":"http://qqsl.oss-cn-hangzhou.aliyuncs.com/panorama/26/1522811870947bik.jpg","name":"001-11.jpg"},
-{"originUrl":"http://qqsl.oss-cn-hangzhou.aliyuncs.com/panorama/26/152281187095756l.jpg","name":"333--11.jpg"}]}
+"images":[{"originUrl":"http://qqsl.oss-cn-hangzhou.aliyuncs.com/panorama/26/1522811870947bik.jpg","name":"001-西宁"},
+{"originUrl":"http://qqsl.oss-cn-hangzhou.aliyuncs.com/panorama/26/152281187095756l.jpg","name":"333-西安"}]}
 ```
 
 
