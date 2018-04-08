@@ -1,9 +1,9 @@
 # 工程布置，外业测量及工程布置模板下载设计
 在FieldController中，以/field开头
 ## 坐标转换接口设计
-### 二. fieldController接口(filed)，坐标转换
+### 一. fieldController接口(filed)，坐标转换
 >
-1. 工程布置坐标导入：/field/coordinateFile, POST
+1. /*工程布置坐标导入：/field/uplaodCoordinate, POST*/
     * 参数：
     * projectId:项目id
     * baseLevelType:基准面类型
@@ -14,13 +14,15 @@
     * FAIL：上传失败:坐标文件或格式错误;
     * EXIST：中心坐标点(行政区)未选择；
     * EXPIRED：您当前的套餐已过期，请重新购买
-2. 工程布置坐标WGS84导出：/field/writeExcel,GET
+2. /*工程布置坐标WGS84导出：/field/downloadCoordinate,POST*/
     * 参数：
-    * projectId:项目id；
-    * type：design或field
-    * baseLevelType:基准面类型
-    * WGS84Type:WGS84坐标格式
-    * 返回：直接下载
+        * projectId:项目id；
+        * type：design或field
+        * baseLevelType:基准面类型
+        * WGS84Type:WGS84坐标格式
+    返回：
+        * OK，下载成功
+        * FAIL，下载失败
 3. 编辑建筑物:/field/editBuild,POST
     * 这个接口用在两处，1是工程布置处，2是地图上编辑，两个地方的参数不用，后台都能处理
     * 参数：
@@ -75,7 +77,7 @@
 	}
 
 ```
-## 坐标模板下载接口设计
+## 二. 坐标模板下载接口设计
 > 
 1. 获取所有模板信息: /field/templateInfo,GET
     参数：无
