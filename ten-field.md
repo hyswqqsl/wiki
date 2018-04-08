@@ -3,42 +3,42 @@
 ## 坐标转换接口设计
 ### 一. fieldController接口(filed)，坐标转换
 >
-1. /*工程布置坐标导入：/field/uplaodCoordinate, POST*/
+1. *工程布置坐标导入：/field/uplaodCoordinate, POST*
     * 参数：
-    * projectId:项目id
-    * baseLevelType:基准面类型
-    * WGS84Type:WGS84坐标格式
-    * fileName:file对象若干个
+        * projectId:项目id
+        * baseLevelType:基准面类型
+        * WGS84Type:WGS84坐标格式
+        * fileName:file对象若干个
     * 返回：
-    * OK：上传成功；
-    * FAIL：上传失败:坐标文件或格式错误;
-    * EXIST：中心坐标点(行政区)未选择；
-    * EXPIRED：您当前的套餐已过期，请重新购买
-2. /*工程布置坐标WGS84导出：/field/downloadCoordinate,POST*/
+        * OK：上传成功；
+        * FAIL：上传失败:坐标文件或格式错误;
+        * EXIST：中心坐标点(行政区)未选择；
+        * EXPIRED：您当前的套餐已过期，请重新购买
+2. *工程布置坐标WGS84导出：/field/downloadCoordinate,POST*
     * 参数：
         * projectId:项目id；
         * type：design或field
         * baseLevelType:基准面类型
         * WGS84Type:WGS84坐标格式
-    返回：
+    * 返回：
         * OK，下载成功
         * FAIL，下载失败
 3. 编辑建筑物:/field/editBuild,POST
-    * 这个接口用在两处，1是工程布置处，2是地图上编辑，两个地方的参数不用，后台都能处理
+    * 这个接口用在两处，1是工程布置处，2是地图上编辑，两个地方的参数不同，后台都能处理
     * 参数：
-    * 1 工程布置：
-    * projectId:项目id
-    * id:建筑物id
-    * attribes:数组，包含{alias:xx,value:xx}格式的一系列属性
-    * 2 地图上编辑
-    * projectId:项目id
-    * id:建筑物id
-    * type:建筑物类型
-    * remark:建筑物备注
+        * 1 工程布置：
+            * projectId:项目id
+            * id:建筑物id
+            * attribes:数组，包含{alias:xx,value:xx}格式的一系列属性
+        * 2 地图上编辑
+            * projectId:项目id
+            * id:建筑物id
+            * type:建筑物类型
+            * remark:建筑物备注
     * 返回：
-    * OK：保存成功
-    * FAIL：保存失败
-    * EXIST:建筑物不存在
+        * OK：保存成功
+        * FAIL：保存失败
+        * EXIST:建筑物不存在
     
 ```
 	/**
