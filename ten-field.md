@@ -3,8 +3,8 @@
 ## 坐标转换接口设计
 ### 一. fieldController接口(filed)，坐标转换
 >
-1. *工程布置坐标导入：/field/uplaodCoordinate, POST*
-    以前接口名为coordinateFile 
+1. 工程布置坐标导入：/field/uplaodCoordinate, POST
+    * 以前接口名为coordinateFile 
     * 参数：
         * projectId:项目id
         * baseLevelType:基准面类型
@@ -15,8 +15,8 @@
         * FAIL：上传失败:坐标文件或格式错误;
         * EXIST：中心坐标点(行政区)未选择；
         * EXPIRED：您当前的套餐已过期，请重新购买
-2. *工程布置坐标WGS84导出：/field/downloadCoordinate,POST*
-    以前接口名为writeExcel，GET请求 
+2. 工程布置坐标WGS84导出：/field/downloadCoordinate,POST
+    * 以前接口名为writeExcel，GET请求 
     * 参数：
         * projectId:项目id；
         * type：design或field
