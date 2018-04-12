@@ -24,7 +24,7 @@
     <error>4101，全景下没有场景</error>
 </krpano>        
 ```
-3. 取得全景皮肤xml：panorama/vtourskin.xml,GET
+3. 取得全景皮肤xml：panorama/tour.xml/skin.xml,GET
     * 参数：无
     * 返回：
         - xml在后台，读取出来，使用response写xml到页面
