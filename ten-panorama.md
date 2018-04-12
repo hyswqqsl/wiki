@@ -6,7 +6,7 @@
 
 ## 查看全景
 >
-1. 取得全景数据：panorama/{instanceId},GET
+1. 取得全景数据：panorama/panorama/{instanceId},GET
     * 参数：instanceId
     * 返回：
         - OK：取得全景数据，data包含全景中所有属性
@@ -28,6 +28,21 @@
     * 参数：无
     * 返回：
         - xml在后台，读取出来，使用response写xml到页面
+4. 取得用户自己的全景列表: panorama/user/lists
+    * 取得子账号自己的全景，需要通过用户id查询
+    * 参数：无
+    * 返回：
+        - OK: 返回json数组，每个全景包含信息，除去热点信息，起始视角，用户id，子账户id外，别的字段都传递。 
+5. 取得子账号自己的全景列表：panorama/account/lists
+    * 取得子账号自己的全景，需要通过子账号id查询
+    * 参数：无
+    * 返回：
+        - OK: 返回json数组，每个全景包含信息，除去热点信息，起始视角，用户id，子账户id外，别的字段都传递。
+6. 取得，用户登陆后，在地图上显示的，所有全景列表: panorama/user/all/lists
+6. 取得未登录情况下，在地图上显示的，所有全景列表: panorama/guest/all/lists
+7. 取得，管理员取得所有待审核的共享类型全景列表: panorama/admin/audit/lists
+
+
 
 ## 新建全景
 >
