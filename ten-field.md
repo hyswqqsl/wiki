@@ -15,7 +15,7 @@
         * FAIL：上传失败:坐标文件或格式错误;
         * EXIST：中心坐标点(行政区)未选择；
         * EXPIRED：您当前的套餐已过期，请重新购买
-2. 工程布置坐标WGS84导出：/field/downloadCoordinate,POST
+2. 工程布置坐标WGS84导出：/field/downloadCoordinate,GET
     * 以前接口名为writeExcel，GET请求 
     * 参数：
         * projectId:项目id；
@@ -84,7 +84,7 @@
 1. 获取所有模板信息: /field/templateInfo,GET
     * 参数：无
     * 返回：OK，数据是所有模板信息的json，见下表
-2. 下载选择的模板：/field/downloadTemplete, POST
+2. 下载选择的模板：/field/downloadTemplete,GET
     前台选择线面和建筑物类型后，需根据线面和建筑物分类分成三组，分别显示，向后台传递参数时，根据线、面、建筑物顺序排列所选类型。
     * 参数：json:["type1","type2","type3"],不管是线面还是建筑物，只¯传递类型数组
     * 返回：
