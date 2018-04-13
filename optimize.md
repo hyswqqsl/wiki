@@ -91,18 +91,20 @@ public class UserMessage extends BaseEntity {
 	 * 类型
 	 */
 	public enum Type {
-		// 购买套餐，包含购买，续费，升级
+		/** 购买套餐，包含购买，续费，升级 */
 		BUY_PACKAGE,
-		// 购买测站，包含购买，续费
+		/** 购买测站，包含购买，续费 */
 		BUY_STATION,
-		// 分享项目
+		/** 分享项目 */
 		SHARE_PROJECT,
-		// 分享测站
+		/** 分享测站 */
 		SHARE_STATION,
-		// 子账号解绑企业
+		/** 子账号解绑企业 */
 		UNBIND_USER,
-		// 认证
-		CERTIFY    
+		/** 认证 */
+		CERTIFY,
+		/** 反馈回复 */
+		FEEDBACK  
 	}
 
 	/**
@@ -133,10 +135,12 @@ public class AccountMessage extends BaseEntity{
      * 类型
      */
     public enum Type {
-        // 邀请或解绑子账号
+        /** 邀请子账号 */
         INVITE_ACCOUNT,
-        // 协同项目
-        COOPERATE_PROJECT
+        /** 项目协同 */
+        COOPERATE_PROJECT,
+        /** 反馈回复 */
+        FEEDBACK
     }
 
     /**
