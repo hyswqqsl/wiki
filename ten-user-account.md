@@ -9,7 +9,7 @@
 7. Message中4090: ACCOUNT_NOINFO子账号信息不全的错误码，改为4090: ACCOUNT_NO_CONFIRMED，子账号未确认
 
 ### 二. AccountController 子账号控制层
->
+
 2. 修改密保手机发送验证码： /account/phone/getUpdateVerify,GET
     * 参数：phone:手机号
     * 返回：OK:发送成功
@@ -85,7 +85,7 @@
     * 返回：OK:密码正确；FAIL：密码错误
     * 
 ###  三. 用戶信息說明
->
+
 1. 用户注册时有昵称、手机号、密码，用户信息里动态添加属性有，身份认证状态，企业认证状态，绑定微信的昵称，微信openid，**当前套餐对象{套餐名，套餐状态}**
 2. 用户可以绑定邮箱，邮箱验证码确认，认证后的邮箱可以登录，也可以发送验证码
 3. 用户真实姓名在身份认证中产生，用户还没有通过身份认证时，用户真实姓名保证和昵称一致
@@ -98,7 +98,7 @@
 10. 邀請子账号/account/invite改为新建子账号/account/create，解绑子账号/account/unbind改为删除子账号/account/delete,增加/account/update,/account/updatePhone
 
 ### 四. userController 用户控制层
->
+
 1.  注册时发送手机验证码:/user/phone/getRegistVerify
     * 参数：phone:手机号
     * 返回：OK:发送成功,FIAL:手机号不合法，EXIST：手机号已被使用
