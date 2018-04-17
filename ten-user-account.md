@@ -95,7 +95,7 @@
 7. 身份证正反面，企业营业执照也是由前台保存到阿里云，路径是qqsl/user/{userid}/identity1.jpg,qqsl/user/{userid}/identity2.jpg,qqsl/user/{userid}/licence.jpg
 8. 动态权限问题：用户设定simple,identity,company,hydrology角色，前台方便显示界面；管理员设定simple,super角色；子账号设定simple角色
 9. 有验证码的不用再发手机号或邮箱！！ 
-10. 邀請子账号/account/invite改为新建子账号/account/create，解绑子账号/account/unbind改为删除子账号/account/delete,增加/account/edit,/account/updatePhone
+10. 邀請子账号/account/invite改为新建子账号/account/create，解绑子账号/account/unbind改为删除子账号/account/delete,增加/account/update,/account/updatePhone
 
 ### 四. userController 用户控制层
 >
@@ -176,23 +176,25 @@
     * 返回：
         * OK:新建成功
         * DATA_EXIST:子账号已存在，不能重复添加。子账号手机号已存在，不能重复添加添加相同的手机号  
-23. 用户编辑子账号：/account/edit,POST
-      * 参数：name, department, remark
+23. 用户编辑子账号：/account/update,POST
+      * 参数：id(子账号id),name, department, remark
       * 返回：
         * OK:编辑成功
+        * FAIL:子账号不属于当前用户,session中的user和参数中的userId不一致，这个处理防止其他用户误操作
 24. 用户编辑子账号手机号：/account/user/updatePhone,POST
     * 用户要编辑phone，首先判断要编辑的手机号是否已被其他子账号使用，如果使用直接返回DATA_EXIST；如果未使用，把子账号状态改为AWAITING,子账号不能登录了
     * 发送通知短信，告诉子账号有企业正在添加为子账号，需要确认，发送Y同意，发送N拒绝;同时把短信记录到note表，子账号回复这条短信后，阿里云短信系统会调用接口把回复内容发送到接口，如果note回复为空，并且回复内容是Y(大小写均可)或N，那么根据收到的短信号查询note表，根据手机号找到子账号，如果回复Y，把状态改为CONFIRMED，生成随机密码，发送账号新建成功短信；如果回复N，把状态改为REFUSED 
-      * 参数：phone
+      * 参数：id(子账号id),phone
       * 返回：
         * OK:编辑成功
         * DATA_EXIST:手机号已存在，不能重复添加。子账号手机号已存在，不能重复添加添加相同的手机号  
+        * FAIL:子账号不属于当前用户
 25. 删除子账号：/account/delete,POST
     * 删除子账号，相当于企业删除员工一样；删除前循环监测所有项目中有无协同内容，删除之
-    * 参数：accountId
+    * 参数：id(子账号id)
     * 返回：     
         * OK:删除成功
-        * FAIL: 子账号不属于该企业，不能删除。session中的user和参数中的userId不一致，这个处理防止其他用户误操作删除子账号
+        * FAIL: 子账号不属于该企业，不能删除
 
 ```
     /** 真实姓名 */
