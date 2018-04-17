@@ -4,9 +4,10 @@
 
 ![panorama-class](/uploads/e56230899240ea156d6ebe97029b6cab/panorama-class.jpg)
 
-## 查看全景
+## 一 查看全景
 >
 1. 取得全景数据：panorama/panorama/{instanceId},GET
+    * 返回全景和场景的所有数据 
     * 参数：instanceId
     * 返回：
         - OK：取得全景数据，data包含全景中所有属性
@@ -27,19 +28,24 @@
 3. 取得全景皮肤xml：panorama/tour.xml/skin.xml,GET
     * 参数：无
     * 返回：
-        - xml在后台，读取出来，使用response写xml到页面
+        * xml在后台，读取出来，使用response写xml到页面
 4. 取得用户/子账号自己的全景列表: panorama/lists
     * 取得自己的全景，需要通过用户id查询,或需要通过子账号id查询
     * 参数：无
     * 返回：
-        - OK: 返回json数组，每个全景包含信息，除去热点信息，起始视角，用户id，子账户id外，别的字段都传递。 
+        * OK: 返回json数组，每个全景除去userId，accountId,hotspot，angleOfView外，别的字段都传递 
 6. 取得，在地图上显示的，所有全景列表: panorama/all/lists
     * 取得地图上显示的全景列表，包含以下三种情况，用户登录后，子账号登陆后，未登录 
+    * 参数：无
+    * 返回：
+        * OK: 返回json数组，每个全景只传递，name，instanceId, thumbUrl, coor 
 7. 取得，管理员取得所有待审核的共享类型全景列表: panorama/admin/lists
+    * 取得管理员上显示的全景列表，只需返回共享的，待审核的全景列表
+    * 参数：无
+    * 返回：
+        * OK: 返回json数组，每个全景只传递，name，instanceId, thumbUrl, coor, region
 
-
-
-## 新建全景
+## 二 新建全景
 >
 1. 取得直传token: oss/directToken,GET
     * 这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  / https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
@@ -58,10 +64,12 @@
  reviewDate: 审核时间,空
  hotspot: 热点信息,空json，"{}"
  angleOfView: 起始视角,空json，"{}"
+ sceneGroup: 场景顺序,空json，"{}"
 ```
-    循环在数据库中添加场景表：
+    
 ```
-name: 图片名
+循环在数据库中添加场景表：
+fileName: 图片名
 originUrl: qqsl上的原图地址
 thumbUrl: qqslImage上的图片缩略图
 instanceId: 唯一编码，用于生产场景名
@@ -99,7 +107,6 @@ instanceId: 唯一编码，用于生产场景名
     oss_token.prefix = 'panorama/';
 ```
 
-
 ```
 前台新建全景时传递的参数示例：
 {"name":"全景名称1111111111","info":"全景描述2222222222222222","coor":"103.77645101765913,36.05377593481913,0","isShare":"true","region":"中国甘肃省兰州市七里河区兰工坪南街190号 邮政编码: 730050",
@@ -107,12 +114,57 @@ instanceId: 唯一编码，用于生产场景名
 {"name":"333-西安","fileName":"152281187095756l.jpg"}]}
 ```
 
+## 三. 全景其他操作
+>
+1. 编辑全景: panorama/update,POST
+    * 用户或子账号可以编辑未审核的共享全景，或非共享的全景，可以编辑name，info，isShare，coor，region，但是全景图片不能添加和删除了,可以把全景由共享改为非共享，反之亦然
+    * 参数：id,全景id，name，info，isShare，coor，region
+    * 返回：
+        * OK:编辑成功
+        * FAIL:全景不属于当前用户或子账号，不能编辑
+2. 编辑全景热点等信息: panorama/updateHotspot,POST
+    * 用户或子账号编辑全景热点，后台直接把热点json保存到数据库
+    * 参数: id,全景id，angleOfView,起始视角json, hotspot,热点json,sceneGroup,场景顺序
+    * 返回：
+        * OK:编辑成功
+        * FAIL:全景不属于当前用户或子账号，不能编辑
+3. 管理员全景审核通过：panorama/admin/review/success，POST
+    * 审核通过时，不需要填写审核意见
+    * 参数: id,全景id
+    * 返回：
+        * OK:审核完成
+4. 管理员全景审核未通过：panorama/admin/review/fail，POST
+    * 审核未通过时，需要填写审核意见
+    * 参数: id,全景id,advice,审核意见
+    * 返回：
+        * OK:审核完成 
 
 
+```
+热点hotspot:
+{
+  "scene_75c116470f1a1e3b": 
+    {"scene":[{"iconType":"custom","imgPath":"http://qqslimage.oss-cn-hangzhou.aliyuncs.com/1/media/img/a2b3e82dded8e3fd.png","thumbPath":"http://qqslimage.oss-cn-hangzhou.aliyuncs.com/1/media/img/a2b3e82dded8e3fd.png","isDynamic":"0","ath":"7.2739317319591","atv":"37.587015248987","name":"schp_fjcex3bwkd","linkedscene":"scene_590a999cd358fb6e","sceneTitle":"湟中维新渠化效果(1)","sceneImg":"http://qqslimage.oss-cn-hangzhou.aliyuncs.com/1/works/590a999cd358fb6e/thumb.jpg"}], "link":[],"image":[], "text":[{"iconType":"custom","imgPath":"http://qqslimage.oss-cn-hangzhou.aliyuncs.com/1/media/img/95b84432a515fec1.png","thumbPath":"http://qqslimage.oss-cn-hangzhou.aliyuncs.com/1/media/img/95b84432a515fec1.png","isDynamic":"0","ath":"21.609106152338","atv":"48.473176347164","name":"schp_jk2fwtstbi","hotspotTitle":"你好","wordContent":"你的应用加了身份认证，有人（或者你自己，呵呵）试图用manager用户登陆你的应用，密码输入错误5次或者5次以上（缺省是5次），就会在日志中记录警告信息，并锁定并禁止该用户的进一步登陆。以提醒你可能有人恶意猜测你的管理员密码。是tomcat为了阻止brute-force攻击（基于密码加密的暴力破解法）的安全策略。","isShowSpotName":""}], "voice":[],"imgtext":[],"obj":[]},
+   "scene_590a999cd358fb6e":
+    {"scene":[],"link":[],"image":[],"text":[],"voice":[],"imgtext":[],"obj":[]}
+}
 
+起始视角:
+{"viewSettings":[
+   {"sceneName":"scene_75c116470f1a1e3b","hlookat":"24.088790438777","vlookat":"56.670667874245","fov":"90","fovmin":"5","fovmax":"120","vlookatmin":"-90","vlookatmax":"90","keepView":"0"},
+   {"sceneName":"scene_590a999cd358fb6e","hlookat":"14.186482857673","vlookat":"23.921350220188","fov":"90","fovmin":"5","fovmax":"120","vlookatmin":"-90","vlookatmax":"90","keepView":"0"}
+]}
 
-
-
+场景显示顺序
+{"sceneGroups":[
+  {"iconType":"system","imgPath":"/static/images/skin1/vr-btn-scene.png","groupName":"场景选择",
+    "scenes":[
+      {"sceneName":"scene_de1ec09cd94d47ba","viewuuid":"de1ec09cd94d47ba","imgPath":"http://p4sxhdbsp.bkt.clouddn.com/1/works/de1ec09cd94d47ba/thumb.jpg","sceneTitle":"666(1)"},
+     {"sceneName":"scene_9ef9165de43a0a0d","viewuuid":"9ef9165de43a0a0d","imgPath":"http://p4sxhdbsp.bkt.clouddn.com/1/works/9ef9165de43a0a0d/thumb.jpg","sceneTitle":"湟中维新渠化效果(1)"}
+    ]
+  }
+]}
+```
 
 
 
