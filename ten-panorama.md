@@ -5,7 +5,7 @@
 ![panorama](/uploads/3335ef51528f31f62bd7ac8f3187119e/panorama.png)
 
 ## 一 查看全景
->
+
 1. 取得全景数据：panorama/panorama/{instanceId},GET
     * 返回全景和场景的所有数据 
     * 参数：instanceId
@@ -46,7 +46,7 @@
         * OK: 返回json数组，每个全景只传递，name，instanceId, thumbUrl, coor, region
 
 ## 二 新建全景
->
+
 1. 取得直传token: oss/directToken,GET
     * 这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  / https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
 2. 新建全景：panorama/add,POST
@@ -115,7 +115,7 @@ instanceId: 唯一编码，用于生产场景名
 ```
 
 ## 三. 全景其他操作
->
+
 1. 编辑全景: panorama/update,POST
     * 用户或子账号可以编辑未审核的共享全景，或非共享的全景，可以编辑name，info，isShare，coor，region，但是全景图片不能添加和删除了,可以把全景由共享改为非共享，反之亦然
     * 参数：id,全景id，name，info，isShare，coor，region
