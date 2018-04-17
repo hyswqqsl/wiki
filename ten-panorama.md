@@ -5,7 +5,7 @@
 ![panorama](/uploads/3335ef51528f31f62bd7ac8f3187119e/panorama.png)
 
 ## 一 查看全景
-
+>
 1. 取得全景数据：panorama/panorama/{instanceId},GET
     * 返回全景和场景的所有数据 
     * 参数：instanceId
@@ -33,7 +33,7 @@
     * 取得自己的全景，需要通过用户id查询,或需要通过子账号id查询
     * 参数：无
     * 返回：
-        * OK: 返回json数组，每个全景除去userId，accountId,hotspot，angleOfView外，别的字段都传递 
+        * OK: 返回json数组，每个全景除去userId，accountId, hotspot，angleOfView, sceneGroup外，别的字段都传递 
 6. 取得，在地图上显示的，所有全景列表: panorama/all/lists
     * 取得地图上显示的全景列表，包含以下三种情况，用户登录后，子账号登陆后，未登录 
     * 参数：无
@@ -43,10 +43,10 @@
     * 取得管理员上显示的全景列表，只需返回共享的，待审核的全景列表
     * 参数：无
     * 返回：
-        * OK: 返回json数组，每个全景只传递，name，instanceId, thumbUrl, coor, region
+        * OK: 返回json数组，每个全景只传递，name，instanceId, info, thumbUrl, coor, region
 
 ## 二 新建全景
-
+>
 1. 取得直传token: oss/directToken,GET
     * 这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  / https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
 2. 新建全景：panorama/add,POST
@@ -115,30 +115,37 @@ instanceId: 唯一编码，用于生产场景名
 ```
 
 ## 三. 全景其他操作
-
+>
 1. 编辑全景: panorama/update,POST
-    * 用户或子账号可以编辑未审核的共享全景，或非共享的全景，可以编辑name，info，isShare，coor，region，但是全景图片不能添加和删除了,可以把全景由共享改为非共享，反之亦然
+    * 可以编辑name，info，isShare，coor，region，但是全景图片不能添加和删除了,可以把全景由共享改为非共享，反之亦然
+    * 已审核的共享全景一旦编辑，状态改为待审核
     * 参数：id,全景id，name，info，isShare，coor，region
     * 返回：
         * OK:编辑成功
         * FAIL:全景不属于当前用户或子账号，不能编辑
 2. 编辑全景热点等信息: panorama/updateHotspot,POST
     * 用户或子账号编辑全景热点，后台直接把热点json保存到数据库
+    * 已审核的共享全景一旦编辑，状态改为待审核
     * 参数: id,全景id，angleOfView,起始视角json, hotspot,热点json,sceneGroup,场景顺序
     * 返回：
         * OK:编辑成功
         * FAIL:全景不属于当前用户或子账号，不能编辑
-3. 管理员全景审核通过：panorama/admin/review/success，POST
+3. 删除全景：panorma/delete,POST
+    * 用户和子账号均可删除全景，子账号可以删除新建24小时之内的全景
+    * 参数: id,全景id
+    * 返回：
+        * OK:删除成功
+        * FAIL: 子账号不能删除超过24小时的全景
+4. 管理员全景审核通过：panorama/admin/review/success，POST
     * 审核通过时，不需要填写审核意见
     * 参数: id,全景id
     * 返回：
         * OK:审核完成
-4. 管理员全景审核未通过：panorama/admin/review/fail，POST
+5. 管理员全景审核未通过：panorama/admin/review/fail，POST
     * 审核未通过时，需要填写审核意见
     * 参数: id,全景id,advice,审核意见
     * 返回：
         * OK:审核完成 
-
 
 ```
 热点hotspot:
@@ -165,6 +172,10 @@ instanceId: 唯一编码，用于生产场景名
   }
 ]}
 ```
+
+
+
+
 
 
 
