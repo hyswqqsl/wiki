@@ -146,7 +146,7 @@ instanceId: 唯一编码，用于生产场景名
     * 参数: id,全景id,advice,审核意见
     * 返回：
         * OK:审核完成 
-6. 下载场景原图: panorama/download/{id}, GET
+6. 取得全景原图下载地址: panorama/downloadUrl/{id}, GET
     * 全景属于用户或子账号时，可以下载全景下各场景原图，由于场景原图保存在qqsl的私有bucket下，必须通过后台生成下载url，注意在新建时，在场景中保存originUrl，这样可由originUrl生成downloadUrl
     * 参数: id,全景id
     * 返回：
