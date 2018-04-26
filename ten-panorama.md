@@ -152,6 +152,7 @@ instanceId: 唯一编码，用于生产场景名
     * 返回：
         * OK:数据是{downloadUrl:xxx}
         * DATA_NOEXIST:全景或场景不存在
+        * DATA_REFUSE:场景不属于当前用户或子账号
 
 
 ```
