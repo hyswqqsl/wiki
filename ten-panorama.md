@@ -157,8 +157,7 @@ instanceId: 唯一编码，用于生产场景名
     * 返回：
         * OK:审核完成 
 
-## ossController接口
-### 一. ossController接口
+## 四. ossController接口
 >
 1. *取得文件访问url：getFileUrl，GET*
     * 返回的文件url有效期30分钟
