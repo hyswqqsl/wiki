@@ -13,13 +13,13 @@
         - OK：取得全景数据，data包含全景中所有属性
         - DATA_NOEXIST：全景不存在，找不到instanceId
         - FAIL：取得全景数据出错
-2. 进入编辑时取得全部全景数据：panorama/full/{instanceId},GET
+2. 进入编辑时取得全部全景数据：panorama/full/{id},GET
     * 返回全景和场景的所有数据，包含downloadUrl，这是一个动态属性，和数据库无关，用于下载全景原图，地图上查看全景，进入编辑全景时，调用这个接口
-    * 参数：instanceId
+    * 参数：id,全景id
     * 返回：
         - OK：取得全景数据，data包含全景中所有属性
         - DATA_NOEXIST：全景不存在，找不到instanceId
-        - 场景不属于当前用户或子账号
+        - DATA_REFUSE:场景不属于当前用户或子账号
         - FAIL：取得全景数据出错 
 3. 取得全景加载xml：panorama/tour.xml,GET
     * 参数：instanceId
