@@ -6,14 +6,22 @@
 
 ## 一 查看全景
 >
-1. 取得全景数据：panorama/panorama/{instanceId},GET
-    * 返回全景和场景的所有数据 
+1. *取得全景数据：panorama/panorama/{instanceId},GET*
+    * 返回全景和场景的所有数据,但是没有downloadUrl，这是一个动态属性，和数据库无关，用于下载全景原图，地图上查看全景，管理员查看全景时，调用这个接口
     * 参数：instanceId
     * 返回：
         - OK：取得全景数据，data包含全景中所有属性
         - DATA_NOEXIST：全景不存在，找不到instanceId
         - FAIL：取得全景数据出错
-2. 取得全景加载xml：panorama/tour.xml,GET
+2. 进入编辑时取得全部全景数据：panorama/full/{instanceId},GET
+    * 返回全景和场景的所有数据，包含downloadUrl，这是一个动态属性，和数据库无关，用于下载全景原图，地图上查看全景，进入编辑全景时，调用这个接口
+    * 参数：instanceId
+    * 返回：
+        - OK：取得全景数据，data包含全景中所有属性
+        - DATA_NOEXIST：全景不存在，找不到instanceId
+        - 场景不属于当前用户或子账号
+        - FAIL：取得全景数据出错 
+3. 取得全景加载xml：panorama/tour.xml,GET
     * 参数：instanceId
     * 返回：
         - 正常情况，使用response写xml到页面
@@ -25,11 +33,11 @@
     <error>4101，全景下没有场景</error>
 </krpano>        
 ```
-3. 取得全景皮肤xml：panorama/tour.xml/skin.xml,GET
+4. 取得全景皮肤xml：panorama/tour.xml/skin.xml,GET
     * 参数：无
     * 返回：
         * xml在后台，读取出来，使用response写xml到页面
-4. 取得用户/子账号自己的全景列表: panorama/lists
+5. 取得用户/子账号自己的全景列表: panorama/lists
     * 取得自己的全景，需要通过用户id查询,或需要通过子账号id查询
     * 参数：无
     * 返回：
@@ -45,10 +53,12 @@
     * 返回：
         * OK: 返回json数组，每个全景只传递，name，instanceId, info, thumbUrl, coor, region
 
+
 ## 二 新建全景
 >
-1. 取得直传token: oss/directToken,GET
-    * 这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  / https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
+1. *取得直传token: oss/directToken,GET*
+   * 参数：bucket: qqsl/qqslimage,表示请求哪个bucket的token
+   * 这是OssController定义的，用于前台使用fileinput控件上传文件使用的直传授权，参见   https://help.aliyun.com/document_detail/31926.html?spm=a2c4g.11186623.4.10.etc6Id， 具体算法下载java源码。还有两个网址可以参考： https://help.aliyun.com/knowledge_detail/39535.html  / https://help.aliyun.com/document_detail/31988.html?spm=a2c4g.11186623.2.3.HUAJpN#h2-post-policy2。  
 2. 新建全景：panorama/add,POST
     * 新建全景过程，请查看设计文档流程图。使用userId/时间戳建立根据临时目录，图片从qqsl的bucket下载，路径在qqsl/panorama/{userid}/，所有图片下载完成后，执行krapno的切片命令，等待完成；使用时间戳进行MD5签名，作为全景的唯一编码，然后把切片后的图片，vtour/panos/下所有文件夹和图片循环上传至，qqslimage/panorama/{userid}/；每个图片都有一个切片目录，目录的名字是图片名(经过fileinput改名)，目录名作为图片的instanceId，每个目录下都有一个thumb.jpg文件，是缩略图。然后在数据库中添加全景表：
 ```
@@ -146,14 +156,17 @@ instanceId: 唯一编码，用于生产场景名
     * 参数: id,全景id,advice,审核意见
     * 返回：
         * OK:审核完成 
-6. 取得全景原图下载地址: panorama/downloadUrl/{id}, GET
-    * 全景属于用户或子账号时，可以下载全景下各场景原图，由于场景原图保存在qqsl的私有bucket下，必须通过后台生成下载url，注意在新建时，在场景中保存originUrl，这样可由originUrl生成downloadUrl
-    * 参数: id,全景id
-    * 返回：
-        * OK:数据是[{id:场景id，downloadUrl:xxx},{id:下一个场景id,downloadUrl:xxx}]
-        * DATA_NOEXIST:全景或场景不存在
-        * DATA_REFUSE:场景不属于当前用户或子账号
 
+## ossController接口
+### 一. ossController接口
+>
+1. *取得文件访问url：getFileUrl，GET*
+    * 返回的文件url有效期30分钟
+    * *参数：bucket:bucket名，key:文件路径,bucketName:bucket名*
+    * 返回：OK：内容是{url：访问地址}，如果文件不存在没有内容
+2. *取得文件列表：objectFiles，GET*
+    * *参数：bucket:bucket名，dir:文件夹名*
+    * 返回：OK：取得成功，数据是文件列表,如果文件不存在返回空数组 
 
 ```
 热点hotspot:
