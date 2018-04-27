@@ -159,9 +159,9 @@ instanceId: 唯一编码，用于生产场景名
 
 ## 四. ossController接口
 >
-1. *取得文件访问url：getFileUrl，GET*
+1. 取得文件访问url：getFileUrl，GET
     * 返回的文件url有效期30分钟
-    * *参数：bucket:bucket名，key:文件路径,bucketName:bucket名*
+    * 参数：key:文件路径
     * 返回：OK：内容是{url：访问地址}，如果文件不存在没有内容
 2. *取得文件列表：objectFiles，GET*
     * *参数：bucket:bucket名，dir:文件夹名*
