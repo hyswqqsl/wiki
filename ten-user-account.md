@@ -236,32 +236,36 @@
 ```
 
 
-
 ```
-/**
- * 短信实体类
- * 
- * @since 2015年11月23日
- * @author 雪庭(flysic) qq: 119238122 github: https://github.com/flysic
- *
- */
-@Entity
-@Table(name = "scene")
-@SequenceGenerator(name = "sequenceGenerator",sequenceName = "note_sequence")
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
-public class Note implements Serializable {
-
-	private static final long serialVersionUID = 8018754754866533505L;
-	/** 项目负责人 */
-	private String name;
-	/** 项目负责人联系电话 */
-	private String phone;
-	/** 短信号 */
-	private String code;
-	/** 短信内容 */
-	private String sendMsg;
-	/** 回复内容 */
-	private String reply;
-}
+	/**
+	 * 用户消息类型
+	 */
+	public enum Type {
+		/** 购买套餐，包含购买，续费，升级 */
+		BUY_PACKAGE,
+		/** 购买测站，包含购买，续费 */
+		BUY_STATION,
+		/** 分享项目 */
+		SHARE_PROJECT,
+		/** 分享测站 */
+		SHARE_STATION,
+		/** 子账号 */
+		ACCOUNT,
+		/** 认证 */
+		CERTIFY,
+		/** 反馈回复 */
+		FEEDBACK
+	}
+  /**
+   * 子账号消息类型
+   */
+  public enum Type {
+      /** 项目协同 */
+      COOPERATE_PROJECT,
+      /** 反馈回复 */
+      FEEDBACK
+  }
 ```
+
+
 
