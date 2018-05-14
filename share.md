@@ -56,23 +56,15 @@
 ### 四. 测站协同设计 StationController
 >
 1. 将多个测站协同给多个子账号:POST,/station/cooperateMul
-    已协同的不再重复 
+    测站协同目前只需要查看即可，已协同的不再重复 
     * 参数：
         * stations:欲协同的多个测站,示例("12,34,24")
-        * type:分为编辑和查看，EDIT,VIEW
         * accountIds:欲协同的多个子账号,示例("12,34,24")
     *  返回:
         * 成功返回OK，
         * 如果不是自己的测站，返回DATA_REFUSE 
         * 失败返回FAIL
-2. 取消测站编辑协同：POST,/station/unCooperate
-    * 参数：
-        * stationId，欲取消协同的测站
-   *  返回:
-        * 成功返回OK
-        * 如果不是自己的测站，返回DATA_REFUSE 
-        * 失败返回FAIL
-3. 取消测站查看协同：POST,/station/unView
+2. 取消测站查看协同：POST,/station/unCooperate
     * 参数：
         * stationId，欲取消协同的测站
         * accountIds，欲取消查看协同的多个子账号,示例("12,34,24")
