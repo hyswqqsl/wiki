@@ -71,6 +71,9 @@
    *  返回:
         * 成功返回OK
         * 如果不是自己的测站，返回DATA_REFUSE 
-        * 失败返回FAIL    
-
+        * 失败返回FAIL   
+3. 子账号取得测站列表：GET, /station/account/lists
+    * 参数：无     
+    *  返回: 
+        * 成功返回OK，返回测站列表，包含测站所有数据
 
