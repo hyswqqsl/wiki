@@ -34,7 +34,7 @@
 1. 取得全景列表，/panorama/lists,GET
     * 参数：regionId，行政区id
     * 返回：
-        * OK，行政区下的全景列表,包含createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
+        * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
 ## 四 ComplaintControler，投诉
 >
@@ -88,4 +88,12 @@
     * 返回：
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}] 
 
+
+
+```
+河长云相关图片路径：
+    qqslimage/hzy/{regionId}/article，新闻
+    qqslimage/hzy/{regionId}/river，河流
+    qqslimage/hzy/{regionId}/Complaint/{userId}/，投诉
+```
 
