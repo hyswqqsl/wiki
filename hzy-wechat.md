@@ -11,15 +11,10 @@
     * 返回：
         * OK，全国范围的政策法规+市级的政策法规列表  
         * FAIL，行政区id不存在
-3. 取得新闻动态详情,/article/news/{id},GET
+3. 取得新闻动态和政策法规详情,/article/article/{id},GET
     * 参数：id: 新闻动态id
     * 返回：
         * OK，新闻动态所有属性
-        * FAIL，id不存在
-4. 取得政策法规详情,/article/law/{id},GET
-    * 参数：id: 政策法规id
-    * 返回：
-        * OK，政策法规所有属性
         * FAIL，id不存在
 
 ## 二 StationController 测站
@@ -71,7 +66,26 @@
         * FAIL，id不存在
         * 4022，DATA_REFUSE，请求的投诉id不属于自己
 
-    
-
+## 五 HzUsrController 河长
+>
+1. 取得总河长，各级河长人数，/hzUser/master,GET
+    * 参数：regionId，行政区id
+    * 返回：
+        * OK，{master:[xx,xx,xx],slave:[xx,xx,xx],cityNum:xx,countyNum:xx,townNum:xx,villageNum:xx}
+2. 取得市级河长名录，/hzUser/cityLevel,GET
+        * 参数：regionId，行政区id
+        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
+3. 取得县级级河长名录，/hzUser/countyLevel,GET
+    * 参数：regionId，行政区id
+    * 返回：
+        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
+4. 取得村级河长名录，/hzUser/townLevel,GET
+    * 参数：regionId，行政区id
+    * 返回：
+        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]   
+5. 取得村级河长名录，/hzUser/villageLevel,GET
+    * 参数：regionId，行政区id
+    * 返回：
+        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}] 
 
 
