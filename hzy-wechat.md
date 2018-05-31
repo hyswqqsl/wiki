@@ -28,6 +28,9 @@
     * 返回：
         * OK，仪表当日数据
         * FAIL,仪表编码不存在
+3. **取得仪表列表：www.qingqingshuili.cn:8080/sensors，GET **
+    * 参数：token
+    * 返回：OK(仪表列表)
 
 ## 三 PanoramaController，全景
 >
