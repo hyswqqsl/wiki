@@ -92,6 +92,16 @@
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}] 
 
 
-
+## 六 riverController,河流接口
+>
+1. 取得河流列表,river/lists/{regionId}，GET
+    河流的行政区保存是json，{234,456,887}
+    * 参数：regionId，行政区id
+    * 返回：
+         * OK，行政区下的所有河流，[{id,name,coors},{..}]
+2. 取得河流详情,river/{id},GET
+    * 参数：regionId，行政区id
+    * 返回：
+         * OK，河流详情，{name,image,content}
 
 
