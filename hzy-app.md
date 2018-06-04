@@ -9,7 +9,7 @@
 
 
 ## 一 RiverSegmentController 河段控制层
->
+
 1. 取得河段详情, /riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
@@ -18,7 +18,7 @@
         * 4022，DATA_REFUSE，请求的河段不属于自己
         
 ## 二 CruiseController 巡河控制层
->
+
 1. 上传巡河记录,/cruise/add,POST
    * 参数：
        * riverSegmentId:河道id
