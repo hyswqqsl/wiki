@@ -6,7 +6,7 @@
 ![ClassDiagram1](/uploads/40d2afedd219fb8b2f32156c2f29b6db/ClassDiagram1.png)
 
 
-## RiverSegmentController 河段控制层
+## 一 RiverSegmentController 河段控制层
 >
 1. 取得河段详情, /riverSegment/{id},GET
     * 参数：id:河段id
@@ -14,7 +14,8 @@
         * OK，河段属性：{name,length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
         * FAIL，河段不存在
         * 4022，DATA_REFUSE，请求的河段不属于自己
-## CruiseController 巡河控制层
+        
+## 二 CruiseController 巡河控制层
 >
 1. 上传巡河记录,/cruise/add,POST
    * 参数：
@@ -35,8 +36,6 @@
     * 参数：id，巡河记录id
     * 返回：
         * OK，{cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}], cruise:{conten,path,duration,length}}
-
-
 
 ```
    /**
