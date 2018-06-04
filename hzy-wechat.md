@@ -93,10 +93,5 @@
 
 
 
-```
-河长云相关图片路径：
-    qqslimage/hzy/{regionId}/article，新闻
-    qqslimage/hzy/{regionId}/river，河流
-    qqslimage/hzy/{regionId}/Complaint/{userId}/，投诉
-```
+
 
