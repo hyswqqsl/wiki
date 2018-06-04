@@ -3,7 +3,9 @@
 ![Main](/uploads/9ba17c1ebcfedf424c4838844a6c17f4/Main.png)
 
 
-![ClassDiagram1](/uploads/40d2afedd219fb8b2f32156c2f29b6db/ClassDiagram1.png)
+![ClassDiagram1](/uploads/4db4f09a675c86cfc59c48c8f7907bd0/ClassDiagram1.png)
+
+
 
 
 ## 一 RiverSegmentController 河段控制层
