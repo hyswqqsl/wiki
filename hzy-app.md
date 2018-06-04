@@ -1,4 +1,8 @@
 # 河长云巡河接口
+
+![ClassDiagram1](/uploads/40d2afedd219fb8b2f32156c2f29b6db/ClassDiagram1.png)
+
+
 ## RiverSegmentController 河段控制层
 >
 1. 取得河段详情, /riverSegment/{id},GET
