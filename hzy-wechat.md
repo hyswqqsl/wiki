@@ -62,7 +62,7 @@
     * 参数：unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，images，riverSegmentName, handleName, handleDate
-3. 取得投诉详情，/complaint/{id},GET
+3. 取得投诉详情，/complaint/complaint,GET
     用户必须登录
     * 参数：
         * id:投诉id
@@ -106,5 +106,9 @@
     * 参数：regionId，行政区id
     * 返回：
          * OK，河流详情，{name,image,content}
-
+## 七 riverSegmentController，河段接口
+1. 取得河段列表，riverSegment/lists, GET
+    * 参数：coor，当前坐标
+    * 返回：
+        * OK，行政区下的所有河段，[{id,name},{..}]
 
