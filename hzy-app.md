@@ -13,7 +13,6 @@
     * 参数：id:河段id
     * 返回：
         * OK，河段属性：{name,length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
-        * FAIL，河段不存在
         * 4022，DATA_REFUSE，请求的河段不属于自己
         
 ## 三 CruiseController 巡河控制层
@@ -26,21 +25,21 @@
    * 参数：
        * riverSegmentId:河道id
        * cruiseRecords:[{type,description,content,coor,address,concernId（关注点id）},{..}]
-       * cruise:{conten,path(巡河路径),duration(巡河时长),length(巡河里长)}
+       * cruise:{beginTime(开始时间),conten,path(巡河路径),duration(巡河时长),length(巡河里长)}
    * 返回：
        * OK,建立成功
-       * FAIL,河道不存在，参数异常
        * 4022，DATA_REFUSE，请求的河段不属于自己
 3. 查询河段所有巡河记录,/cruise/lists/{riverSegmentId},GET
     * 参数：riverSegmentId，河道id
     * 返回：
-        * OK，河长在这个河段的巡河记录,[{conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
-        * FAIL，河段不存在
+        * OK，河长在这个河段的巡河记录,[{id,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
         * 4022，DATA_REFUSE，请求的河段不属于自己
 4. 查看巡河记录详情,/cruise/{id},GET
     * 参数：id，巡河记录id
     * 返回：
-        * OK，{cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}], cruise:{conten,path,duration,length}}
+        * OK，{cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}], cruise:{beginTime,conten,path,duration,length}}
+        * 4022，DATA_REFUSE，请求的记录不属于自己
+
 
 ```
    /**
@@ -105,7 +104,6 @@
     qqslimage/hzy/{regionId}/complaint/{userId}/，投诉
     qqslimage/hzy/{regionId}/cruise/record/{id}/,巡河记录
 ```
-
 
 
 
