@@ -37,7 +37,7 @@
 4. 查看巡河记录详情,/cruise/{id},GET
     * 参数：id，巡河记录id
     * 返回：
-        * OK，{cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}], cruise:{beginTime,conten,path,duration,length}}
+        * OK，{beginTime,conten,path,duration,length,{cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
 
 
