@@ -54,16 +54,19 @@
         * riverSegmentName:选择的河段名，必需
         * name:投诉人姓名，可以使匿名
         * phone:投诉人电话，可以为空
+        * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
 2. 取得投诉列表，/complaint/lists,GET
     用户必须登录
-    * 参数：无
+    * 参数：unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，images，riverSegmentName, handleName, handleDate
 3. 取得投诉详情，/complaint/{id},GET
     用户必须登录
-    * 参数：id:投诉id
+    * 参数：
+        * id:投诉id
+        * unionId，微信唯一标识
     * 返回：
         * OK，投诉所有属性
         * FAIL，id不存在
@@ -93,7 +96,7 @@
 
 
 ## 六 riverController,河流接口
-
+>
 1. 取得河流列表,river/lists/{regionId}，GET
     河流的行政区保存是json，{234,456,887}
     * 参数：regionId，行政区id
