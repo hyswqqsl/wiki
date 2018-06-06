@@ -96,7 +96,7 @@
 
 ## 六 riverSegmentController，河段接口
 1. 取得河段列表，riverSegment/lists, GET
-    * 参数：coor，当前坐标
+    * 参数：coor，当前坐标 {lat:36.934,lon:102.23,ele:0}
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]
 
