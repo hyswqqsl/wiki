@@ -73,7 +73,6 @@
         * 4022，DATA_REFUSE，请求的投诉id不属于自己
 
 ## 五 HzUsrController 河长
->
 1. 取得总河长，各级河长人数，/hzUser/master,GET
     * 参数：regionId，行政区id
     * 返回：
@@ -94,6 +93,7 @@
     * 返回：
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}] 
 
+
 ## 六 riverSegmentController，河段接口
 1. 取得河段列表，riverSegment/lists, GET
     * 参数：coor，当前坐标
