@@ -130,7 +130,7 @@
 河长云相关图片路径：
     qqslimage/hzy/{regionId}/article/，新闻
     qqslimage/hzy/{regionId}/river/，河流
-    qqslimage/hzy/{regionId}/complaint/{userId}/，投诉
+    qqslimage/hzy/{regionId}/complaint/{uinonId}/，投诉
     qqslimage/hzy/{regionId}/cruise/record/{id}/,巡河记录
 ```
 
