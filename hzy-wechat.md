@@ -45,9 +45,8 @@
     用户必须登录
     * 参数：
         * title：标题，必需
-        * describe：描述，由几组关注信息自动组成的，必需
+        * description：描述，由几组关注信息自动组成的，必需
         * content：投诉内容，必需
-        * images: 图片路径，最多五张图片，{image1:xx,image2:xxx,image3:xxx...}，图片必需
         * coor:由网页定位识别的经纬度，必需
         * address:由网页定位识别的位置，必需
         * riverSegmentId:选择的河段id，必需
