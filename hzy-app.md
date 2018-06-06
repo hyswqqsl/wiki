@@ -12,10 +12,10 @@
 1. 取得河段详情, /riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
-        * OK，河段属性：{name,length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
+        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
         
-## 三 CruiseController 巡河控制层
+## 二 CruiseController 巡河控制层
 >
 1. 取得河段巡河记录类型,/cruise/recordType,GET
    * 参数：无
@@ -25,7 +25,7 @@
    * 参数：
        * riverSegmentId:河道id
        * cruiseRecords:[{type,description,content,coor,address,concernId（关注点id）},{..}]
-       * cruise:{beginTime(开始时间),conten,path(巡河路径),duration(巡河时长),length(巡河里长)}
+       * cruise:{beginTime(开始时间),content,path(巡河路径),duration(巡河时长),length(巡河里长)}
    * 返回：
        * OK,建立成功
        * 4022，DATA_REFUSE，请求的河段不属于自己
@@ -34,7 +34,7 @@
     * 返回：
         * OK，河长在这个河段的巡河记录,[{id,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
         * 4022，DATA_REFUSE，请求的河段不属于自己
-4. 查看巡河记录详情,/cruise/{id},GET
+4. 查看巡河记录详情,/cruise/cruise/{id},GET
     * 参数：id，巡河记录id
     * 返回：
         * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}]}
@@ -94,6 +94,35 @@
         // 公示牌
         BILLBOARD
     }
+    
+    
+    /**
+     * 行政区级别
+     */
+    public enum RegionLevel {
+        // 省
+        PROVINCE,
+        // 市
+        CITY,
+        // 县
+        COUNTY,
+        // 乡
+        TOWN,
+        // 村
+        VILLAGE
+    }
+
+    /**
+     * 河长级别
+     */
+    public enum HzType {
+        // 总河长
+        MASTER,
+        // 副总河长
+        SLAVE,
+        // 河长
+        NORMAL
+    }    
 ```
 
 
