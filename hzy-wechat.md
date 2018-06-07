@@ -68,16 +68,11 @@
         * 4022，DATA_REFUSE，请求的投诉id不属于自己
 
 ## 五 HzUsrController 河长
-1. 取得总河长，各级河长人数，/hzUser/master,GET
-    * 参数：
-        * regionCode，行政区编码
-    * 返回：
-        * OK，{master:[xx,xx,xx],slave:[xx,xx,xx],cityNum:xx,countyNum:xx,townNum:xx,villageNum:xx}
-2. 取得河长名录，/hzUser/lists,GET
+1. 取得河长名录，/hzUser/lists,GET
     * 参数：
         * regionCode，行政区编码
     * 返回： 
-        * OK，[city:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},type:xx},county:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},town:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},village:{name:xx,riverSegments(管辖河段):[xx,xx,xx]}]
+        * OK，[master(总河长):[{name,job(职务)},{...}],slave(副总河长):[{name,job(职务)},{...}]，city(市级名录):[{name,job(职务),riverSegments(管辖河段):[xx,xx,xx]},{...}],county(县级河长):{{name,job(职务),riverSegments(管辖河段):[xx,xx,xx]},{...}],town(乡级河长):[{name,job(职务),riverSegments(管辖河段):[xx,xx,xx]},{...}],village(村级河长):[{name,job(职务),riverSegments(管辖河段):[xx,xx,xx]},{...}]]
 
 
 ## 六 riverSegmentController，河段接口
