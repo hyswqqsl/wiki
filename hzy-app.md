@@ -11,7 +11,7 @@
 1. 登录发送验证码: /hzUser/login/getLoginVerify,GET
     * 河长登录时，取得验证码
     * 参数：
-        * phine:登录手机号
+        * phone:登录手机号
     * 返回：
         * OK:发送成功
         * DATA_NOEXIST:手机号不存在
@@ -30,6 +30,11 @@
     * 返回：
         * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
+2. 取得河长管辖的河段,/riverSegment/lists/{hzUserId},GET
+    * 参数：
+        * hzUserId:河长用户id
+    * 返回：
+        * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名)}]
         
 ## 三 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
@@ -40,7 +45,7 @@
    * 参数：
        * riverSegmentId:河道id
        * cruiseRecords:[{type,description,content,coor,address,concernId（关注点id）},{..}]
-       * cruise:{beginTime(开始时间),content,path(巡河路径),duration(巡河时长),length(巡河里长)}
+       * cruise:{beginTime(开始时间),content,path(巡河路径),duration(巡河时长),length(巡河里长),instanceId:唯一标识}
    * 返回：
        * OK,建立成功
        * 4022，DATA_REFUSE，请求的河段不属于自己
@@ -143,10 +148,10 @@
 
 ```
 河长云相关图片路径：
-    qqslimage/hzy/{regionId}/article/，新闻
-    qqslimage/hzy/{regionId}/river/，河流
-    qqslimage/hzy/{regionId}/complaint/{uinonId}/，投诉
-    qqslimage/hzy/{regionId}/cruise/record/{id}/,巡河记录
+    qqslimage/hzy/{regionCode}/article/，新闻
+    qqslimage/hzy/{regionCode}/river/，河流
+    qqslimage/hzy/{regionCode}/complaint/{uinonId}/，投诉
+    qqslimage/hzy/{regionCode}/cruise/record/{instanceId}/,巡河记录
 ```
 
 
