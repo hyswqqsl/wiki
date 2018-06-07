@@ -1,4 +1,4 @@
-# 河长云巡河接口
+# 河长云app接口设计
 
 
 ![Main](/uploads/9ba17c1ebcfedf424c4838844a6c17f4/Main.png)
@@ -7,8 +7,24 @@
 ![ClassDiagram1](/uploads/4db4f09a675c86cfc59c48c8f7907bd0/ClassDiagram1.png)
 
 
+## 一 河长登录接口
+1. 登录发送验证码: /hzUser/login/getLoginVerify,GET
+    * 河长登录时，取得验证码
+    * 参数：
+        * phine:登录手机号
+    * 返回：
+        * OK:发送成功
+        * DATA_NOEXIST:手机号不存在
+2. 登录：/hzUser/login,POST
+    * 河长每次登录都是用动态验证码    
+    * 参数：
+        * code:验证码
+    * 返回:
+        * OK:登录成功
+        * 4041: CODE_INVALID 验证码过期
+        * 4042: CODE_ERROR 验证码输入错误
+
 ## 一 RiverSegmentController 河段控制层
->
 1. 取得河段详情, /riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
@@ -16,11 +32,10 @@
         * 4022，DATA_REFUSE，请求的河段不属于自己
         
 ## 二 CruiseController 巡河控制层
->
 1. 取得河段巡河记录类型,/cruise/recordType,GET
    * 参数：无
    * 返回：
-       * OK,[{type,description},{..}]
+       * OK,[{type:类型英文,value:类型中文，description:["xxx","..."]}]
 2. 上传巡河记录,/cruise/add,POST
    * 参数：
        * riverSegmentId:河道id
