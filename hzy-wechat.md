@@ -73,25 +73,11 @@
         * regionCode，行政区编码
     * 返回：
         * OK，{master:[xx,xx,xx],slave:[xx,xx,xx],cityNum:xx,countyNum:xx,townNum:xx,villageNum:xx}
-2. 取得市级河长名录，/hzUser/cityLevel,GET
+2. 取得河长名录，/hzUser/cityLevel,GET
     * 参数：
         * regionCode，行政区编码
     * 返回： 
-        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
-3. 取得县级级河长名录，/hzUser/countyLevel,GET
-    * 参数：
-        * regionCode，行政区编码
-    * 返回：
-        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
-4. 取得村级河长名录，/hzUser/townLevel,GET
-    * 参数：
-        * regionCode，行政区编码
-    * 返回：
-        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]   
-5. 取得村级河长名录，/hzUser/villageLevel,GET
-    * 参数：regionId，行政区id
-    * 返回：
-        * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}] 
+        * OK，[city:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},type:xx},county:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},town:{name:xx,riverSegments(管辖河段):[xx,xx,xx]},village:{name:xx,riverSegments(管辖河段):[xx,xx,xx]}]
 
 
 ## 六 riverSegmentController，河段接口
