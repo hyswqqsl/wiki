@@ -73,7 +73,7 @@
         * regionCode，行政区编码
     * 返回：
         * OK，{master:[xx,xx,xx],slave:[xx,xx,xx],cityNum:xx,countyNum:xx,townNum:xx,villageNum:xx}
-2. 取得河长名录，/hzUser/cityLevel,GET
+2. 取得河长名录，/hzUser/lists,GET
     * 参数：
         * regionCode，行政区编码
     * 返回： 
