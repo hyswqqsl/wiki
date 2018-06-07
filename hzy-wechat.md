@@ -1,6 +1,5 @@
 # 河长云微信公众号接口设计
 ## 一 ArticleControler 新闻动态和政策方案 
->
 1. 取得新闻动态列表,/article/newses,GET
     * 参数：regionCode，行政区编码
     * 返回：
@@ -18,7 +17,6 @@
         * FAIL，id不存在
 
 ## 二 StationController 测站
->
 1. 取得测站列表：121.40.82.11:8080/stations，GET
     * 参数：regionCode，行政区编码
     * 返回：
@@ -33,14 +31,12 @@
     * 返回：OK(仪表列表)
 
 ## 三 PanoramaController，全景
->
 1. 取得全景列表，/panorama/lists,GET
     * 参数：regionCode，行政区编码
     * 返回：
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
 ## 四 ComplaintControler，投诉
->
 1. 提交投诉,/complaint/submit,POST
     用户必须登录
     * 参数：
