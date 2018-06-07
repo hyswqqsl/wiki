@@ -1,13 +1,13 @@
-# 微信公众号涉及的接口设计
+# 河长云微信公众号接口设计
 ## 一 ArticleControler 新闻动态和政策方案 
 >
 1. 取得新闻动态列表,/article/newses,GET
-    * 参数：regionId，行政区id
+    * 参数：regionCode，行政区编码
     * 返回：
         * OK，所属行政区的新闻动态列表
         * FAIL，行政区不存在
 2. 取得政策法规列表，/article/laws, GET
-    * 参数：regionId，行政区id
+    * 参数：regionCode，行政区编码
     * 返回：
         * OK，全国范围的政策法规+市级的政策法规列表  
         * FAIL，行政区id不存在
@@ -20,7 +20,7 @@
 ## 二 StationController 测站
 >
 1. 取得测站列表：121.40.82.11:8080/stations，GET
-    * 参数：regionId，行政区id
+    * 参数：regionCode，行政区编码
     * 返回：
         * OK,行政区下的所有测站，包含createDate(建立时间),instanceId(唯一编码),type(测站类型),address(安装位置),value(最新数据)
 2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
@@ -35,7 +35,7 @@
 ## 三 PanoramaController，全景
 >
 1. 取得全景列表，/panorama/lists,GET
-    * 参数：regionId，行政区id
+    * 参数：regionCode，行政区编码
     * 返回：
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
@@ -73,18 +73,23 @@
 
 ## 五 HzUsrController 河长
 1. 取得总河长，各级河长人数，/hzUser/master,GET
-    * 参数：regionId，行政区id
+    * 参数：
+        * regionCode，行政区编码
     * 返回：
         * OK，{master:[xx,xx,xx],slave:[xx,xx,xx],cityNum:xx,countyNum:xx,townNum:xx,villageNum:xx}
 2. 取得市级河长名录，/hzUser/cityLevel,GET
-        * 参数：regionId，行政区id
+    * 参数：
+        * regionCode，行政区编码
+    * 返回： 
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
 3. 取得县级级河长名录，/hzUser/countyLevel,GET
-    * 参数：regionId，行政区id
+    * 参数：
+        * regionCode，行政区编码
     * 返回：
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]
 4. 取得村级河长名录，/hzUser/townLevel,GET
-    * 参数：regionId，行政区id
+    * 参数：
+        * regionCode，行政区编码
     * 返回：
         * OK，[{name:xx,riverSegments(管辖河段):[xx,xx,xx],type:xx}]   
 5. 取得村级河长名录，/hzUser/villageLevel,GET
@@ -97,5 +102,5 @@
 1. 取得河段列表，riverSegment/lists, GET
     * 参数：coor，当前坐标 {lat:36.934,lon:102.23,ele:0}
     * 返回：
-        * OK，行政区下的所有河段，[{id,name},{..}]
+        * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
