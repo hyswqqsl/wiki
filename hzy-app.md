@@ -24,14 +24,14 @@
         * 4041: CODE_INVALID 验证码过期
         * 4042: CODE_ERROR 验证码输入错误
 
-## 一 RiverSegmentController 河段控制层
+## 二 RiverSegmentController 河段控制层
 1. 取得河段详情, /riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
         * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
         
-## 二 CruiseController 巡河控制层
+## 三 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
    * 参数：无
    * 返回：
