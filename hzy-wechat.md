@@ -61,11 +61,11 @@
 3. 取得投诉详情，/complaint/complaint,GET
     用户必须登录
     * 参数：
-        * id:投诉id
+        * instanceId:投诉唯一标识
         * unionId，微信唯一标识
     * 返回：
         * OK，投诉所有属性
-        * FAIL，id不存在
+        * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉id不属于自己
 
 ## 五 HzUsrController 河长
