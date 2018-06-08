@@ -66,7 +66,7 @@
     * 返回：
         * OK，投诉所有属性
         * FAIL，唯一标识不存在
-        * 4022，DATA_REFUSE，请求的投诉id不属于自己
+        * 4022，DATA_REFUSE，请求的投诉不属于自己
 
 ## 五 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
