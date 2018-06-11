@@ -50,6 +50,7 @@
         * name:投诉人姓名，可以使匿名
         * phone:投诉人电话，可以为空
         * instanceId:唯一标识
+        * medias: "xx,xx,.."
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
