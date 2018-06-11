@@ -51,6 +51,7 @@
         * phone:投诉人电话，可以为空
         * instanceId:唯一标识
         * mediaIds: "xx,xx,.."
+        * regionCode：行政区全国统一编码
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
@@ -103,8 +104,9 @@
 
 
 ## 六 riverSegmentController，河段接口
-1. 取得河段列表，riverSegment/coor/lists, GET
-    * 参数：coor，当前坐标 {lat:36.934,lon:102.23,ele:0}
+1. 取得河段列表，riverSegment/region/lists, GET
+    * 参数：
+        * regionCode：行政区全国统一编码
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
