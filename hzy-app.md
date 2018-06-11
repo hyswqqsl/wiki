@@ -32,7 +32,7 @@
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * 参数：无
     * 返回：
-        * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名)}]
+        * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数)},{...}]
 3. android原生取得河段的面坐标,riverSegment/android/coors,GET
     * 参数：
         * id:河段id
