@@ -3,8 +3,9 @@
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
+![ClassDiagram2](/uploads/72e079677195640ab7988092eef615f4/ClassDiagram2.png)
 
-![ClassDiagram1](/uploads/b49f4699d00df366ad8534bf4197ad17/ClassDiagram1.png)
+
 
 
 
