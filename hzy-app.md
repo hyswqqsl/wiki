@@ -56,7 +56,7 @@
 3. 查询河段所有巡河记录,/cruise/lists/{riverSegmentId},GET
     * 参数：riverSegmentId，河道id
     * 返回：
-        * OK，河长在这个河段的巡河记录,[{id,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
+        * OK，河长在这个河段的巡河记录,[{instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
         * 4022，DATA_REFUSE，请求的河段不属于自己
 4. 查看巡河记录详情,/cruise/cruise/{instanceId},GET
     * 参数：instanceId，巡河记录标识
