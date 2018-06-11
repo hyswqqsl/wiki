@@ -1,10 +1,12 @@
 # 河长云app接口设计
 
 
-![Main](/uploads/9ba17c1ebcfedf424c4838844a6c17f4/Main.png)
+![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
 
-![ClassDiagram1](/uploads/4db4f09a675c86cfc59c48c8f7907bd0/ClassDiagram1.png)
+![ClassDiagram1](/uploads/b49f4699d00df366ad8534bf4197ad17/ClassDiagram1.png)
+
+
 
 
 ## 一 河长登录接口
