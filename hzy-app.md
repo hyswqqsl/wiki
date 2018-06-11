@@ -63,7 +63,7 @@
     * 返回：
         * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,concern:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
-
+ 
 
 ```
    /**

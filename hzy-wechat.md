@@ -107,3 +107,16 @@
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
+ ## 七 WeChatController,微信控制层
+ 1. 根据code取得unionId,/weChat/unionId,GET
+    * 参数：code，微信code
+    * 返回：
+        * OK，{unionId:xxx}，目前没有unionId时，返回openId
+        
+## 八 OssController,阿里云Oss控制层
+1. 根据treePath(阿里云路径)得到文件列表，/oss/objectFiles,GET
+    * 参数:
+        * dir: 文件路径
+        * bucket: bucket名
+    * 返回：
+        * OK，文件数组，ObjectFile对象全属性
