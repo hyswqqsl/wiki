@@ -25,16 +25,21 @@
         * 4042: CODE_ERROR 验证码输入错误
 
 ## 二 RiverSegmentController 河段控制层
-1. 取得河段详情, /riverSegment/{id},GET
+1. 取得河段详情, /riverSegment/riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzbUser(name,phone)，concerns:[{id,name,type,coor,address}]}
+        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)，concerns:[{id,name,type,coor,address}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
-2. 取得河长管辖的河段,/riverSegment/lists/{hzUserId},GET
-    * 参数：
-        * hzUserId:河长用户id
+2. 取得河长管辖的河段,/riverSegment/lists,GET
+    * 参数：无
     * 返回：
         * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名)}]
+3. android原生取得河段的面坐标,riverSegment/android/coors,GET
+    * 参数：
+        * id:河段id
+        * token:原生访问传递的token
+    * 返回：
+        * OK,{coors:[{lat:36.934,lon:102.23,ele:0}, {...}]}
         
 ## 三 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
@@ -44,7 +49,7 @@
 2. 上传巡河记录,/cruise/add,POST
    * 参数：
        * riverSegmentId:河道id
-       * cruiseRecords:[{type,description,content,coor,address,concernId（关注点id）},{..}]
+       * cruiseRecords:[{type,description,content,coor,address,,instanceId(唯一标识),concernId(关注点id)},{..}]
        * cruise:{beginTime(开始时间),content,path(巡河路径),duration(巡河时长),length(巡河里长),instanceId:唯一标识}
    * 返回：
        * OK,建立成功
@@ -57,7 +62,7 @@
 4. 查看巡河记录详情,/cruise/cruise/{instanceId},GET
     * 参数：instanceId，巡河记录标识
     * 返回：
-        * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,concern:{name,type}},{..}]}
+        * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,concern:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
 
 
