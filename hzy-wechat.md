@@ -58,7 +58,7 @@
 2. 取得投诉列表，/complaint/lists,GET
     * 参数：unionId，微信唯一标识
     * 返回：
-        * OK，返回投诉列表，只需返回id，createDate, title，images，riverSegmentName, handleName, handleDate
+        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, handleName, handleDate
 3. 取得投诉详情，/complaint/complaint,GET
     投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
