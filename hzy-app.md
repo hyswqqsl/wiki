@@ -3,7 +3,7 @@
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
-![ClassDiagram1](/uploads/5381c1b40a453a41326f1e331534a12a/ClassDiagram1.png)
+![ClassDiagram1](/uploads/de06844c974b5f15fcc1c14744c36392/ClassDiagram1.png)
 
 
 ## 一 河长登录接口
