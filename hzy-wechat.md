@@ -16,7 +16,7 @@
         * OK，新闻动态所有属性
         * FAIL，id不存在
 4. 保存新闻动态，/article/create, POST
-    * region不用保存，因为session中有这个信息                 
+    * 参数中不需要regionCode，因为session中有这个信息                 
     * 参数： 
         * title,文章标题
         * content，文章内容
@@ -27,18 +27,15 @@
         * OK,保存成功
         
 ## 二 StationController 测站
-1. 取得测站列表：121.40.82.11:8080/stations，GET
+1. 取得测站列表：/station/lists
     * 参数：regionCode，行政区编码
     * 返回：
-        * OK,行政区下的所有测站，包含createDate(建立时间),instanceId(唯一编码),type(测站类型),address(安装位置),value(最新数据)
+        * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回类似于:{name:xx,instanceIs:xx,riverModel:xx,sensors:[{code:xx,type:xx}]
 2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
     * 参数：code，仪表编码
     * 返回：
         * OK，仪表当日数据
         * FAIL,仪表编码不存在
-3. **取得仪表列表：www.qingqingshuili.cn:8080/sensors，GET **
-    * 参数：token
-    * 返回：OK(仪表列表)
 
 ## 三 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
@@ -121,7 +118,6 @@
 }
 ```
 
-
 ## 六 riverSegmentController，河段接口
 1. 取得河段列表，riverSegment/region/lists, GET
     * 参数：
@@ -142,3 +138,39 @@
         * bucket: bucket名
     * 返回：
         * OK，文件数组，ObjectFile对象全属性
+
+## 九 RiverController,河湖控制层
+1. 取得河湖列表,/river/lists,GET   
+    * 参数
+        * regionCode，行政区code
+    * 返回：
+        * OK,返回河流的所有属性
+
+           
+## 十 HzbUserController,Hzb用户控制层
+1. 河长办用户登录,/hzbUser/login,POST
+    * 登录成功，除了把hzbUser保存在session中，还要保存regionCode
+    * 参数: 
+        * phone：手机号
+        * password:密码
+        * cookie：cookie
+    * 返回：
+        * OK(用户对象):登录成功
+        * 4040 CODE_NEED 需要验证码
+        * 4023 DATA_LOCK 用户已锁定
+        * 4021：DATA_NOEXIST 账号不存在
+        * FAIL：密码错误
+2. 河长办用户验证码登录：/hzbUser/web/loginByVerify POST
+    * 参数：password:密码；verification:验证码
+    * 返回：
+        * OK(用户对象):登录成功
+        * 4041: CODE_INVALID 验证码过期
+        * 4042: CODE_ERROR 验证码输入错误
+3. 登录发送验证码: /hzbUser/login/getLoginVerify
+   * 参数
+       * phone:手机号
+   * 返回：
+       * OK:发送成功
+       * 4021：DATA_NOEXIST 账号不存在
+        
+                  
