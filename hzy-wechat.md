@@ -1,4 +1,14 @@
 # 河长云微信公众号接口设计
+
+## 零 WechatController 公众号控制层
+1. 登录，/wechat/login,GET
+    * 微信登录主要是在session中建立登录标识,建立微信用户角色，wechat_simple
+    * 参数：
+        * unionId,微信统一标识
+    * 返回
+        * OK,登录成功    
+    
+
 ## 一 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * 参数：regionCode，行政区编码
