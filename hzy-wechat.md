@@ -15,7 +15,17 @@
     * 返回：
         * OK，新闻动态所有属性
         * FAIL，id不存在
-
+4. 保存新闻动态，/article/create, POST
+    * region不用保存，因为session中有这个信息                 
+    * 参数： 
+        * title,文章标题
+        * content，文章内容
+        * imageUrl，图片
+        * type，WATERPOLICY(水利法规), WATERNEW(新闻动态)
+        * level，CITY(州级),COUNTY(县级)
+    * 返回:
+        * OK,保存成功
+        
 ## 二 StationController 测站
 1. 取得测站列表：121.40.82.11:8080/stations，GET
     * 参数：regionCode，行政区编码
@@ -68,6 +78,16 @@
         * OK，投诉所有属性
         * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉不属于自己
+4. 回复投诉反馈，/complaint/handle,POST
+    * 回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
+    * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
+    * 参数：
+        * id,投诉id
+        * handleName,处理人姓名
+        * handleContent,回复内容
+    * 返回：
+        * OK,回复成功        
+        * 4022: DATA_REFUSE 投诉不属于河长办 
 
 ## 五 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
