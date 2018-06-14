@@ -17,7 +17,7 @@
         * OK，新闻动态所有属性
         * FAIL，id不存在
 4. 保存新闻动态，/article/create, POST
-    * 参数中不需要regionCode，因为session中有这个信息                 
+    * 河长办用户操作，参数中不需要regionCode，因为session中有这个信息  
     * 参数： 
         * title,文章标题
         * content，文章内容
@@ -77,7 +77,7 @@
         * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉不属于自己
 4. 回复投诉反馈，/complaint/handle,POST
-    * 回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
+    * 河长办用户操作,回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
     * 参数：
         * id,投诉id
