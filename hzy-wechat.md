@@ -56,7 +56,7 @@
     * 返回：
         * OK，新闻动态所有属性
         * FAIL，id不存在
-4. 保存新闻动态，/article/create, POST
+4. 新建新闻动态，/article/create, POST
     * 河长办用户操作，参数中不需要regionCode，因为session中有这个信息  
     * 参数： 
         * title,文章标题
@@ -66,12 +66,22 @@
         * level，CITY(州级),COUNTY(县级)
     * 返回:
         * OK,保存成功
-        
+5. 修改新闻动态，/article/update, POST
+    * 参数： 
+        * id,新闻动态id
+        * title,文章标题        
+        * content，文章内容
+        * imageUrl，图片
+        * type，WATERPOLICY(水利法规), WATERNEW(新闻动态)
+        * level，CITY(州级),COUNTY(县级)
+    * 返回:
+        * OK,保存成功
+                        
 ## 四 StationController 测站
 1. 取得测站列表：/station/lists
     * 参数：regionCode，行政区编码
     * 返回：
-        * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回类似于:{name:xx,instanceIs:xx,riverModel:xx,sensors:[{code:xx,type:xx}]
+        * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回和水利云返回测站列表数据保持一致
 2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
     * 参数：code，仪表编码
     * 返回：
@@ -180,6 +190,12 @@
         * bucket: bucket名
     * 返回：
         * OK，文件数组，ObjectFile对象全属性
+2. 根据key得到文件访问路径，/oss/objectUrl，GET
+    * 参数:
+        * key:文件key
+        * bucket:bucket名
+    * 返回：
+        * OK，{url:xxx}
 
 ## 十一 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET   
