@@ -3,8 +3,7 @@
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
-![ClassDiagram1](/uploads/de06844c974b5f15fcc1c14744c36392/ClassDiagram1.png)
-
+![ClassDiagram1](/uploads/2fd93a5f214bb84127af8a5eae4f0dd3/ClassDiagram1.png)
 
 ## 一 河长登录接口
 1. 登录发送验证码: /hzUser/login/getLoginVerify,GET
