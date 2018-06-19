@@ -147,6 +147,24 @@
         // 河长
         NORMAL
     }    
+    
+    /**
+     * 河流兴趣点类型
+     */
+    public enum RiverIntrestType {
+        // 公示牌
+        BILLBOARD,
+        // 灌区
+        IRRIGATION,
+        // 水库
+        RESERVOIR,
+        // 污水处理厂
+        SEWAGE_FACTORY,
+        // 排污口
+        OUTLET,
+        // 水源
+        WATER_SOURCE
+    }    
 ```
 
 
