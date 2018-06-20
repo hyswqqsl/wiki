@@ -8,7 +8,7 @@
         * password:密码
         * cookie：cookie
     * 返回：
-        * OK(用户对象):登录成功
+        * OK:登录成功,返回河长办用户属性，hzy:{name：xxx,regionCode:xxx,...}
         * 4040 CODE_NEED 需要验证码
         * 4023 DATA_LOCK 用户已锁定
         * 4021：DATA_NOEXIST 账号不存在
@@ -113,11 +113,16 @@
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
-2. 取得投诉列表，/complaint/lists,GET
+2. 取得微信用户的投诉列表，/complaint/lists,GET
     * 参数：unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, handleName, handleDate
-3. 取得投诉详情，/complaint/complaint,GET
+3. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
+    * 参数：
+        * regionCode：行政区全国统一编码    
+    * 返回：
+        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, handleName, handleDate
+4. 取得投诉详情，/complaint/complaint,GET
     投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
         * instanceId:投诉唯一标识
@@ -126,7 +131,7 @@
         * OK，投诉所有属性
         * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉不属于自己
-4. 回复投诉反馈，/complaint/handle,POST
+5. 回复投诉反馈，/complaint/handle,POST
     * 河长办用户操作,回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
     * 参数：
