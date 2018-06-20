@@ -13,7 +13,7 @@
         * 4023 DATA_LOCK 用户已锁定
         * 4021：DATA_NOEXIST 账号不存在
         * FAIL：密码错误
-2. 河长办用户验证码登录：/hzbUser/web/loginByVerify POST
+2. 河长办用户验证码登录：/hzbUser/loginByVerify POST
     * 参数：password:密码；verification:验证码
     * 返回：
         * OK(用户对象):登录成功
