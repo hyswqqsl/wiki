@@ -26,7 +26,7 @@
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
     * 参数：id:河段id
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)，concerns:[{id,name,type,coor,address}]}
+        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)，interests:[{id,name,type,coor,address}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * 参数：无
@@ -47,7 +47,7 @@
 2. 上传巡河记录,/cruise/add,POST
    * 参数：
        * riverSegmentId:河道id
-       * cruiseRecords:[{type,description,content,coor,address,,instanceId(唯一标识),concernId(关注点id)},{..}]
+       * cruiseRecords:[{type,description,content,coor,address,,instanceId(唯一标识),interestId(关注点id)},{..}]
        * cruise:{beginTime(开始时间),content,path(巡河路径),duration(巡河时长),length(巡河里长),instanceId:唯一标识}
    * 返回：
        * OK,建立成功
@@ -60,7 +60,7 @@
 4. 查看巡河记录详情,/cruise/cruise/{instanceId},GET
     * 参数：instanceId，巡河记录标识
     * 返回：
-        * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,concern:{name,type}},{..}]}
+        * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
  
 
@@ -107,17 +107,6 @@
             return values()[ordinal];
         }
     }
-    
-        /**
-     * 河段关注点类型
-     */
-    public enum RiverSegmentConcernType {
-        // 排污口
-        OUTLET,
-        // 公示牌
-        BILLBOARD
-    }
-    
     
     /**
      * 行政区级别

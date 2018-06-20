@@ -8,7 +8,7 @@
         * password:密码
         * cookie：cookie
     * 返回：
-        * OK:登录成功,返回河长办用户属性，hzy:{name：xxx,regionCode:xxx,...}
+        * OK:登录成功,返回河长办用户属性+河长办属性，{name:xxx,...,hzb:{name：xxx,regionCode:xxx,...}}
         * 4040 CODE_NEED 需要验证码
         * 4023 DATA_LOCK 用户已锁定
         * 4021：DATA_NOEXIST 账号不存在
