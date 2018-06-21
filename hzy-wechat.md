@@ -37,7 +37,7 @@
        * 返回：
            * OK(用户对象)，包含河长办用户所有属性，不包含河长办属性
            * 4011: NO_SESSION,未登录
-6.河长办用户注销,/hzbUser/logout POST
+6. 河长办用户注销,/hzbUser/logout POST
    * 参数：无
    * 返回：OK,注销成功
        
