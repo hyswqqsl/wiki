@@ -141,7 +141,7 @@
     * 返回：
         * OK,回复成功        
         * 4022: DATA_REFUSE 投诉不属于河长办 
-6， 编辑反馈回复，/complaint/handle/update,POST
+6. 编辑反馈回复，/complaint/handle/update,POST
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
     * 参数：
         * id,投诉id
@@ -214,7 +214,7 @@
     * 参数：无
     * 返回：
         * OK，数据格式：
-~~~
+```
 {requestId:xxx, AssumedRoleUser:            \"AssumedRoleId\":" + "\""
 				+ AssumedRoleId + "\"" + ",\n"
 				+ "                     \"Arn\":" + "\""
@@ -228,7 +228,7 @@
 				+ "\"" + ",\n" + "                     \"SecurityToken\":"
 				+ "\"" + Security_Token + "\"" + "\n"
 				+ "                                      }\n" + "}\n";
-~~~                
+```               
 
 ## 十一 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET   
