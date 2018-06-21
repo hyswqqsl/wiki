@@ -141,6 +141,15 @@
     * 返回：
         * OK,回复成功        
         * 4022: DATA_REFUSE 投诉不属于河长办 
+6， 编辑反馈回复，/complaint/handle/update,POST
+    * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
+    * 参数：
+        * id,投诉id
+        * handleName,处理人姓名
+        * handleContent,回复内容
+    * 返回：
+        * OK,编辑成功        
+        * 4022: DATA_REFUSE 投诉不属于河长办         
 
 ## 七 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
@@ -201,6 +210,25 @@
         * bucket:bucket名
     * 返回：
         * OK，{url:xxx}
+3. 获取sts安全令牌,用于上传或获取oss存储的文件, /oss/sts,GET
+    * 参数：无
+    * 返回：
+        * OK，数据格式：
+~~~
+{requestId:xxx, AssumedRoleUser:            \"AssumedRoleId\":" + "\""
+				+ AssumedRoleId + "\"" + ",\n"
+				+ "                     \"Arn\":" + "\""
+				+ CommonAttributes.ROLE_ARN + "\"" + "\n"
+				+ "                                        },\n"
+				+ "                     \"Credentials\":{\n"
+				+ "                     \"AccessKeyId\":" + "\"" + AccessKey_Id
+				+ "\"" + ",\n" + "                     \"AccessKeySecret\":"
+				+ "\"" + AccessKey_Secret + "\"" + ",\n"
+				+ "                     \"Expiration\":" + "\"" + Expiration
+				+ "\"" + ",\n" + "                     \"SecurityToken\":"
+				+ "\"" + Security_Token + "\"" + "\n"
+				+ "                                      }\n" + "}\n";
+~~~                
 
 ## 十一 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET   
