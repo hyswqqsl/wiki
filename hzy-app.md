@@ -161,10 +161,15 @@
     qqslimage/hzy/{regionCode}/article/，新闻
     qqslimage/hzy/{regionCode}/river/，河流
     qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/，投诉图片
-    qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}，投诉处理图片
+    qqslimage/hzy/{regionCode}/complaint/handle/，投诉处理图片
     qqslimage/hzy/{regionCode}/cruise/record/{instanceId}/,巡河记录
 ```
 
+```$xslt
+instanceId生成方式
+https://github.com/kelektiv/node-uuid
+https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html
+```
 
 
 

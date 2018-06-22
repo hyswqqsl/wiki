@@ -64,7 +64,7 @@
     * 返回：
         * OK，新闻动态所有属性
         * FAIL，id不存在
-4. 新建新闻动态，/article/create, POST
+4. 新建文章，/article/create, POST
     * 河长办用户操作，参数中不需要regionCode，因为session中有这个信息  
     * 参数： 
         * title,文章标题
@@ -74,7 +74,7 @@
         * level，CITY(州级),COUNTY(县级)
     * 返回:
         * OK,保存成功
-5. 修改新闻动态，/article/update, POST
+5. 修改文章，/article/update, POST
     * 参数： 
         * id,新闻动态id
         * title,文章标题        
@@ -84,6 +84,14 @@
         * level，CITY(州级),COUNTY(县级)
     * 返回:
         * OK,保存成功
+ 6. 上传文章图片，/article/image/create POST
+    * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/article/中，上传时使用https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html方式生成图片的唯一编码
+    * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903,压缩到图片宽度600px
+    * 参数： 
+    * 使用HttpServletRequest request，转换为MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request，取得图片，参见https://blog.csdn.net/qq_24419601/article/details/79784773
+    * 返回:
+        * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
+        * FAIL
                         
 ## 四 StationController 测站
 1. 取得测站列表：/station/lists
@@ -157,7 +165,15 @@
         * handleContent,回复内容
     * 返回：
         * OK,编辑成功        
-        * 4022: DATA_REFUSE 投诉不属于河长办         
+        * 4022: DATA_REFUSE 投诉不属于河长办  
+7. 回复反馈时，上传图片，/complaint/image/create,POST
+   * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/complaint/handle/，投诉处理图片中，上传时使用https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html方式生成图片的唯一编码
+    * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903,压缩到图片宽度600px
+    * 参数： 
+    * 使用HttpServletRequest request，转换为MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request，取得图片，参见https://blog.csdn.net/qq_24419601/article/details/79784773
+    * 返回:
+        * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
+        * FAIL
 
 ## 七 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
