@@ -129,15 +129,17 @@
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
-2. 取得微信用户的投诉列表，/complaint/lists,GET
-    * 参数：unionId，微信唯一标识
+2. 公众号取得微信用户的投诉列表，/complaint/lists,GET
+    * 参数：
+        * unionId，微信唯一标识
+        * regionCode，行政区全国统一编码    
     * 返回：
-        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, handleName, handleDate
+        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
 3. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
     * 参数：
         * regionCode：行政区全国统一编码    
     * 返回：
-        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, handleName, handleDate
+        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status, handleName, handleDate
 4. 取得投诉详情，/complaint/complaint,GET
     投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
@@ -150,6 +152,7 @@
 5. 回复投诉反馈，/complaint/handle,POST
     * 河长办用户操作,回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
+    * 取session中的reginCode，保存在投诉对象中的regionCode
     * 参数：
         * id,投诉id
         * handleName,处理人姓名
