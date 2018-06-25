@@ -130,16 +130,16 @@
     * 返回：
         * OK，建立成功，与登录的user关联
 2. 公众号取得微信用户的投诉列表，/complaint/lists,GET
+    * regionCode从session中取
     * 参数：
         * unionId，微信唯一标识
-        * regionCode，行政区全国统一编码    
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
 3. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
     * 参数：
         * regionCode：行政区全国统一编码    
     * 返回：
-        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status, handleName, handleDate
+        * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
 4. 取得投诉详情，/complaint/complaint,GET
     投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
