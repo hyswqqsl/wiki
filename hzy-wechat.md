@@ -150,9 +150,7 @@
         * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉不属于自己
 5. 回复投诉反馈，/complaint/handle,POST
-    * 河长办用户操作,回复反馈时可以上传图片，直接存储在阿里云上地址：qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/{handle}
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
-    * 取session中的reginCode，保存在投诉对象中的regionCode
     * 参数：
         * id,投诉id
         * handleName,处理人姓名
