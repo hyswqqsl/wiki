@@ -111,7 +111,7 @@
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
 ## 六 ComplaintControler，投诉
-1. 提交投诉,/complaint/submit,POST
+1. 公众号提交投诉,/complaint/wechat/submit,POST
     投诉实体中增加imageUrl，上传图片时，把第一张图的地址保存在imageUrl中
     * 参数：
         * title：标题，必需
@@ -122,25 +122,42 @@
         * riverSegmentId:选择的河段id，必需
         * riverSegmentName:选择的河段名，必需
         * name:投诉人姓名，可以使匿名
-        * phone:投诉人电话，可以为空
+        * @ phone:投诉人电话
         * instanceId:唯一标识
         * mediaIds: "xx,xx,.."
         * regionCode：行政区全国统一编码
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
-2. 公众号取得微信用户的投诉列表，/complaint/lists,GET
+2. 手机app提交投诉,/complaint/phone/submit,POST
+    * 参数：
+        * title：标题，必需
+        * description：描述，由几组关注信息自动组成的，必需
+        * content：投诉内容，必需
+        * coor:由网页定位识别的经纬度，必需
+        * address:由网页定位识别的位置，必需
+        * riverSegmentId:选择的河段id，必需
+        * riverSegmentName:选择的河段名，必需
+        * name:投诉人姓名，可以使匿名
+        * @ phone:投诉人电话
+        * instanceId:唯一标识
+        * imageUrl:封面图片
+        * regionCode：行政区全国统一编码
+        * unionId，微信唯一标识
+    * 返回：
+        * OK，建立成功，与登录的user关联        
+3. 公众号取得微信用户的投诉列表，/complaint/lists,GET
     * regionCode从session中取
     * 参数：
         * unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
-3. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
+4. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
     * 参数：
         * regionCode：行政区全国统一编码    
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
-4. 取得投诉详情，/complaint/complaint,GET
+5. 取得投诉详情，/complaint/complaint,GET
     投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
         * instanceId:投诉唯一标识
@@ -149,7 +166,7 @@
         * OK，投诉所有属性
         * FAIL，唯一标识不存在
         * 4022，DATA_REFUSE，请求的投诉不属于自己
-5. 回复投诉反馈，/complaint/handle,POST
+6. 回复投诉反馈，/complaint/handle,POST
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
     * 参数：
         * id,投诉id
@@ -158,7 +175,7 @@
     * 返回：
         * OK,回复成功        
         * 4022: DATA_REFUSE 投诉不属于河长办 
-6. 编辑反馈回复，/complaint/handle/update,POST
+7. 编辑反馈回复，/complaint/handle/update,POST
     * 如果投诉的regionCode和session中保存的regionCode不一致，返回错误
     * 参数：
         * id,投诉id
@@ -167,7 +184,7 @@
     * 返回：
         * OK,编辑成功        
         * 4022: DATA_REFUSE 投诉不属于河长办  
-7. 上传回复图片，/complaint/image/create,POST
+8. 编辑器上传回复图片，/complaint/image/create,POST
    * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/complaint/handle/，投诉处理图片中，上传时使用https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html 方式生成图片的唯一编码
     * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903 ,压缩到图片宽度600px
     * 参数： 
