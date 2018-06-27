@@ -232,7 +232,7 @@
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
- ## 九 WeChatController,微信控制层
+## 九 WeChatController,微信控制层
  1. 根据code取得unionId,/weChat/unionId,GET
     * 取得unionId成功后，将unionId存在session中，直接登录
     * 参数：code，微信code
