@@ -3,7 +3,8 @@
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
-![1](/uploads/be48ba071ebfd16e0e3abc614812f013/1.png)
+![class](/uploads/eaa00d5f29df4730c512fc3d867555b6/class.png)
+
 
 ![22](/uploads/8d75fb2464b5cb4dbdb5aa26a6a0533d/22.png)
 
