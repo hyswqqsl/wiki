@@ -1,4 +1,4 @@
-# 河长云微信公众号接口设计
+# 河长云web端接口设计
 
 ## 一 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
@@ -40,22 +40,83 @@
 6. 河长办用户注销,/hzbUser/logout POST
    * 参数：无
    * 返回：OK,注销成功
-       
-## 二 微信用户登录,/wechat/login,POST
-   * 微信登录，把unionId存入session中
+
+## 二 MatterController，事件管理
+1. 事件登记,/matter/register,POST
+   * 督查督办编号目前由唯一编码方式生成
+   * 目前事件管理都是由市级河长办发起的，交办给县级河长办
+   * 生成的事件状态是登记
+   * 记录登记人员id
+   * 办理次数为0
    * 参数：
-       *  unionId：微信unionId      
-   * 返回
-       * OK，登录成功
+       * code: 督查督办编号
+       * title: 标题
+       * content: 内容
+       * requirement: 办理要求
+       * deadline: 时限要求
+       * source: 事件来源
+       * sourceId: 来源id,如果来源是河长报告，那么来源id就是河长报告id,如果来源是投诉，那么来源id就是投诉id
+       * emergency: 紧急程度
+   * 返回：
+       * OK，建立成功
+       * FAIL，事件来源有误       
+2. 事件交办,/matter/deliver,POST
+    * 事件改为状态是交办
+    * 参数：
+        * id: 事件id
+        * hzbId: 交办给的县级河长办id
+    * 返回：
+        * OK: 交办成功
+        * FAIL: 事件状态有误
+3. 事件承办,/matter/handle,POST
+   * 事件是交办或审核退回的，可以进行承办
+   * 事件改为状态是承办
+   * 承办时可以上传图片，由前台处理
+   * 参数： 
+       * id: 事件id
+       * organizerId: 承办单位id
+       * description: 承办描述
+    * 返回： 
+       * OK: 承办成功
+       * FAIL: 事件状态有误
+4. 事件办结,/matter/complete,POST
+    * 事件状态改为办结
+    * 办结时可以上传图片，由前台处理
+    * 参数：
+        * id：事件id
+        * description: 办结描述
+        * FAIL: 事件状态有误
+5. 事件审核不通过，审核退回,/matter/return,POST
+    * 事件状态改为审核退回
+    * 审核时可以上传图片，由前台处理
+    * 办理次数+1
+    * 参数：
+        * id： 事件id
+        * description: 审核描述
+    * 返回:
+        * OK: 退回成功       
+        * FAIL: 事件状态有误
+6. 事件归档,/matter/archive,POST
+    * 事件状态改为归档
+    * 参数：
+        * id： 事件id
+        * description: 审核描述 
+    * 返回：
+        * OK: 归档成功
+        * FAIL: 事件状态有误
+7. 事件催办,/matter/urgent,POST
+8. 事件反馈,/matter/feedback,POST
+9. 事件责任退回,/matter/deliver/return,POST
+10. 查看事件详情,/matter/{code},GET
    
 ## 三 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
-    * 参数：regionCode，行政区编码
+    * 参数：无
     * 返回：
         * OK，所属行政区的新闻动态列表
         * FAIL，行政区不存在
 2. 取得政策法规列表，/article/laws, GET
-    * 参数：regionCode，行政区编码
+    * 参数：无
     * 返回：
         * OK，全国范围的政策法规+市级的政策法规列表  
         * FAIL，行政区id不存在
@@ -95,18 +156,18 @@
                         
 ## 四 StationController 测站
 1. 取得测站列表：/station/lists
-    * 参数：regionCode，行政区编码
+    * 参数：无
     * 返回：
         * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回和水利云返回测站列表数据保持一致
 2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
-    * 参数：code，仪表编码
+    * 参数：code，仪表编码，token
     * 返回：
         * OK，仪表当日数据
         * FAIL,仪表编码不存在
 
 ## 五 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
-    * 参数：regionCode，行政区编码
+    * 参数：无
     * 返回：
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
@@ -125,7 +186,6 @@
         * @ phone:投诉人电话
         * instanceId:唯一标识
         * mediaIds: "xx,xx,.."
-        * regionCode：行政区全国统一编码
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联
@@ -142,19 +202,16 @@
         * @ phone:投诉人电话
         * instanceId:唯一标识
         * imageUrl:封面图片
-        * regionCode：行政区全国统一编码
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联        
 3. 公众号取得微信用户的投诉列表，/complaint/lists,GET
-    * regionCode从session中取
     * 参数：
         * unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
 4. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
-    * 参数：
-        * regionCode：行政区全国统一编码    
+    * 参数：无
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
 5. 取得投诉详情，/complaint/complaint,GET
@@ -195,8 +252,7 @@
 
 ## 七 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
-    * 参数：
-        * regionCode，行政区编码
+    * 参数：无
     * 返回： 
         * OK,
 
@@ -226,18 +282,25 @@
 ```
 
 ## 八 riverSegmentController，河段接口
-1. 取得河段列表，riverSegment/region/lists, GET
-    * 参数：
-        * regionCode：行政区全国统一编码
+1. 取得河段列表，/riverSegment/region/lists, GET
+    * 参数：无
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
 ## 九 WeChatController,微信控制层
  1. 根据code取得unionId,/weChat/unionId,GET
     * 取得unionId成功后，将unionId存在session中，直接登录
-    * 参数：code，微信code
+    * 参数：
+        * code，微信code
+        * regionCode:行政区编码 
     * 返回：
         * OK，{unionId:xxx}，目前没有unionId时，返回openId
+2. 移动端微信用户登录,/weChat/login,POST
+   * 微信登录，把unionId存入session中
+   * 参数：
+       *  unionId：微信unionId      
+   * 返回
+       * OK，登录成功        
         
 ## 十 OssController,阿里云Oss控制层
 1. 根据treePath(阿里云路径)得到文件列表，/oss/objectFiles,GET
@@ -274,8 +337,7 @@
 
 ## 十一 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET   
-    * 参数
-        * regionCode，行政区code
+    * 参数: 无
     * 返回：
         * OK,返回河流的所有属性
         
