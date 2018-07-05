@@ -214,7 +214,6 @@
 3. 公众号取得微信用户的投诉列表，/complaint/lists,GET
     * 参数：
         * unionId，微信唯一标识
-        * regionCode：行政区编码
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
 4. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
@@ -307,7 +306,7 @@
 2. 移动端微信用户登录,/weChat/login,POST
    * 微信登录，把unionId存入session中
    * 参数：
-       *  unionId：微信unionId
+       * unionId：微信unionId
        * regionCode:行政区编码       
    * 返回
        * OK，登录成功        
