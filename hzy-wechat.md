@@ -111,12 +111,14 @@
    
 ## 三 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
-    * 参数：无
+    * 参数：
+        * regionCode：行政区编码
     * 返回：
         * OK，所属行政区的新闻动态列表
         * FAIL，行政区不存在
 2. 取得政策法规列表，/article/laws, GET
-    * 参数：无
+    * 参数：
+       * regionCode：行政区编码
     * 返回：
         * OK，全国范围的政策法规+市级的政策法规列表  
         * FAIL，行政区id不存在
@@ -156,7 +158,8 @@
                         
 ## 四 StationController 测站
 1. 取得测站列表：/station/lists
-    * 参数：无
+    * 参数：
+       * regionCode：行政区编码
     * 返回：
         * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回和水利云返回测站列表数据保持一致
 2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
@@ -167,13 +170,15 @@
 
 ## 五 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
-    * 参数：无
+    * 参数：
+       * regionCode：行政区编码
     * 返回：
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
 ## 六 ComplaintControler，投诉
 1. 公众号提交投诉,/complaint/wechat/submit,POST
-    投诉实体中增加imageUrl，上传图片时，把第一张图的地址保存在imageUrl中
+    * 投诉实体中增加imageUrl，上传图片时，把第一张图的地址保存在imageUrl中
+    * 不需要regionCode
     * 参数：
         * title：标题，必需
         * description：描述，由几组关注信息自动组成的，必需
@@ -190,6 +195,7 @@
     * 返回：
         * OK，建立成功，与登录的user关联
 2. 手机app提交投诉,/complaint/phone/submit,POST
+    * 不需要regionCode
     * 参数：
         * title：标题，必需
         * description：描述，由几组关注信息自动组成的，必需
@@ -208,6 +214,7 @@
 3. 公众号取得微信用户的投诉列表，/complaint/lists,GET
     * 参数：
         * unionId，微信唯一标识
+        * regionCode：行政区编码
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
 4. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
@@ -215,7 +222,7 @@
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
 5. 取得投诉详情，/complaint/complaint,GET
-    投诉实体中增加imageUrl，保存第一张图的地址
+    * 投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
         * instanceId:投诉唯一标识
         * unionId，微信唯一标识
@@ -252,7 +259,8 @@
 
 ## 七 HzUsrController 河长
 1. 取得河长名录，/hzUser/lists,GET
-    * 参数：无
+    * 参数：
+        * regionCode：行政区编码    
     * 返回： 
         * OK,
 
@@ -283,7 +291,8 @@
 
 ## 八 riverSegmentController，河段接口
 1. 取得河段列表，/riverSegment/region/lists, GET
-    * 参数：无
+    * 参数：
+        * regionCode：行政区编码, 这个regionCode是当先位置的县区级行政编码    
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
 
@@ -298,7 +307,8 @@
 2. 移动端微信用户登录,/weChat/login,POST
    * 微信登录，把unionId存入session中
    * 参数：
-       *  unionId：微信unionId      
+       *  unionId：微信unionId
+       * regionCode:行政区编码       
    * 返回
        * OK，登录成功        
         
@@ -337,7 +347,8 @@
 
 ## 十一 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET   
-    * 参数: 无
+    * 参数: 
+       * regionCode:行政区编码     
     * 返回：
         * OK,返回河流的所有属性
         
