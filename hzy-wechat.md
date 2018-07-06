@@ -86,10 +86,9 @@
         * id：事件id
         * description: 办结描述
         * FAIL: 事件状态有误
-5. 事件审核不通过，审核退回,/matter/return,POST
+5. 事件审核不通过，审核退回,/matter/returnBack,POST
     * 事件状态改为审核退回
     * 审核时可以上传图片，由前台处理
-    * 办理次数+1
     * 参数：
         * id： 事件id
         * description: 审核描述
