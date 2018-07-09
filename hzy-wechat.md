@@ -112,14 +112,14 @@
 7. 事件催办,/matter/urgent,POST
 
 8. 事件反馈,/matter/feedback,POST
-9. 事件责任退回,/matter/deliver/return,POST
+9. 事件责任退回,/matter/deliver/returnBack,POST
 10. 查看事件详情,/matter/{code},GET
     * 列出事件所有数据
     * 参数：code，督查督办编号
     * 返回：
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办图片list，办结图片list
-        * {code:xxx,title:xxx,...,images:[path1,path2,...],[{id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}, {id:xxx,handleDescription:xxx,organizerId:xxx}]}
+        * {code:xxx,title:xxx,...,images:[path1,path2,...],[{id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}, {id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}]}
    
 ## 三 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET

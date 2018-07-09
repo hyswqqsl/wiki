@@ -7,9 +7,6 @@
 
 ![22](/uploads/8d75fb2464b5cb4dbdb5aa26a6a0533d/22.png)
 
-
-
-
 ## 一 河长登录接口
 1. 登录发送验证码: /hzUser/login/getLoginVerify,GET
     * 河长登录时，取得验证码
@@ -67,7 +64,6 @@
     * 返回：
         * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
- 
 
 ```
    /**
