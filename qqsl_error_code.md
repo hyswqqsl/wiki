@@ -120,3 +120,8 @@
 *   4103: PANORAMA_SLICE_ERROE
     新建全景时，切图失败
 
+**[411x事件错误]
+>
+* 4111: MATTER_TYPE_ERROR 事件状态错误
+* 4112: MATTER_TIMEOUT 交办超时，不能责任退回
+

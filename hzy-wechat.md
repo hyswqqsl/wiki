@@ -47,13 +47,15 @@
     * 登记图片: /qqslimage/{regionCode}/matter/{code}/register
     * 承办图片: /qqslimage/{regionCode}/matter/{code}/{handleId}/handle
     * 办结图片: /qqslimage/{regionCode}/matter/{code}/{handleId}/complete
- 
+    * 事件状态：0-登记 1-交办 2-责任退回 3-承办 4-重办 5-办结 6-审核退回 7-归档
+     
 1. 事件登记,/matter/register,POST
    * 督查督办编号目前由唯一编码方式生成
    * 目前事件管理都是由市级河长办发起的，交办给县级河长办
    * 生成的事件状态是登记
    * 记录登记人员id
-   * 办理次数为0
+   * 事件来源：0-上级交办 1-系统推送 2-社会媒体监督 3-群众投诉 4-河长报告
+   * 紧急程度：0-一般 1-加急 2-紧急
    * 参数：
        * code: 督查督办编号
        * title: 标题
@@ -65,7 +67,7 @@
        * emergency: 紧急程度
    * 返回：
        * OK，建立成功
-       * FAIL，事件来源有误       
+       * 4111: MATTER_TYPE_ERROR 事件状态错误
 2. 事件交办,/matter/deliver,POST
     * 事件改为状态是交办
     * 参数：
@@ -73,7 +75,7 @@
         * hzbId: 交办给的县级河长办id
     * 返回：
         * OK: 交办成功
-        * FAIL: 事件状态有误
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
 3. 事件承办,/matter/handle,POST
    * 事件是交办或审核退回的，可以进行承办
    * 事件改为状态是承办
@@ -84,14 +86,16 @@
        * description: 承办描述
     * 返回： 
        * OK: 承办成功
-       * FAIL: 事件状态有误
+       * 4111: MATTER_TYPE_ERROR 事件状态错误
+       * 4022: DATA_REFUSE，事件不属于该河长办
 4. 事件办结,/matter/complete,POST
     * 事件状态改为办结
     * 办结时可以上传图片，由前台处理
     * 参数：
         * id：事件id
         * description: 办结描述
-        * FAIL: 事件状态有误
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
+        * 4022: DATA_REFUSE，事件不属于该河长办        
 5. 事件审核不通过，审核退回,/matter/returnBack,POST
     * 事件状态改为审核退回
     * 审核时可以上传图片，由前台处理
@@ -100,7 +104,7 @@
         * description: 审核描述
     * 返回:
         * OK: 退回成功       
-        * FAIL: 事件状态有误
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
 6. 事件归档,/matter/archive,POST
     * 事件状态改为归档
     * 参数：
@@ -108,19 +112,65 @@
         * description: 审核描述 
     * 返回：
         * OK: 归档成功
-        * FAIL: 事件状态有误
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
 7. 事件催办,/matter/urgent,POST
-
-8. 事件反馈,/matter/feedback,POST
+    * 市河长办发起
+    * 事件状态必须是承办，才能接受催办
+    * 参数：
+        * id：事件id
+        * content: 催办内容
+    * 返回：
+        * OK：催办成功
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
+8. 事件催办回复,/matter/urgent/result,POST
+    * 县区河长办分回复
+    * 参数：
+        * id: 事件催办id
+        * result: 回复内容
+    * 返回：
+        * OK：回复成功
+        * 4022: DATA_REFUSE，事件催办不属于该河长办        
+9. 事件反馈,/matter/feedback,POST
+    * 县区河长办发起
+    * 事件状态必须是承办，才能反馈
+    * 参数：
+        * id：事件id
+        * content: 反馈内容
+    * 返回：
+        * OK：反馈成功
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
+        * 4010: UNAUTHORIZED，非市级河长办不能进行操作
+10. 事件反馈回复：/matter/feedback/result,POST
+    * 市河长办回复
+    * 参数：
+        * id: 事件催办id
+        * result: 回复内容
+    * 返回：
+        * OK：回复成功
 9. 事件责任退回,/matter/deliver/returnBack,POST
-10. 查看事件详情,/matter/{code},GET
+   * 事件状态必须是交办
+   * 事件必须在24小时内
+   * 参数：
+       * id: 事件id
+       * description：责任退回描述
+   * 返回：
+        * OK：反馈成功
+        * 4111: MATTER_TYPE_ERROR 事件状态错误
+        * 4112: MATTER_TIMEOUT 交办超时，不能责任退回
+10. 取得承办单位列表，/matter/organizer/lists，GET
+   * 参数：
+       * regionCode：行政区编码
+   * 返回:
+       * OK，承办单位所有属性，【{id：xxx,code:xxx, ...},{id:xxx,code:xxx,...}】
+       * FAIL, 行政区编码和河长办不一致
+11. 查看事件详情,/matter/{code},GET
     * 列出事件所有数据
     * 参数：code，督查督办编号
     * 返回：
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办图片list，办结图片list
         * {code:xxx,title:xxx,...,images:[path1,path2,...],[{id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}, {id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}]}
-   
+         
 ## 三 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * 参数：
