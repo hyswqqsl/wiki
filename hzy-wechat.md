@@ -55,25 +55,25 @@
    * 生成的事件状态是登记
    * 记录登记人员id
    * 事件来源：0-上级交办 1-系统推送 2-社会媒体监督 3-群众投诉 4-河长报告
-   * 紧急程度：0-一般 1-加急 2-紧急
    * 参数：
        * code: 督查督办编号
        * title: 标题
        * content: 内容
-       * requirement: 办理要求
-       * deadline: 时限要求
        * source: 事件来源
        * sourceId: 来源id,如果来源是河长报告，那么来源id就是河长报告id,如果来源是投诉，那么来源id就是投诉id
-       * emergency: 紧急程度
    * 返回：
        * OK，建立成功
 2. 事件交办,/matter/deliver,POST
     * 事件状态必须是登记或责任退回才能交办
     * 事件改为状态是交办
+    * 紧急程度：0-一般 1-加急 2-紧急            
     * 参数：
         * id: 事件id
         * hzbId: 交办给的县级河长办id
-    * 返回：
+        * requirement: 办理要求
+        * deadline: 时限要求
+        * emergency: 紧急程度        
+      * 返回：
         * OK: 交办成功
         * 4111: MATTER_TYPE_ERROR 事件状态错误
 3. 事件承办,/matter/handle,POST
@@ -167,9 +167,30 @@
     * 参数：code，督查督办编号
     * 返回：
         * 事件所有属性，事件图片list
-        * 事件处理列表，每个列表中的承办图片list，办结图片list
-        * {code:xxx,title:xxx,...,images:[path1,path2,...],[{id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}, {id:xxx,handleDescription:xxx,organizerId:xxx, handleImages:[path1,path2,...], completeImages:[path1,path2,...]}]}
-         
+        * 事件处理列表，每个列表中的承办文件list，办结文件list
+        * 事件下发,上报列表
+~~~
+{code:xxx,title:xxx,...,
+    files: [path1,path2,...],
+    handles: [
+        {id:xxx,handleDescription:xxx,organizerId:xxx, handleFiles: [path1,path2,...], 
+            completeImages: [path1,path2,...]
+        },
+        {id:xxx,handleDescription:xxx,organizerId:xxx, handleFiles: [path1,path2,...], 
+            completeFiles: [path1,path2,...]
+        }
+    ], 
+    hastens: [
+        {content:xxx,result:xxx,type:xxx},
+        {...}
+    ], 
+    feedBacks: [
+        {content:xxx,result:xxx,type:xxx},
+        {...}
+    ]
+}
+~~~
+
 ## 三 ArticleControler 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * 参数：
