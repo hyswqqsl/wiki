@@ -67,8 +67,8 @@
        * emergency: 紧急程度
    * 返回：
        * OK，建立成功
-       * 4111: MATTER_TYPE_ERROR 事件状态错误
 2. 事件交办,/matter/deliver,POST
+    * 事件状态必须是登记或责任退回才能交办
     * 事件改为状态是交办
     * 参数：
         * id: 事件id
@@ -139,7 +139,6 @@
     * 返回：
         * OK：反馈成功
         * 4111: MATTER_TYPE_ERROR 事件状态错误
-        * 4010: UNAUTHORIZED，非市级河长办不能进行操作
 10. 事件反馈回复：/matter/feedback/result,POST
     * 市河长办回复
     * 参数：
@@ -147,6 +146,7 @@
         * result: 回复内容
     * 返回：
         * OK：回复成功
+        * 4010: UNAUTHORIZED，非市级河长办不能进行操作
 9. 事件责任退回,/matter/deliver/returnBack,POST
    * 事件状态必须是交办
    * 事件必须在24小时内
@@ -158,8 +158,7 @@
         * 4111: MATTER_TYPE_ERROR 事件状态错误
         * 4112: MATTER_TIMEOUT 交办超时，不能责任退回
 10. 取得承办单位列表，/matter/organizer/lists，GET
-   * 参数：
-       * regionCode：行政区编码
+   * 参数：无
    * 返回:
        * OK，承办单位所有属性，【{id：xxx,code:xxx, ...},{id:xxx,code:xxx,...}】
        * FAIL, 行政区编码和河长办不一致
