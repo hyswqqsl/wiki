@@ -17,6 +17,7 @@
     * 参数：唯一标识：instanceId
     * 返回：OK(订单对象):订单建立成功，跳转到支付界面，EXIST：有未处理的订单，UNKNOWN:未知错误
 3. 配置升级： 在点击'提交订单'时调用，/trade/updatePackage POST
+
     * 参数：唯一标识：instanceId,预升级的配置：packageType
     * 返回：OK(订单对象):订单建立成功，跳转到支付界面，EXIST：有未处理的订单，UNKNOWN:未知错误
 4. 获取用户订单列表: 获取订单列表 /trade/lists GET
