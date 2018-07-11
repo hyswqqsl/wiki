@@ -4,7 +4,6 @@
 
 ![class](/uploads/917f19a83d4049c743d8ca3cbd6bafcf/class.png)
 
-
 ![22](/uploads/8d75fb2464b5cb4dbdb5aa26a6a0533d/22.png)
 
 ## 一 河长登录接口
@@ -62,7 +61,7 @@
 ## 二 RiverController,河湖控制层
 1. 取得河湖列表,/river/lists,GET
     * **weChat,app端使用**
-    * **角色：weChat**   
+    * **角色：无**   
     * 参数: 
        * regionCode:行政区编码     
     * 返回：
@@ -412,7 +411,7 @@
 ## 六 ArticleController 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * **weChat,web端使用**
-    * **角色：weChat, 河长办用户**    
+    * **角色：无**    
     * 参数：
         * regionCode：行政区编码
     * 返回：
@@ -420,7 +419,7 @@
         * FAIL，行政区不存在
 2. 取得政策法规列表，/article/laws, GET
     * **weChat,web端使用**
-    * **角色：weChat, 河长办用户**    
+    * **角色：无**    
     * 参数：
        * regionCode：行政区编码
     * 返回：
@@ -428,7 +427,7 @@
         * FAIL，行政区id不存在
 3. 取得新闻动态和政策法规详情,/article/article/{id},GET
     * **weChat,web端使用**
-    * **角色：weChat, 河长办用户**    
+    * **角色：无**    
     * 参数：id: 新闻动态id
     * 返回：
         * OK，新闻动态所有属性
@@ -479,7 +478,7 @@
 ## 七 StationController 测站
 1. 取得测站列表：/station/list
     * **weChat, web端使用**
-    * **角色：weChat, 河长办用户**   
+    * **角色：无**   
     * 参数：
        * regionCode：行政区编码
     * 返回：
@@ -493,7 +492,7 @@
 ## 八 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
     * **weChat, web端使用**
-    * **角色：weChat, 河长办用户** 
+    * **角色：无** 
     * 参数：
        * regionCode：行政区编码
     * 返回：
@@ -522,7 +521,7 @@
         * OK，建立成功，与登录的user关联
 2. 手机app提交投诉,/complaint/phone/submit,POST
     * **app端使用**
-    * **角色：河长** 
+    * **角色：weChat** 
     * 不需要regionCode
     * 参数：
         * title：标题，必需
