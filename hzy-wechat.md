@@ -160,7 +160,7 @@
     * **角色：各级河长, 河长办用户**
     * 参数：instanceId，巡河记录标识
     * 返回：
-        * OK，{beginTime,conten,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
+        * OK，{beginTime,content,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
         * 4022，DATA_REFUSE，请求的记录不属于自己
 
 ## 四 HzbUserController,河长办用户控制层
@@ -337,6 +337,8 @@
         * OK：回复成功
         * 4010: UNAUTHORIZED，非市级河长办不能进行操作
 9. 事件责任退回,/matter/deliver/returnBack,POST
+    * **web端使用**
+    * **角色：县河长办用户**
    * 事件状态必须是交办
    * 事件必须在24小时内
    * 参数：
@@ -347,13 +349,31 @@
         * 4111: MATTER_TYPE_ERROR 事件状态错误
         * 4112: MATTER_TIMEOUT 交办超时，不能责任退回
 10. 取得承办单位列表，/matter/organizer/lists，GET
-    * **web端使用**
-    * **角色：市河长办用户，县河长办用户**
+   * **web端使用**
+   * **角色：市河长办用户，县河长办用户**
    * 参数：无
    * 返回:
        * OK，承办单位所有属性，【{id：xxx,code:xxx, ...},{id:xxx,code:xxx,...}】
        * FAIL, 行政区编码和河长办不一致
-11. 查看事件详情,/matter/{code},GET
+11. **`取得办理的事件列表,/matter/handle/lists,GET`**
+   * **web端使用**
+   * **角色：市河长办用户，县河长办用户**
+   * 取得未归档的事件列表
+   * 如果是市级河长办，取得事件regionCode等于市级regionCode的所有事件
+   * 如果是市级河长办，根据外键取得事件列表
+   * 参数：无
+   * 返回:
+       * OK，列表，事件对象所有属性，不包含文件列表，包含子对象
+12. **`取得归档事件列表,/matter/archive/list,GET`**
+   * **web端使用**
+   * **角色：市河长办用户，县河长办用户**
+   * 取得已归档的事件列表
+   * 如果是市级河长办，取得事件regionCode等于市级regionCode的所有事件
+   * 如果是市级河长办，根据外键取得事件列表
+   * 参数：无
+   * 返回:
+       * OK，列表，事件对象所有属性，不包含文件列表，包含子对象       
+13. 查看事件详情,/matter/{code},GET
     * **web端使用**
     * **角色：市河长办用户，县河长办用户**
     * 列出事件所有数据
