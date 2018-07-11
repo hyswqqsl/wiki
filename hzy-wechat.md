@@ -1,8 +1,9 @@
-# 河长云web端接口设计
+# 河长云接口设计
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
-![class](/uploads/60d36c549753823f8689780385334472/class.png)
+![class](/uploads/917f19a83d4049c743d8ca3cbd6bafcf/class.png)
+
 
 ![22](/uploads/8d75fb2464b5cb4dbdb5aa26a6a0533d/22.png)
 
