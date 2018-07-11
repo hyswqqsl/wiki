@@ -93,7 +93,7 @@
         * OK,新建成功
         * 4022: DATA_REFUSE，河湖不属于该河长办
         * 4021：DATA_NOEXIST 河湖存在
-4. **`删除河湖概况,/river/delete/{id},DELETE**   ` 
+4. **`删除河湖概况,/river/delete/{id},DELETE`**
     * **web端使用**
     * **角色：河长办管理员**
     * 参数： 
