@@ -213,9 +213,6 @@
 ## 五 MatterController，事件管理
 
     * 前台事件图片上传
-    * 登记图片: /qqsl/hzy/{regionCode}/matter/{code}/register
-    * 承办图片: /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/handle
-    * 办结图片: /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/complete
     * 事件状态：0-登记 1-交办 2-责任退回 3-承办 4-重办 5-办结 6-审核退回 7-归档
      
 1. 事件登记,/matter/register,POST
@@ -736,11 +733,22 @@
 
 ```    
 河长云相关图片路径：
-    qqslimage/hzy/{regionCode}/article/，新闻
-    qqslimage/hzy/{regionCode}/river/，河流
-    qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/，投诉图片
-    qqslimage/hzy/{regionCode}/complaint/handle/，投诉处理图片
-    qqslimage/hzy/{regionCode}/cruise/record/{instanceId}/,巡河记录
+    新闻
+    qqslimage/hzy/{regionCode}/article/
+    河流
+    qqslimage/hzy/{regionCode}/river/
+    投诉图片
+    qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/
+    投诉处理图片
+    qqslimage/hzy/{regionCode}/complaint/handle/
+    巡河记录
+    qqsl/hzy/{regionCode}/cruise/record/{instanceId}/
+    事件登记图片
+    /qqsl/hzy/{regionCode}/matter/{code}/register
+    事件承办图片
+    /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/handle
+    事件办结图片
+     /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/complete
 ```
 
 ```
