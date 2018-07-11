@@ -483,11 +483,16 @@
        * regionCode：行政区编码
     * 返回：
         * OK,行政区下的所有测站，包含属性，测站下仪表所有属性，返回和水利云返回测站列表数据保持一致
-2. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
+2. 取得token，用于和监测系统请求数据，/station/token
+    * **角色：无** 
+    * 参数：无
+    * 返回：
+        * OK，返回token
+3. 取得仪表当日数据：121.40.82.11:8080/sensor/{code}, GET    
     * 参数：code，仪表编码，token
     * 返回：
         * OK，仪表当日数据
-        * FAIL,仪表编码不存在
+        * FAIL,仪表编码不存在        
 
 ## 八 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
