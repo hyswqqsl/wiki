@@ -601,7 +601,7 @@
 ## 十 weChatController,微信控制层
  1. 根据code取得unionId,/weChat/unionId,GET
     * **weChat使用**
-    * **角色：weChat**  
+    * **角色：无**  
     * 取得unionId成功后，将unionId存在session中，直接登录
     * 参数：
         * code，微信code
@@ -610,7 +610,7 @@
         * OK，{unionId:xxx}，目前没有unionId时，返回openId
 2. 移动端微信用户登录,/weChat/login,POST
     * **app端使用**
-    * **角色：weChat** 
+    * **角色：无** 
    * 微信登录，把unionId存入session中
    * 参数：
        * unionId：微信unionId
