@@ -379,6 +379,7 @@
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办文件list，办结文件list
         * 事件下发,上报列表
+        
 ```
 {code:xxx,title:xxx,...,
     files: [path1,path2,...],
@@ -625,6 +626,7 @@
     * 参数：无
     * 返回：
         * OK，数据格式：
+        
 ```
 {requestId:xxx, AssumedRoleUser:            \"AssumedRoleId\":" + "\""
 				+ AssumedRoleId + "\"" + ",\n"
@@ -639,11 +641,10 @@
 				+ "\"" + ",\n" + "                     \"SecurityToken\":"
 				+ "\"" + Security_Token + "\"" + "\n"
 				+ "                                      }\n" + "}\n";
+```				
 
-```                
-   /**
-     * 巡河记录类型
-     */
+```     
+    巡河记录类型
     public enum CruiseRecordType {
         // 水体
         RIVER_BODY("水体异味,颜色异常"),
