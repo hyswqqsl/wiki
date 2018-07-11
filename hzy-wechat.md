@@ -196,6 +196,8 @@
        * OK:发送成功
        * 4021：DATA_NOEXIST 账号不存在
 4. 修改密码:在基本资料的修改密码处点击保存时调用， /hzbUser/updatePassword POST
+    * **web端使用**
+    * **角色：河长办用户**
    * 参数：
        * oldPassword:当前密码
        * newPassword：新密码
@@ -203,11 +205,15 @@
        * OK:修改成功
        * FAIL:当前密码错误
 5. 获取当前河长办用户：/hzbUser/getUser GET
+    * **web端使用**
+    * **角色：河长办用户**
        * 参数：
        * 返回：
            * OK(用户对象)，包含河长办用户所有属性，不包含河长办属性
            * 4011: NO_SESSION,未登录
 6. 河长办用户注销,/hzbUser/logout POST
+    * **web端使用**
+    * **角色：河长办用户**
    * 参数：无
    * 返回：OK,注销成功
 
@@ -618,12 +624,16 @@
     * 返回：
         * OK，文件数组，ObjectFile对象全属性
 2. 根据key得到文件访问路径，/oss/objectUrl，GET
+    * **weChat, app, web端使用**
+    * **角色：weChat, 河长，河长办用户** 
     * 参数:
         * key:文件key
         * bucket:bucket名
     * 返回：
         * OK，{url:xxx}
 3. 获取sts安全令牌,用于上传或获取oss存储的文件, /oss/sts,GET
+    * **weChat, app, web端使用**
+    * **角色：weChat, 河长，河长办用户** 
     * 参数：无
     * 返回：
         * OK，数据格式：
@@ -755,6 +765,6 @@
 
 ```
 河长角色：hzUser:city, hzUser:county, hzUser:town, hzUser:village
-河长办角色：hzbUser:city, hzbUser:county, hzbAdmin
+河长办角色：hzbUser:city, hzbUser:county, hzbUser:admin
 weChat角色：weChatUser:simple
 ```
