@@ -166,7 +166,7 @@
 ## 四 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
     * **web端使用**
-    * **角色：河长办用户**
+    * **角色：无**
     * 登录成功，除了把hzbUser保存在session中，还要保存regionCode
     * 参数: 
         * phone：手机号
@@ -180,7 +180,7 @@
         * FAIL：密码错误
 2. 河长办用户验证码登录：/hzbUser/loginByVerify POST
     * **web端使用**
-    * **角色：河长办用户**
+    * **角色：无**
     * 参数：password:密码；verification:验证码
     * 返回：
         * OK(用户对象):登录成功
@@ -188,7 +188,7 @@
         * 4042: CODE_ERROR 验证码输入错误
 3. 登录发送验证码: /hzbUser/login/getLoginVerify
     * **web端使用**
-    * **角色：河长办用户**
+    * **角色：无**
    * 参数
        * phone:手机号
    * 返回：
