@@ -543,14 +543,16 @@
         * unionId，微信唯一标识
     * 返回：
         * OK，建立成功，与登录的user关联        
-3. 公众号取得微信用户的投诉列表，/complaint/lists,GET
-    * **weChat, web端使用**
-    * **角色：weChat, 河长办用户** 
+3. 公众号取得微信用户的投诉列表，/complaint/weChat/lists,GET
+    * **weChat**
+    * **角色：weChat** 
     * 参数：
         * unionId，微信唯一标识
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate
-4. 取得河长办下的投诉列表:/complaint/hzb/lists,GET
+4. 取得投诉列表:/complaint/hzb/lists,GET
+    * **web端使用**
+    * **角色：市河长办** 
     * 参数：无
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
