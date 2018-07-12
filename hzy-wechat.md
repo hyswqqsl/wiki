@@ -9,7 +9,7 @@
 ## 一 河长登录接口
 1. 登录发送验证码: /hzUser/login/getLoginVerify,GET
     * **app端使用**
-    * **角色：各级河长**
+    * **角色：无**
     * 河长登录时，取得验证码
     * 参数：
         * phone:登录手机号
@@ -18,7 +18,7 @@
         * DATA_NOEXIST:手机号不存在
 2. 登录：/hzUser/login,POST
     * **app端使用**
-    * **角色：各级河长**
+    * **角色：无**
     * 河长每次登录都是用动态验证码    
     * 参数：
         * code:验证码
@@ -28,7 +28,7 @@
         * 4042: CODE_ERROR 验证码输入错误
 3. 取得河长名录，/hzUser/lists,GET
     * **weChat,web端使用**
-    * **角色：weChat，hzb用户**
+    * **角色：无**
     * 参数：
         * regionCode：行政区编码    
     * 返回： 
@@ -367,7 +367,7 @@
    * 参数：无
    * 返回:
        * OK，列表，事件对象所有属性，不包含文件列表，包含子对象
-12. **`取得归档事件列表,/matter/archive/list,GET`**
+12. **`取得归档事件列表,/matter/archive/lists,GET`**
    * **web端使用**
    * **角色：市河长办用户，县河长办用户**
    * 取得已归档的事件列表
@@ -476,7 +476,7 @@
         * 4022，DATA_REFUSE，文章不属于自己
                         
 ## 七 StationController 测站
-1. 取得测站列表：/station/list
+1. 取得测站列表：/station/lists
     * **weChat, web端使用**
     * **角色：无**   
     * 参数：
