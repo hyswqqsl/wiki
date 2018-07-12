@@ -10,47 +10,47 @@
 
 ### 二. AccountController 子账号控制层
 >
-2. 修改密保手机发送验证码： /account/phone/getUpdateVerify,GET
+1. 修改密保手机发送验证码： /account/phone/getUpdateVerify,GET
     * 参数：phone:手机号
     * 返回：OK:发送成功
     * FAIL:手机号不合法
     * EXIST：手机号已被使用
-3. 手机找回密码时发送验证码：/account/phone/getGetbackVerify,GET
+2. 手机找回密码时发送验证码：/account/phone/getGetbackVerify,GET
     * 参数：phone:手机号
     * 返回：OK:发送成功
     * FIAL:手机号不合法
     * EXIST：账号不存在
-4. web端登录发送验证码: /account/login/getLoginVerify,GET
+3. web端登录发送验证码: /account/login/getLoginVerify,GET
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，如果手机号注册，发送手机验证码；如果是email，如果邮箱绑定，发送邮箱验证码
     * 参数：code:登录凭证
     * 返回：OK:发送成功,FAIL:手机号/邮箱不合法，EXIST：账号不存在
-5. email绑定时发送验证码:/account/email/getBindVerify,GET
+4. email绑定时发送验证码:/account/email/getBindVerify,GET
     * 参数：email:手机号
     * 返回：OK:发送成功,FAIL:邮箱不合法，EXIST：邮箱已存在
-6. email找回密码时发送验证码：/account/email/getGetbackVerify,GET
+5. email找回密码时发送验证码：/account/email/getGetbackVerify,GET
     * 参数：email:邮箱
     * 返回：OK:发送成功,FAIL:email不合法，EXIST：邮箱不存在 
-8. 手机找回密码: /account/phone/getbackPassord,GET
+6. 手机找回密码: /account/phone/getbackPassord,GET
     * 忘记密码时找回密码 
     * 参数：verification:验证码;passord:重设的密码; 
     * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误
-9. email找回密码:/account/email/getbackPassord，GET
+7. email找回密码:/account/email/getbackPassord，GET
     * 忘记密码时找回密码
     * 参数：verification:验证码;passord:重设的密码;   
     * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
-10. 修改密码:在基本资料的修改密码处点击保存时调用， /account/updatePassword POST
+8. 修改密码:在基本资料的修改密码处点击保存时调用， /account/updatePassword POST
     * 参数：oldPassword:当前密码，newPassword：新密码
     * 返回：OK:修改成功，UNKNOWN:当前密码错误
-11. 修改密保手机：在基本资料的密保手机处点击保存时调用account/updatePhone POST
+9. 修改密保手机：在基本资料的密保手机处点击保存时调用account/updatePhone POST
     * 参数：verification:验证码
     * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
-12. 绑定邮箱：在基本资料里的绑定邮箱处点击保存时调用，/account/updateEmail POST
+10. 绑定邮箱：在基本资料里的绑定邮箱处点击保存时调用，/account/updateEmail POST
     * 参数：verification:验证码
     * 返回：OK:修改成功，INVALID:请重新获取验证码，FAIL:验证码错误 
-13. 获取子账号信息：在基本资料的基本信息处显示，/account/getAccount GET
+11. 获取子账号信息：在基本资料的基本信息处显示，/account/getAccount GET
     * 参数：
     * 返回：OK(用户对象)，包含昵称、手机号，身份认证状态，企业认证状态，绑定微信的昵称，微信openid等
-16. web端登录：/account/web/login POST
+12. web端登录：/account/web/login POST
     * 子账号状态不是已确认CONFIRMED，不能登录，返回ACCOUNT_NO_CONFIRMED
     * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：code：登录凭证，手机号或邮箱；password:密码；cookie：cookie
@@ -61,7 +61,7 @@
         * OTHER:需要验证码，
         * UNKNOWN:用户已锁定
         * ACCOUNT_NO_CONFIRMED:子账号未确认
-17. 移动端登录：/account/phone/login POST
+13. 移动端登录：/account/phone/login POST
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
     * 参数：code：登录凭证，手机号或邮箱；password:密码
     * 返回：
@@ -70,7 +70,7 @@
         * EXIST:用户不存在,
         * UNKNOWN:用户已锁定
         * ACCOUNT_NO_CONFIRMED:子账号未确认 
-20. web端验证码登录：改为 /account/web/loginByVerify POST 
+14. web端验证码登录：改为 /account/web/loginByVerify POST 
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：password:密码；verification:验证码
     * 返回：
@@ -79,7 +79,7 @@
         * UNKNOWN:用户已锁定；
         * INVALID:请重新获取验证码
         * ACCOUNT_NO_CONFIRMED:子账号未确认
-21. 判断输入的用户密码是否正确：/account/checkPassword,POST
+15. 判断输入的用户密码是否正确：/account/checkPassword,POST
     * 进入账号管理时，要求输入密码，保证安全
     * 参数：password:密码
     * 返回：OK:密码正确；FAIL：密码错误
