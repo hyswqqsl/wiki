@@ -558,11 +558,10 @@
         * OK，返回投诉列表，只需返回id，createDate, name, phone, title，imageUrl，riverSegmentName, status, handleName, handleDate
 5. 取得投诉详情，/complaint/complaint,GET
     * **weChat, web端使用**
-    * **角色：weChat, 河长办用户** 
+    * **角色：weChat, 市河长办** 
     * 投诉实体中增加imageUrl，保存第一张图的地址
     * 参数：
         * instanceId:投诉唯一标识
-        * unionId，微信唯一标识
     * 返回：
         * OK，投诉所有属性
         * FAIL，唯一标识不存在
