@@ -66,7 +66,7 @@
        * regionCode:行政区编码     
     * 返回：
         * OK,返回河流的所有属性
-2. **`超级管理员取得河湖列表,/river/hzb/lists,GET`**
+2. **`市河长办取得河湖列表,/river/hzb/lists,GET`**
     * **weChat,app端使用**
     * **角色：市河长办管理员**   
     * 参数: 无 
