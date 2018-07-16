@@ -57,6 +57,54 @@
     }           
 }
 ```
+4. 取得下级河长列表,/hzUser/down/lists,GET
+   * **app端使用**
+   * **角色：各级河长**
+   * 参数：无
+   * 返回：OK,河长列表，河长所有属性
+5. 取得上级河长，/hzUser/up/hzUser，GET
+   * **app端使用**
+   * **角色：各级河长**
+   * 参数：无
+   * 返回：OK,上级河长所有属性
+6. 村乡级河长发报告给乡级河长,/hzUser/village/report,POST
+   * **app端使用**
+   * **角色：村级河长**
+   * 村级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
+   * 报告中加入乡级河长id，县河长办id，就是说村河长报告不仅乡级河长能看到，县河长办也能看到
+   * 参数：
+       * title,标题
+       * content,内容
+       * instanceId,唯一编码
+       * @ complaintId 巡河id
+   * 返回：
+       * OK,报告成功
+       * 4010: UNAUTHORIZED,不是村级河长
+7. 村级河长取得报告列表       
+7. 乡级河长处理村级河长报告,/hzUser/town/report/handle,POST
+   * **app端使用**
+   * **角色：乡级河长**
+   * 村级报告给乡级河长，乡级河长对报告内容进行处理
+   * 参数：
+       * id，报告id
+       * handleContent,内容
+   * 返回：
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是乡级河长，或不是提交给自己的报告
+8. 乡级河长取得村级报告列表       
+9. 乡河长发报告给县河长办,/hzUser/town/report,POST
+   * **app端使用**
+   * **角色：乡级河长**
+   * 乡级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
+   * 报告中加入县河长办id
+   * 参数：
+       * title,标题
+       * content,内容
+       * instanceId,唯一编码
+       * @ complaintId 巡河id
+   * 返回：
+       * OK,报告成功
+       * 4010: UNAUTHORIZED,不是村级河长
 
 ## 二 RiverController,河湖控制层
 1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
@@ -99,14 +147,24 @@
         * OK,新建成功
         * 4022: DATA_REFUSE，河湖不属于该河长办
         * 4021：DATA_NOEXIST 河湖存在
-5. **`删除河湖概况,/river/delete/{id},DELETE`**
+5. **`删除河湖概况,/river/delete,POST`**
     * **web端使用**
     * **角色：市河长办管理员**   
     * 参数： 
         * id: 河湖id
     * 返回:
         * OK,删除成功
-        * 4022，DATA_REFUSE，河湖不属于自己        
+        * 4022，DATA_REFUSE，河湖不属于自己    
+6. 上传河湖图片，/river/image/create POST
+       * **web端使用**
+       * **角色：河长办管理员**    
+       * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/river/中，上传时使用 https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html 方式生成图片的唯一编码
+       * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903 ,压缩到图片宽度600px
+       * 参数： 
+       * 使用HttpServletRequest request，转换为MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request，取得图片，参见https://blog.csdn.net/qq_24419601/article/details/79784773
+       * 返回:
+           * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
+           * FAIL            
         
 ## 二 RiverSegmentController 河段控制层
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
@@ -221,37 +279,21 @@
    * **角色：河长办用户**
    * 参数：无
    * 返回：OK,注销成功
-7. 取得下级河长列表,/hzUser/down/lists,GET
+12. 县河长办处理河长报告，/hzbUser/county/report/handle,POST
    * **app端使用**
-   * **角色：各级河长**
-   * 参数：无
-   * 返回：OK,河长列表，河长所有属性
-8. 取得上级河长，/hzUser/up/hzUser，GET
-   * **app端使用**
-   * **角色：各级河长**
-   * 参数：无
-   * 返回：OK,上级河长所有属性
-9. 村乡级河长发报告，给乡级河长,/hzUser/village/report,POST
-   * **app端使用**
-   * **角色：村级河长**
-   * 村级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
-   * 报告中加入乡级河长id，县河长办id，就是说村河长报告不仅乡级河长能看到，县河长办也能看到
+   * **角色：县河长办**
+   * 乡级河长报告给县河长办，县河长办对报告内容进行处理
    * 参数：
-       * title,标题
-       * content,内容
-       * @ complaintId 巡河id
-   * 返回：OK,报告成功
-10. 乡级河长处理村级河长报告,/hzUser/town/handle,POST
-   * **app端使用**
-   * **角色：乡级河长**
-   * 村级报告给乡级河长，乡级河长对报告内容进行处理
-   * 参数：
-       * title,标题
-       * content,内容
-       * @ complaintId 巡河id
+       * id，报告id
+       * handleContent,内容
    * 返回：
-       * OK,报告成功
-       *     
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是乡级河长，或不是提交给自己的报告
+13. 县河长办取得河长报告列表
+
+14. 县河长办向市河长办发送报告
+15. 市河长办从县河长办报告立案事件       
+
 
 ## 五 MatterController，事件管理
 
@@ -503,7 +545,7 @@
     * 返回:
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL
- 7. **`删除文章，/article/delete/{id}，DELETE`**
+ 7. **`删除文章，/article/delete，POST`**
     * **web端使用**
     * **角色：河长办管理员**   
     * 参数： 
