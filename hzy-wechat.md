@@ -68,6 +68,8 @@
    * 参数：无
    * 返回：OK,上级河长所有属性
 6. 村乡级河长发报告给乡级河长,/hzUser/village/report,POST
+   * 图片单独上传
+   * 村级报告type=0
    * **app端使用**
    * **角色：村级河长**
    * 村级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
@@ -76,12 +78,37 @@
        * title,标题
        * content,内容
        * instanceId,唯一编码
-       * @ complaintId 巡河id
+       * @ cruiseId 巡河id
    * 返回：
        * OK,报告成功
+       * 4010: UNAUTHORIZED,不是村级和乡级河长
+       * 4021：DATA_NOEXIST,数据不存在,巡河id找不到巡河记录
+7. 村河长取得自己的报告列表, /hzUser/report/village/lists,GET
+   * 村级取得type=0的报告，乡级取得type=1的报告
+   * **app端使用**
+   * **角色：村级河长**
+   * 参数：无
+   * 返回：
+       * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是村级河长
-7. 村级河长取得报告列表       
-7. 乡级河长处理村级河长报告,/hzUser/town/report/handle,POST
+8. 乡河长取得自己的报告列表, /hzUser/report/town/lists,GET
+   * 村级取得type=0的报告，乡级取得type=1的报告
+   * **app端使用**
+   * **角色：乡级河长**
+   * 参数：无
+   * 返回：
+       * OK,发出自己的报告列表，报告所有属性
+       * 4010: UNAUTHORIZED,不是乡级河长       
+9. 乡河长取得发给自己的报告列表,/hzUser/report/town/receive/lists,GET
+   * **app端使用**
+   * **角色：乡级河长**
+   * 参数：无
+   * 返回：
+       * OK,自己发出的报告列表，报告所有属性
+       * 4010: UNAUTHORIZED,不是乡级河长       
+10. 乡级河长处理村级河长报告,/hzUser/report/town/handle,POST
+   * 回复图片单独上传
+   * 乡级报告type=0
    * **app端使用**
    * **角色：乡级河长**
    * 村级报告给乡级河长，乡级河长对报告内容进行处理
@@ -91,8 +118,8 @@
    * 返回：
        * OK,处理成功
        * 4010: UNAUTHORIZED,不是乡级河长，或不是提交给自己的报告
-8. 乡级河长取得村级报告列表       
-9. 乡河长发报告给县河长办,/hzUser/town/report,POST
+11. 乡河长发报告给县河长办,/hzUser/town/report,POST
+   * 图片单独上传
    * **app端使用**
    * **角色：乡级河长**
    * 乡级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
@@ -279,7 +306,24 @@
    * **角色：河长办用户**
    * 参数：无
    * 返回：OK,注销成功
-12. 县河长办处理河长报告，/hzbUser/county/report/handle,POST
+7. 县河长办取得发给自己的报告列表,/hzbUser/report/county/receive/lists,GET
+   * 县河长办取得的是河长报告
+   * **web端使用**
+   * **角色：县河长办**
+   * 参数：无
+   * 返回：
+       * OK,发给自己报告列表，报告所有属性
+       * 4010: UNAUTHORIZED,不是县河长办用户
+8 市河长办取得发给自己的报告列表,/hzbUser/report/city/receive/lists,GET
+       * 市河长办取得的是河长办报告
+       * **web端使用**
+       * **角色：市河长办**
+       * 参数：无
+       * 返回：
+           * OK,发给自己报告列表，报告所有属性
+           * 4010: UNAUTHORIZED,不是市河长办用户        
+9. 县河长办处理河长报告，/hzbUser/report/county/handle,POST
+   * 回复图片放在编辑器中，不用单独上传
    * **app端使用**
    * **角色：县河长办**
    * 乡级河长报告给县河长办，县河长办对报告内容进行处理
@@ -289,11 +333,75 @@
    * 返回：
        * OK,处理成功
        * 4010: UNAUTHORIZED,不是乡级河长，或不是提交给自己的报告
-13. 县河长办取得河长报告列表
-
-14. 县河长办向市河长办发送报告
-15. 市河长办从县河长办报告立案事件       
-
+10. 县河长办向市河长办发送报告，/hzbUser/county/report,POST
+   * 内容图片放在编辑器中，不用单独上传
+   * **app端使用**
+   * **角色：县河长办**
+   * 县河长办报告给市河长办，可以从巡河记录里报告，也可以直接报告
+   * 参数：
+       * title,标题
+       * content,内容
+       * @ complaintId 巡河id
+   * 返回：
+       * OK,报告成功
+       * 4010: UNAUTHORIZED,不是县河长办
+11. 县河长办取得自己的河长办报告，/hzbUser/report/county/lists,GET
+   * **app端使用**
+   * **角色：县河长办**
+   * 县河长办报告给市河长办，可以从巡河记录里报告，也可以直接报告
+   * 参数：
+       * title,标题
+       * content,内容
+       * @ complaintId 巡河id
+   * 返回：
+       * OK,报告成功
+       * 4010: UNAUTHORIZED,不是县河长办
+12. 市河长办处理县河长办报告,/hzbUser/report/city/handle,POST
+   * 回复图片放在编辑器中，不用单独上传
+   * **app端使用**
+   * **角色：市河长办**
+   * 县河长办报告给市河长办，市河长办对报告内容进行处理
+   * 参数：
+       * id，报告id
+       * handleContent,内容
+   * 返回：
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是市级河长办
+13. 市长办给县河长办发送待办事项,/hzbUser/city/todo,POST
+   * 图片放在编辑器中，不用单独上传
+   * **app端使用**
+   * **角色：市河长办**
+   * 参数：
+       * title,标题
+       * content,内容
+   * 返回：
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是市级河长办
+14. 县河长办取得代办事项,/hzbUser/todo/county/lists,GET     
+   * **app端使用**
+   * **角色：县河长办**
+   * 参数：
+   * 返回：
+       * OK,发给自己代办事项，所有属性
+       * 4010: UNAUTHORIZED,不是县河长办用户  
+15. 县河长办处理待办事项，/hzbUser/todo/county/handle,POST
+   * 回复图片放在编辑器中，不用单独上传
+   * **app端使用**
+   * **角色：县河长办**
+   * 市河长办发代办事项给县河长办，县河长办对代办事项进行处理
+   * 参数：
+       * id，报告id
+       * handleContent,内容
+   * 返回：
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是县级河长办
+16. 市河长办取得所有代办事项，/hzbUser/todo/city/lists,GET
+   * **app端使用**
+   * **角色：县河长办**
+   * 参数：
+   * 返回：
+       * OK,所有代办事项，所有属性
+       * 4010: UNAUTHORIZED,不是市河长办用户       
 
 ## 五 MatterController，事件管理
 
@@ -845,6 +953,12 @@
     /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/handle
     事件办结图片
      /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/complete
+     村级，乡级河长报告图片
+     /qqsl/hzy/{regionCode}/report/{instanceId}
+     村级河长报告回复图片
+     /qqsl/hzy/{regionCode}/report/{instanceId}/handle
+     河长办报告，回复图片
+     /qqsl/hzy/{regionCode}/report/hzb
 ```
 
 ```
