@@ -2,8 +2,7 @@
 
 ![Main](/uploads/c9320c2bf210134518be2ec906eef08c/Main.png)
 
-![class](/uploads/99c951ca4587874aa6e859eec5f31b2b/class.png)
-
+![class](/uploads/3ca67b85c0e03a4b908053044f1bf2ec/class.png)
 
 
 ![22](/uploads/8d75fb2464b5cb4dbdb5aa26a6a0533d/22.png)
