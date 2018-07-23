@@ -982,11 +982,13 @@
     qqslimage/hzy/{regionCode}/complaint/handle/
     巡河记录
     qqsl/hzy/{regionCode}/cruise/record/{instanceId}/
-    事件登记图片
+    事件图片
+    /qqsl/hzy/{regionCode}/matter/{code}/image/
+    事件登记附件
     /qqsl/hzy/{regionCode}/matter/{code}/register
-    事件承办图片
+    事件承办附件
     /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/handle
-    事件办结图片
+    事件办结附件
      /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/complete
      村级，乡级河长报告图片
      /qqsl/hzy/{regionCode}/report/{instanceId}
