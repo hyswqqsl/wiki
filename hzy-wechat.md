@@ -68,7 +68,7 @@
    * **角色：各级河长**
    * 参数：无
    * 返回：OK,上级河长所有属性
-6. 村乡级河长发报告给乡级河长,/hzUser/village/report,POST
+6. 村级河长发报告给乡级河长,/hzUser/village/report,POST
    * 图片单独上传
    * 村级报告type=0
    * **app端使用**
