@@ -134,6 +134,17 @@
    * 返回：
        * OK,报告成功
        * 4010: UNAUTHORIZED,不是村级河长
+12. 取得河长报告详情,/hzUser/report/{instanceId}，GET
+   * **app,web端使用**
+   * **角色：村级，乡级河长，县河长办**
+   * 如果是村级河长，必须是自己的河长报告
+   * 如果是乡级河长，必须是自己的河长报告，或发给自己的报告
+   * 如果是县河长办，必须是发给自己的报告
+    * 参数：
+        * instanceId，唯一编码
+    * 返回：
+        * OK，河长报告所有属性
+       * 4010: UNAUTHORIZED,不是属于自己的报告
 
 ## 二 RiverController,河湖控制层
 1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
@@ -343,6 +354,7 @@
    * 参数：
        * title,标题
        * content,内容
+       * instanceId,唯一编码
        * @ complaintId 巡河id
    * 返回：
        * OK,报告成功
@@ -376,6 +388,8 @@
    * 参数：
        * title,标题
        * content,内容
+       * instanceId,唯一编码
+       * hzbId，县河长办id
    * 返回：
        * OK,处理成功
        * 4010: UNAUTHORIZED,不是市级河长办
@@ -403,7 +417,26 @@
    * 参数：
    * 返回：
        * OK,所有代办事项，所有属性
-       * 4010: UNAUTHORIZED,不是市河长办用户       
+       * 4010: UNAUTHORIZED,不是市河长办用户     
+17. 取得县河长办报告详情,/hzbUser/report/{instanceId},GET
+   * **wen端使用**
+   * **角色：县河长办,市河长办**
+   * 如果是县河长办用户，报告必须属于县河长办
+   * 参数：
+       * instanceId，报告唯一编码
+   * 返回：
+       * OK，返回报告所有属性
+       * 4010: UNAUTHORIZED,不属于这个县河长办
+18. 取得河长办代办事项,/hzbUser/todo/{instanceId},GET
+   * **wen端使用**
+   * **角色：县河长办,市河长办**
+   * 如果是县河长办用户，代办事项必须属于县河长办
+   * 参数：
+       * instanceId，报告唯一编码
+   * 返回：
+       * OK，返回报告所有属性
+       * 4010: UNAUTHORIZED,不属于这个县河长办          
+       
 
 ## 五 MatterController，事件管理
 
