@@ -153,7 +153,7 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的报告
-14. 河长编辑自己的报告，/hzUser/report/update,DELETE
+14. 河长编辑自己的报告，/hzUser/report/update,POST
    * **app端使用**
    * **角色：村级，乡级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -478,7 +478,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是属于自己的报告             
-21. 市河长办删除代办事项，/hzbUser/todo/delete/{instanceId},GET
+21. 市河长办删除代办事项，/hzbUser/todo/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：市级河长**
    * 只能删除发出后1小时内，且没有处理的代办事项
@@ -487,7 +487,7 @@
    * 返回：
        * OK，删除成功
        * DATA_NOEXIST，不存在              
-22. 市河长办编辑代办事项，/hzbUser/todo/update,GET
+22. 市河长办编辑代办事项，/hzbUser/todo/update,POST
    * **app端使用**
    * **角色：市级河长**
    * 只能编辑发出后1小时内，且没有处理的代办事项
