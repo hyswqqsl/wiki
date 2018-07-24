@@ -153,6 +153,18 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的报告
+14. 河长编辑自己的报告，/hzUser/report/update,DELETE
+   * **app端使用**
+   * **角色：村级，乡级河长**
+   * 只能编辑发出后1小时内，且没有处理的报告
+   * 参数：
+       * instanceId，报告唯一编码
+       * title,标题
+       * content,内容       
+   * 返回：
+       * OK，编辑成功
+       * DATA_NOEXIST，不存在       
+       * 4010: UNAUTHORIZED,不是属于自己的报告       
 
 ## 二 RiverController,河湖控制层
 1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
@@ -452,8 +464,21 @@
        * instanceId，报告唯一编码
    * 返回：
        * OK，删除成功
-       * 4010: UNAUTHORIZED,不是属于自己的报告    
-20. 市河长办删除代办事项，/hzbUser/todo/delete/{instanceId},GET
+       * DATA_NOEXIST，不存在
+       * 4010: UNAUTHORIZED,不是属于自己的报告
+20. 县河长办编辑自己的报告，/hzbUser/report/update,POST
+   * **app端使用**
+   * **角色：县级河长**
+   * 只能编辑发出后1小时内，且没有处理的报告
+   * 参数：
+       * instanceId，报告唯一编码
+       * title,标题
+       * content,内容
+   * 返回：
+       * OK，编辑成功
+       * DATA_NOEXIST，不存在       
+       * 4010: UNAUTHORIZED,不是属于自己的报告             
+21. 市河长办删除代办事项，/hzbUser/todo/delete/{instanceId},GET
    * **app端使用**
    * **角色：市级河长**
    * 只能删除发出后1小时内，且没有处理的代办事项
@@ -461,6 +486,18 @@
        * instanceId，报告唯一编码
    * 返回：
        * OK，删除成功
+       * DATA_NOEXIST，不存在              
+22. 市河长办编辑代办事项，/hzbUser/todo/update,GET
+   * **app端使用**
+   * **角色：市级河长**
+   * 只能编辑发出后1小时内，且没有处理的代办事项
+   * 参数：
+       * instanceId，报告唯一编码
+       * title,标题
+       * content,内容       
+   * 返回：
+       * OK，编辑成功
+       * DATA_NOEXIST，不存在              
 
 ## 五 MatterController，事件管理
 
