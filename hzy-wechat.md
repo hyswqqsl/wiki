@@ -70,7 +70,7 @@
    * 根据自己河道lists，找到对应的乡级河长lists
    * 参数：无
    * 返回：OK,河长列表，河长所有属性
-6. 村级河长根据巡河记录发报告给乡级河长,/hzUser/village/report,POST
+6. 村级河长根据巡河记录发报告给乡级河长,/hzUser/village/cruise/report,POST
    * 图片单独上传
    * 村级报告type=0
    * **app端使用**
