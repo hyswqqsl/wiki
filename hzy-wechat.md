@@ -61,30 +61,51 @@
 4. 取得下级河长列表,/hzUser/down/lists,GET
    * **app端使用**
    * **角色：各级河长**
+   * 根据自己河道lists，找到对应的村级河道lists，过滤出所有村级河长
    * 参数：无
    * 返回：OK,河长列表，河长所有属性
-5. 取得上级河长，/hzUser/up/hzUser，GET
+5. 取得上级河长，/hzUser/up/lists，GET
    * **app端使用**
    * **角色：各级河长**
+   * 根据自己河道lists，找到对应的乡级河长lists
    * 参数：无
-   * 返回：OK,上级河长所有属性
-6. 村级河长发报告给乡级河长,/hzUser/village/report,POST
+   * 返回：OK,河长列表，河长所有属性
+6. 村级河长根据巡河记录发报告给乡级河长,/hzUser/village/report,POST
    * 图片单独上传
    * 村级报告type=0
    * **app端使用**
    * **角色：村级河长**
-   * 村级报告给乡级河长，可以从巡河记录里报告，也可以直接报告
+   * 村级报告给乡级河长，从巡河记录里报告
    * 报告中加入乡级河长id，县河长办id，就是说村河长报告不仅乡级河长能看到，县河长办也能看到
+   * 根据巡河id找到河段id，存到报告里,根据河段id找到上级河段，得到乡级河长
    * 参数：
        * title,标题
        * content,内容
        * instanceId,唯一编码
-       * @ cruiseId 巡河id
+       * cruiseId 巡河id
    * 返回：
        * OK,报告成功
-       * 4010: UNAUTHORIZED,不是村级和乡级河长
+       * 4010: UNAUTHORIZED,不是村级河长
        * 4021：DATA_NOEXIST,数据不存在,巡河id找不到巡河记录
-7. 村河长取得自己的报告列表, /hzUser/report/village/lists,GET
+7. 村级河长直接发报告给乡级河长,/hzUser/village/report,POST
+      * 图片单独上传
+      * 村级报告type=0
+      * **app端使用**
+      * **角色：村级河长**
+      * 村级报告给乡级河长，直接报告
+      * 报告中加入乡级河长id，县河长办id，就是说村河长报告不仅乡级河长能看到，县河长办也能看到
+      * 根据乡级河长，找到乡级河段lists，通过乡级河段lists，还有自己的河段lists，匹配一下，只能有一个自己的河段匹配，保存到报告里
+      * 如果匹配不到河段，返回错误 
+      * 参数：
+          * title,标题
+          * content,内容
+          * instanceId,唯一编码
+          * parentId 上级河长id
+      * 返回：
+          * OK,报告成功
+          * 4010: UNAUTHORIZED,不是村级和乡级河长
+          * 4021：DATA_NOEXIST,数据不存在,匹配不到河段
+8. 村河长取得自己的报告列表, /hzUser/report/village/lists,GET
    * 村级取得type=0的报告，乡级取得type=1的报告
    * **app端使用**
    * **角色：村级河长**
@@ -92,7 +113,7 @@
    * 返回：
        * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是村级河长
-8. 乡河长取得自己的报告列表, /hzUser/report/town/lists,GET
+9. 乡河长取得自己的报告列表, /hzUser/report/town/lists,GET
    * 村级取得type=0的报告，乡级取得type=1的报告
    * **app端使用**
    * **角色：乡级河长**
@@ -100,14 +121,14 @@
    * 返回：
        * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是乡级河长       
-9. 乡河长取得发给自己的报告列表,/hzUser/report/town/receive/lists,GET
+10. 乡河长取得发给自己的报告列表,/hzUser/report/town/receive/lists,GET
    * **app端使用**
    * **角色：乡级河长**
    * 参数：无
    * 返回：
        * OK,自己发出的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是乡级河长       
-10. 乡级河长处理村级河长报告,/hzUser/report/town/handle,POST
+11. 乡级河长处理村级河长报告,/hzUser/report/town/handle,POST
    * 回复图片单独上传
    * 乡级报告type=0
    * **app端使用**
@@ -119,7 +140,7 @@
    * 返回：
        * OK,处理成功
        * 4010: UNAUTHORIZED,不是乡级河长，或不是提交给自己的报告
-11. 乡河长发报告给县河长办,/hzUser/town/report,POST
+12. 乡河长发报告给县河长办,/hzUser/town/report,POST
    * 图片单独上传
    * **app端使用**
    * **角色：乡级河长**
@@ -133,7 +154,7 @@
    * 返回：
        * OK,报告成功
        * 4010: UNAUTHORIZED,不是村级河长
-12. 取得河长报告详情,/hzUser/report/{instanceId}，GET
+13. 取得河长报告详情,/hzUser/report/{instanceId}，GET
    * **app,web端使用**
    * **角色：村级，乡级河长，县河长办**
    * 如果是村级河长，必须是自己的河长报告
@@ -144,7 +165,7 @@
     * 返回：
         * OK，河长报告所有属性
        * 4010: UNAUTHORIZED,不是属于自己的报告
-13. 河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
+14. 河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：村级，乡级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -153,7 +174,7 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的报告
-14. 河长编辑自己的报告，/hzUser/report/update,POST
+15. 河长编辑自己的报告，/hzUser/report/update,POST
    * **app端使用**
    * **角色：村级，乡级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
