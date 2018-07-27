@@ -370,7 +370,7 @@
     * 返回河长办属性，河长办管理的所有河段列表，行政区及管理的所有河长列表,下级河长办
     * 参数：
     * 返回：
-       * OK，河长办信息，河长办管理的所有河段列表，下级河长办，行政区及管理的所有河长列表，{name:xx,regionName:xx,remark:xx,phone:xx, riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionName:xx,hzUserId,hzUserName}, {...}], downHzbs:[{name:xx,regionName:xx,remark:xx,phone:xx}, {...}],regions:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}], childes:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}]}]}
+       * OK，河长办信息，河长办管理的所有河段列表，下级河长办，行政区及管理的所有河长列表，{id,name:xx,regionName:xx,remark:xx,phone:xx, riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionName:xx,hzUserId,hzUserName}, {...}], downHzbs:[{id,name:xx,regionId,regionName:xx,remark:xx,phone:xx}, {...}],regions:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}], childes:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}]}]}
        * 4011: NO_SESSION,未登录       
 7. 河长办用户注销,/hzbUser/logout POST
    * **web端使用**
