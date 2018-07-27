@@ -63,7 +63,7 @@
    * **角色：各级河长**
    * 根据自己河道lists，找到对应的村级河道lists，过滤出所有上级河长，下级河长
    * 参数：无
-   * 返回：OK,河长详情，管辖的河段，上级河长，下级河长信息 {name:xx,regionId,regionName,phone:xx,job:xx,type:xx,riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},{...}],upHzUsers:[{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx},{...}], downHzUsers:[{id,name:xx,regionId,regionName:xx,phone:xx,job:xx,type:xx},{...}], hzb:{name,regionId,regionName,remark,phone}}
+   * 返回：OK,河长详情，管辖的河段，上级河长，下级河长信息，河长办 {name:xx,regionId,regionName,phone:xx,job:xx,type:xx,riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},{...}],upHzUsers:[{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx},{...}], downHzUsers:[{id,name:xx,regionId,regionName:xx,phone:xx,job:xx,type:xx},{...}], hzb:{name,regionId,regionName,remark,phone}}
 5. 村级河长根据巡河记录发报告给乡级河长,/hzUser/village/cruise/report,POST
    * 图片单独上传
    * 村级报告type=0
@@ -370,7 +370,7 @@
     * 返回河长办属性，河长办管理的所有河段列表，行政区及管理的所有河长列表
     * 参数：
     * 返回：
-       * OK，河长办信息，河长办管理的所有河段列表，行政区及管理的所有河长列表，{name:xx,regionName:xx,remark:xx,phone:xx, riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionName:xx,hzUserId,hzUserName}, {...}], regions:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}, childes:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}]}]}
+       * OK，河长办信息，河长办管理的所有河段列表，行政区及管理的所有河长列表，{name:xx,regionName:xx,remark:xx,phone:xx, riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionName:xx,hzUserId,hzUserName}, {...}], regions:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}], childes:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}]}]}
        * 4011: NO_SESSION,未登录       
 7. 河长办用户注销,/hzbUser/logout POST
    * **web端使用**
