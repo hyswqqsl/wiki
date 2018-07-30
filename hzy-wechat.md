@@ -194,7 +194,49 @@
    * 返回：
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
-       * 4010: UNAUTHORIZED,不是属于自己的报告       
+       * 4010: UNAUTHORIZED,不是属于自己的报告  
+16. 新建河长，/hzUser/admin/create,POST
+   * **web端使用**
+   * **角色：市河长办管理员**
+   * 参数：
+       * name
+       * code，人员编码
+       * phone，手机号
+       * type，类型
+       * remark，备注
+       * regionId，行政区id
+   * 返回：
+       * OK，新建成功
+17. 修改河长，/hzUser/admin/update,POST
+   * **web端使用**
+   * **角色：市河长办管理员**
+   * 参数：
+       * id
+       * name
+       * code，人员编码
+       * phone，手机号
+       * type，类型
+       * remark，备注
+       * regionId，行政区id
+   * 返回：
+       * OK，修改成功
+       * DATA_NOEXIST           
+18. 删除河长,/hzUser/admin/delete/{id},DELETE
+   * **web端使用**
+   * **角色：市河长办管理员**
+   * 参数：
+       * id
+   * 返回：
+       * OK，删除成功 
+       * DATA_NOEXIST
+19. 取得河长列表，/hzUser/admin/lists,GET       
+   * **web端使用**
+   * **角色：市河长办管理员**
+   * 参数：
+       * regionId,行政区id
+   * 返回：
+       * OK，删除成功 
+       * DATA_NOEXIST                         
 
 ## 二 RiverController,河湖控制层
 1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
@@ -886,7 +928,7 @@
        * OK，登录成功        
 
 ## 十二 行政区基础数据添加，RegionController
-1. 取得zTree结构json，/region/tree,GET
+1. 取得zTree结构json，/region/admin/tree,GET
     * **web使用**
     * **角色：市河长办管理员**  
     * 得到前台显示用的region属性结构json串
@@ -894,16 +936,16 @@
        * code,行政区code
     * 返回：
         * OK，json串		
-2. 新建节点，/region/node/create,POST
+2. 新建节点，/region/admin/node/create,POST
     * **web使用**
     * **角色：市河长办管理员**  
     * 参数：
         * parentId,父级节点id
         * name,节点名
     * 返回：
-        * OK,删除成功    
+        * OK,删除成功,返回当前的ZTree的json串
         * DATA_NOEXIST,parengId不存在              
-3. 修改节点，/region/node/update,POST
+3. 修改节点，/region/admin/node/update,POST
     * **web使用**
     * **角色：市河长办管理员**  
     * 参数：
@@ -912,15 +954,15 @@
         * code,编码
         * remark,备注
     * 返回：
-        * OK,删除成功    
+        * OK,删除成功,返回当前的ZTree的json串   
         * DATA_NOEXIST,id不存在             
-4. 删除节点，/region/node/delete,DELETE
+4. 删除节点，/region/admin/node/delete/{id},DELETE
     * **web使用**
     * **角色：市河长办管理员**  
     * 参数：
         * id,节点id
     * 返回:
-        * OK,删除成功    
+        * OK,删除成功,返回当前的ZTree的json串    
         * DATA_NOEXIST,id不存在 
         
 ## 十二 OssController,阿里云Oss控制层
