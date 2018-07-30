@@ -884,8 +884,46 @@
        * regionCode:行政区编码       
    * 返回
        * OK，登录成功        
+
+## 十二 行政区基础数据添加，RegionController
+1. 取得zTree结构json，/region/tree,GET
+    * **web使用**
+    * **角色：市河长办管理员**  
+    * 得到前台显示用的region属性结构json串
+    * 参数：
+       * code,行政区code
+    * 返回：
+        * OK，json串		
+2. 新建节点，/region/node/create,POST
+    * **web使用**
+    * **角色：市河长办管理员**  
+    * 参数：
+        * parentId,父级节点id
+        * name,节点名
+    * 返回：
+        * OK,删除成功    
+        * DATA_NOEXIST,parengId不存在              
+3. 修改节点，/region/node/update,POST
+    * **web使用**
+    * **角色：市河长办管理员**  
+    * 参数：
+        * id,节点id
+        * name,节点名
+        * code,编码
+        * remark,备注
+    * 返回：
+        * OK,删除成功    
+        * DATA_NOEXIST,id不存在             
+4. 删除节点，/region/node/delete,DELETE
+    * **web使用**
+    * **角色：市河长办管理员**  
+    * 参数：
+        * id,节点id
+    * 返回:
+        * OK,删除成功    
+        * DATA_NOEXIST,id不存在 
         
-## 十一 OssController,阿里云Oss控制层
+## 十二 OssController,阿里云Oss控制层
 1. 根据treePath(阿里云路径)得到文件列表，/oss/objectFiles,GET
     * **weChat, app, web端使用**
     * **角色：weChat, 河长，河长办用户** 
@@ -923,7 +961,7 @@
 				+ "\"" + ",\n" + "                     \"SecurityToken\":"
 				+ "\"" + Security_Token + "\"" + "\n"
 				+ "                                      }\n" + "}\n";
-```				
+```	       
 
 ```     
     巡河记录类型
