@@ -195,7 +195,16 @@
    * 返回：
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
-       * 4010: UNAUTHORIZED,不是属于自己的报告                         
+       * 4010: UNAUTHORIZED,不是属于自己的报告
+16. 取得河段下的报告列表,/hzUser/report/riverSegment/lists,GET
+   * **app端使用**
+   * **角色：村级，乡级河长**
+   * 只能编辑发出后1小时内，且没有处理的报告
+   * 参数：
+       * riverSegmentId,河段id
+   * 返回：
+       * OK，返回报告列表
+       * 4010: UNAUTHORIZED,不是属于自己河段
 
 ## 二 RiverController,河湖控制层
 1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
