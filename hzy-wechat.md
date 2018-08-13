@@ -325,7 +325,6 @@
     * 参数：instanceId，巡河记录标识
     * 返回：
         * OK，{beginTime,content,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
-        * 4022，DATA_REFUSE，请求的记录不属于自己
 
 ## 四 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
