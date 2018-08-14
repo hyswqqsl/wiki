@@ -107,7 +107,7 @@
    * 返回：
        * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是村级河长
-9. 河长取得发给自己的报告列表,/hzUser/report/receive/lists,GET
+9. 河长取得发给对应河长办的报告列表,/hzUser/report/receive/lists,GET
    * 发给河长办的报告列表，各级河长能看到，报告所有属性
    * **app端使用**
    * **角色：乡，县，市级河长**
@@ -115,11 +115,11 @@
    * 返回：
        * OK,报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是乡,县，市级河长          
-10. 取得河长报告详情,/hzUser/report/{instanceId}，GET
+10. 取得河长办报告详情,/hzUser/report/{instanceId}，GET
    * **app,web端使用**
    * **角色：村级，乡级河长，县河长办**
    * 如果是村级河长，必须是自己的河长报告
-   * 如果是乡,县，市级河长，必须是发给自己的河长报告
+   * 如果是乡,县，市级河长，必须是发给对应河长办的河长办报告
     * 参数：
         * instanceId，唯一编码
     * 返回：
@@ -352,11 +352,12 @@
 14. 取得河长办报告详情,/hzbUser/report/{instanceId},GET
    * **wen端使用**
    * **角色：各级河长办用户**
+   * 报告必须是属于自己河长办，或下级发给自己所属河长办的
    * 参数：
        * instanceId，报告唯一编码
    * 返回：
        * OK，返回报告所有属性
-       * 4010: UNAUTHORIZED,不属于自己的报告
+       * 4010: UNAUTHORIZED,不属于自己或下级报告
 15. 河长办删除自己的报告，/hzbUser/report/{instanceId},DELETE
    * **app端使用**
    * **角色：乡，县级河长**
@@ -1016,7 +1017,7 @@
     新闻
     qqslimage/hzy/{regionCode}/hzNotice/    
     河流一河一档图片
-    qqslimage/hzy/{regionCode}/river/
+    qqslimage/hzy/{regionCode}/riverArchive/
     投诉图片
     qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/
     投诉处理图片
