@@ -921,7 +921,30 @@
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL
         
-## 十四  巡河员报告控制层,/
+## 十四  巡河员报告控制层,PatrolUserController
+1. 上传巡河记录,/patrolUser/record/add,POST
+    * **app端使用**
+    * **角色：巡河员**
+   * 参数：
+       * riverSegmentId:河段id
+       * record:{type,description,content,coor,address,,instanceId(唯一标识),interestId(关注点id)}
+   * 返回：
+       * OK,建立成功
+       * 4022，DATA_REFUSE，请求的河段不属于自己
+2. 取得巡河记录列表,/patrolUser/record/lists,GET
+    * **app端使用**
+    * **角色：巡河员**
+   * 参数： 无
+   * 返回：
+       * OK,巡河员记录列表
+3. 取得巡河记录详情，/patrolUser/record/{instanceId},GET
+    * **app端使用**
+    * **角色：巡河员**
+   * 参数： instanceId,唯一编码
+   * 返回：
+       * OK,巡河员记录属性，图片url列表
+       * 4022，DATA_REFUSE，巡河员记录不属于自己
+
 
 ```     
     巡河记录类型
