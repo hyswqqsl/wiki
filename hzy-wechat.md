@@ -154,66 +154,47 @@
    * 返回：
        * OK，返回报告列表
        * 4010: UNAUTHORIZED,不是属于自己河段
+15. 河长发送任务给河长办,/hzUser/task/create,POST
+   * 图片单独上传
+   * **app端使用**
+   * **角色：市，县，乡级河长**
+   * 参数：
+       * title 标题
+       * content 内容
+       * riverSegmentId,河段id
+   * 返回：
+       * OK，任务建立成功
+16. 编辑河长办任务，/hzUser/task/update,POST
+   * **app端使用**
+   * **角色：市，县，乡级河长**
+   * 只能编辑发出后1小时内，且没有处理的报告
+   * 参数：
+       * instanceId，报告唯一编码
+       * title,标题
+       * content,内容       
+   * 返回：
+       * OK，编辑成功
+       * DATA_NOEXIST，不存在       
+       * 4010: UNAUTHORIZED,不是属于自己的任务
+17. 删除河长办任务，/hzUser/task/delete/{instanceId},DELETE
+   * **app端使用**
+   * **角色：市，县，乡级河长**
+   * 只能删除发出后1小时内，且没有处理的报告
+   * 参数：
+       * instanceId，报告唯一编码
+   * 返回：
+       * OK，删除成功
+       * 4010: UNAUTHORIZED,不是属于自己的任务       
 
-## 二 RiverController,河湖控制层
-1. **`微信端取得河湖列表,/river/weChat/lists,GET`**
+## 二 RiverArchiveController,一河一档控制层
+1. 微信取得一河一档列表,/riverArchive/weChat/lists,GET
     * **weChat,app端使用**
     * **角色：无**   
-    * 参数: 
+    * 参数：
        * regionCode:行政区编码     
     * 返回：
-        * OK,返回河流的所有属性
-2. **`市河长办取得河湖列表,/river/hzb/lists,GET`**
-    * **weChat,app端使用**
-    * **角色：市河长办管理员**   
-    * 参数: 无 
-    * 返回：
-        * OK,返回河流的所有属性           
-3. **`新建河湖概况, /river/create, POST`**
-    * **web端使用**
-    * **角色：市河长办管理员**   
-    * 河流级别：0-一级，1-二级，2-三级，3-四级 
-    * 参数: 
-       * name:名称
-       * superRiver:上级河流
-       * level:河流级别
-       * content: 河湖概况内容
-       * imageUrl:河湖概况图片              
-    * 返回：
-        * OK,新建成功
-4. **`修改河湖概况, /river/update, POST`**
-    * **web端使用**
-    * **角色：市河长办管理员**   
-    * 河流级别：0-一级，1-二级，2-三级，3-四级 
-    * 参数:
-       * id: 河湖id 
-       * name:名称
-       * superRiver:上级河流
-       * level:河流级别
-       * content: 河湖概况内容
-       * imageUrl:河湖概况图片              
-    * 返回：
-        * OK,新建成功
-        * 4022: DATA_REFUSE，河湖不属于该河长办
-        * 4021：DATA_NOEXIST 河湖存在
-5. **`删除河湖概况,/river/delete,POST`**
-    * **web端使用**
-    * **角色：市河长办管理员**   
-    * 参数： 
-        * id: 河湖id
-    * 返回:
-        * OK,删除成功
-        * 4022，DATA_REFUSE，河湖不属于自己    
-6. 上传河湖图片，/river/image/create POST
-       * **web端使用**
-       * **角色：河长办管理员**    
-       * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/river/中，上传时使用 https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html 方式生成图片的唯一编码
-       * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903 ,压缩到图片宽度600px
-       * 参数： 
-       * 使用HttpServletRequest request，转换为MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request，取得图片，参见https://blog.csdn.net/qq_24419601/article/details/79784773
-       * 返回:
-           * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
-           * FAIL            
+        * OK,返回一河一档列表
+ 
         
 ## 二 RiverSegmentController 河段控制层
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
@@ -349,7 +330,7 @@
    * **角色：各级河长办**
    * 处理发给河长办自己的报告
    * 参数：
-       * id，报告id
+       * instanceId,唯一编码
        * handleContent,内容
    * 返回：
        * OK,处理成功
@@ -374,7 +355,7 @@
        * instanceId，报告唯一编码
    * 返回：
        * OK，返回报告所有属性
-       * 4010: UNAUTHORIZED,不属于这个县河长办
+       * 4010: UNAUTHORIZED,不属于自己的报告
 15. 河长办删除自己的报告，/hzbUser/report/{instanceId},DELETE
    * **app端使用**
    * **角色：乡，县级河长**
@@ -396,7 +377,34 @@
    * 返回：
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
-       * 4010: UNAUTHORIZED,不是属于自己的报告             
+       * 4010: UNAUTHORIZED,不是自己的报告
+17. 河长办取得发给自己的任务列表,/hzbUser/task/lists,GET
+   * 河长办取得的是发给自己的任务
+   * **web端使用**
+   * **角色：各级河长办**
+   * 参数：无
+   * 返回：
+       * OK,发给自己任务列表
+       * 4010: UNAUTHORIZED,不是河长办用户
+18. 河长办取得任务详情,/hzbUser/task/{instanceId},GET
+   * **wen端使用**
+   * **角色：各级河长办用户**
+   * 参数：
+       * instanceId，报告唯一编码
+   * 返回：
+       * OK，返回所有属性，包括任务的图片列表
+       * 4010: UNAUTHORIZED,不是发给自己的任务
+19. 河长办回复河长任务，/hzbUser/task/reply,POST
+   * 回复图片放在编辑器中，不用单独上传
+   * **app端使用**
+   * **角色：各级河长办**
+   * 处理发给河长办自己的任务
+   * 参数：
+       * instanceId，唯一编码
+       * handleContent,内容
+   * 返回：
+       * OK,处理成功
+       * 4010: UNAUTHORIZED,不是自己的任务             
 
 ## 五 MatterController，事件管理
 
@@ -625,7 +633,7 @@
     * 返回：
         * OK，新闻动态所有属性
         * FAIL，id不存在
-4. 新建文章，/article/create, POST
+4. 新建文章，/article/admin/create, POST
     * **web端使用**
     * **角色：河长办管理员**    
     * 河长办用户操作，参数中不需要regionCode，因为session中有这个信息  
@@ -637,7 +645,7 @@
         * level，CITY(州级),COUNTY(县级)
     * 返回:
         * OK,保存成功
-5. 修改文章，/article/update, POST
+5. 修改文章，/article/admin/update, POST
     * **web端使用**
     * **角色：河长办管理员**    
     * 参数： 
@@ -852,7 +860,64 @@
 				+ "\"" + ",\n" + "                     \"SecurityToken\":"
 				+ "\"" + Security_Token + "\"" + "\n"
 				+ "                                      }\n" + "}\n";
-```	       
+```
+
+## 十三 河长通报控制层,HzNoticeController
+1. 新建河长通报,/hzNotice/admin/create,POST
+    * **web端使用**
+    * **角色：河长办管理员**    
+    * 河长办用户操作，参数中不需要regionCode，因为session中有这个信息  
+    * 参数： 
+        * title,标题
+        * content，内容
+        * imageUrl，图片
+        * type，0- 工作通报 1- 考核通报
+    * 返回:
+        * OK,保存成功
+2. 取得河长通报列表,/heNotice/lists,GET
+    * **weChat,web端使用**
+    * **角色：无**    
+    * 参数：
+        * regionCode：行政区编码
+    * 返回：
+        * OK，所属行政区的河长通报
+        * FAIL，行政区不存在
+3. 取得河长通报详情,/hzNotice/details/{id},GET
+    * **weChat,web端使用**
+    * **角色：无**    
+    * 参数：id: 通报id
+    * 返回：
+        * OK，通报所有属性
+        * FAIL，id不存在
+4. 修改通报，/hzNotice/admin/update, POST
+    * **web端使用**
+    * **角色：河长办管理员**    
+    * 参数： 
+        * id,id
+        * title,标题        
+        * content，内容
+        * imageUrl，图片
+        * type，0- 工作通报 1- 考核通报
+    * 返回:
+        * OK,保存成功
+ 5. 删除通报，/hzNotice/delete，POST
+    * **web端使用**
+    * **角色：河长办管理员**   
+    * 参数： 
+        * id: id
+    * 返回:
+        * OK,删除成功
+        * 4022，DATA_REFUSE，通报不属于河长办的行政区         
+5. 上传通报图片，/hzNotice/image/create POST
+    * **web端使用**
+    * **角色：河长办管理员**    
+    * 前台编辑器上传图片时调用后台接口，把图片上传到阿里云的qqslimage/hzy/{regionCode}/heNotice/中，上传时使用 https://www.cnblogs.com/jdonson/archive/2009/07/22/1528466.html 方式生成图片的唯一编码
+    * 上传时对图片进行压缩，以便用户能快速浏览，参见https://blog.csdn.net/niuch1029291561/article/details/17377903 ,压缩到图片宽度600px
+    * 参数： 
+    * 使用HttpServletRequest request，转换为MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request，取得图片，参见https://blog.csdn.net/qq_24419601/article/details/79784773
+    * 返回:
+        * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
+        * FAIL
 
 ```     
     巡河记录类型
@@ -947,7 +1012,9 @@
 河长云相关图片路径：
     新闻
     qqslimage/hzy/{regionCode}/article/
-    河流
+    新闻
+    qqslimage/hzy/{regionCode}/hzNotice/    
+    河流一河一档图片
     qqslimage/hzy/{regionCode}/river/
     投诉图片
     qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/
@@ -963,12 +1030,13 @@
     /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/handle
     事件办结附件
      /qqsl/hzy/{regionCode}/matter/{code}/{handleId}/complete
-     村级，乡级河长报告图片
+     河长办报告图片
      /qqsl/hzy/{regionCode}/report/{instanceId}
-     村级河长报告回复图片
+     河长办报告回复图片
      /qqsl/hzy/{regionCode}/report/{instanceId}/handle
-     河长办报告，回复图片
-     /qqsl/hzy/{regionCode}/report/hzb
+     河长办任务图片
+     /qqsl/hzy/{regionCode}/task/{instanceId}
+     
 ```
 
 ```
