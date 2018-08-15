@@ -60,24 +60,7 @@
     }           
 }
 ```
-4. 村级河长根据巡河记录发报告给乡级河长办,/hzUser/village/cruise/report,POST
-   * 图片单独上传
-   * **app端使用**
-   * **角色：村级河长**
-   * 村级报告给乡级河长办，从巡河记录里报告
-   * 报告中加入上级河长id，乡河长办id，就是说村河长报告不仅乡级河长能看到，乡河长办也能看到
-   * 根据巡河id找到河段id，存到报告里,根据河段id找到上级河段，得到上级河长
-   * 参数：
-       * title,标题
-       * content,内容
-       * instanceId,唯一编码
-       * cruiseId 巡河id
-       * upHzbId 乡级河长办id       
-   * 返回：
-       * OK,报告成功
-       * 4010: UNAUTHORIZED,不是村级河长
-       * 4021：DATA_NOEXIST,数据不存在,巡河id找不到巡河记录
-5. 村级河长直接发报告给乡级河长办,/hzUser/village/report,POST
+4. 村级河长直接发报告给乡级河长办,/hzUser/village/report,POST
       * 图片单独上传
       * 村级报告type=0
       * **app端使用**
@@ -101,15 +84,7 @@
    * 返回：
        * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是村级河长
-7. 河长取得发给对应河长办的报告列表,/hzUser/report/receive/lists,GET
-   * 发给河长办的报告列表，各级河长能看到，报告所有属性
-   * **app端使用**
-   * **角色：乡，县，市级河长**
-   * 参数：无
-   * 返回：
-       * OK,报告列表，报告所有属性
-       * 4010: UNAUTHORIZED,不是乡,县，市级河长          
-8. 取得河长办报告详情,/hzUser/report/{instanceId}，GET
+7. 取得河长办报告详情,/hzUser/report/{instanceId}，GET
    * **app,web端使用**
    * **角色：村级，乡级河长，县河长办**
    * 如果是村级河长，必须是自己的河长报告
@@ -119,7 +94,7 @@
     * 返回：
         * OK，河长报告所有属性
        * 4010: UNAUTHORIZED,不是属于自己的报告
-9. 村河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
+8. 村河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：村级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -128,7 +103,7 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的报告
-10. 村河长编辑自己的报告，/hzUser/report/update,POST
+9. 村河长编辑自己的报告，/hzUser/report/update,POST
    * **app端使用**
    * **角色：村级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -140,16 +115,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是属于自己的报告
-11. 取得河段下的报告列表,/hzUser/report/riverSegment/lists,GET
-   * **app端使用**
-   * **角色：各级级河长**
-   * 只能编辑发出后1小时内，且没有处理的报告
-   * 参数：
-       * riverSegmentId,河段id
-   * 返回：
-       * OK，返回报告列表
-       * 4010: UNAUTHORIZED,不是属于自己河段
-12. 河长发送任务给河长办,/hzUser/task/create,POST
+10. 河长发送任务给河长办,/hzUser/task/create,POST
    * 图片单独上传
    * **app端使用**
    * **角色：市，县，乡级河长**
@@ -159,7 +125,7 @@
        * riverSegmentId,河段id
    * 返回：
        * OK，任务建立成功
-13. 编辑河长办任务，/hzUser/task/update,POST
+11. 编辑河长办任务，/hzUser/task/update,POST
    * **app端使用**
    * **角色：市，县，乡级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -171,7 +137,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是属于自己的任务
-14. 删除河长办任务，/hzUser/task/delete/{instanceId},DELETE
+12. 删除河长办任务，/hzUser/task/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：市，县，乡级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -180,17 +146,38 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的任务
-15.               
+13. 取得河长发的任务列表,/hzUser/task/lists,GET
+   * **app端使用**
+   * **角色：市，县，乡级河长**
+   * 参数：无
+   * 返回：
+       * OK，任务列表
+14. 取得任务详情,/hzUser/task/details/{instanceId},GET
+   * **web, app端使用**
+   * **角色：市，县，乡级河长,各级河长办**
+   * 河长自己的任务，能取得
+   * 河长办上级河长发的任务，能取得
+   * 参数：instanceId,唯一编码
+   * 返回：
+       * OK，任务所有属性
+       * 4010: UNAUTHORIZED,不是属于自己的任务
 
 ## 二 RiverArchiveController,一河一档控制层
-1. 微信取得一河一档列表,/riverArchive/weChat/lists,GET
-    * **weChat,app端使用**
+1. 微信取得一河一档列表,/riverArchive/weChat/archive/lists,GET
+    * **weChat端使用**
     * **角色：无**   
     * 参数：
        * regionCode:行政区编码     
     * 返回：
-        * OK,返回一河一档列表
- 
+        * OK,返回一河一档列表,每个对象包含所有一河一档属性+兴趣点列表
+2. 河长取得一河一档列表,/riverArchive/hzUser/archive/lists,GET
+    * **app端使用**
+    * **角色：各级河长，巡河员**
+    * 根据session中的regionCode,取得行政区，如果regionCode为空，使用行政区id，取得市级行政区编码
+    * 如果是巡河员，使用行政区id，取得市级行政区编码
+    * 参数：无
+    * 返回：
+        * OK,返回一河一档列表,每个对象包含所有一河一档属性+兴趣点列表 
         
 ## 二 RiverSegmentController 河段控制层
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
@@ -955,16 +942,22 @@
 5. 取得巡河记录列表,/patrolUser/record/lists,GET
     * **app端使用**
     * **角色：巡河员**
-   * 参数： 无
-   * 返回：
+    * 参数： 无
+    * 返回：
        * OK,巡河员记录列表
 6. 取得巡河记录详情，/patrolUser/record/{instanceId},GET
-    * **app端使用**
-    * **角色：巡河员**
+   * **app端使用**
+   * **角色：巡河员**
    * 参数： instanceId,唯一编码
    * 返回：
        * OK,巡河员记录属性，图片url列表
        * 4022，DATA_REFUSE，巡河员记录不属于自己
+7. 河长取得所有所属巡河员列表,GET
+   * **app端使用**
+   * **角色：各级河长**
+   * 参数：无
+   * 返回：
+       * OK,根据自己的河段列表，查询每个河段下的巡河员列表，组合起来，每个巡河员下的河段id，河段名也放在json中
 
 ```     
     巡河记录类型
