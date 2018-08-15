@@ -922,7 +922,33 @@
         * FAIL
         
 ## 十四  巡河员报告控制层,PatrolUserController
-1. 上传巡河记录,/patrolUser/record/add,POST
+1. 登录发送验证码: /patrolUser/login/getLoginVerify,GET
+    * **app端使用**
+    * **角色：无**
+    * 巡河员登录时，取得验证码
+    * 参数：
+        * phone:登录手机号
+    * 返回：
+        * OK:发送成功
+        * DATA_NOEXIST:手机号不存在
+2. 登录：/patrolUser/login,POST
+    * **app端使用**
+    * **角色：无**
+    * 巡河员每次登录都是用动态验证码    
+    * 参数：
+        * code:验证码
+    * 返回:
+        * OK:登录成功,返回巡河员详情，{name:xxx,location:xxx,phone:xx,riverSegment:{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},upHzUser:{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx}, hzb:{name,regionId,regionName,remark,phone}}
+        * 4041: CODE_INVALID 验证码过期
+        * 4042: CODE_ERROR 验证码输入错误
+3. 取得巡河员名录，/hzUser/lists,GET
+    * **weChat,web端使用**
+    * **角色：无**
+    * 参数：
+        * regionCode：行政区编码    
+    * 返回： 
+        * OK，格式: [{name:xxx,location:xxx,phone:xx,riverSegment(管辖河段):{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx}}
+4. 上传巡河记录,/patrolUser/record/add,POST
     * **app端使用**
     * **角色：巡河员**
    * 参数：
@@ -931,20 +957,19 @@
    * 返回：
        * OK,建立成功
        * 4022，DATA_REFUSE，请求的河段不属于自己
-2. 取得巡河记录列表,/patrolUser/record/lists,GET
+5. 取得巡河记录列表,/patrolUser/record/lists,GET
     * **app端使用**
     * **角色：巡河员**
    * 参数： 无
    * 返回：
        * OK,巡河员记录列表
-3. 取得巡河记录详情，/patrolUser/record/{instanceId},GET
+6. 取得巡河记录详情，/patrolUser/record/{instanceId},GET
     * **app端使用**
     * **角色：巡河员**
    * 参数： instanceId,唯一编码
    * 返回：
        * OK,巡河员记录属性，图片url列表
        * 4022，DATA_REFUSE，巡河员记录不属于自己
-
 
 ```     
     巡河记录类型
