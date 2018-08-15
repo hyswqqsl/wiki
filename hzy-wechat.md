@@ -26,7 +26,7 @@
     * 参数：
         * code:验证码
     * 返回:
-        * OK:登录成功
+        * OK:登录成功,返回河长详情，管辖的河段，上级河长，下级河长信息，河长办 {name:xx,regionId,regionName,phone:xx,job:xx,type:xx,riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},{...}],upHzUsers:[{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx},{...}], downHzUsers:[{id,name:xx,regionId,regionName:xx,phone:xx,job:xx,type:xx},{...}], hzb:{name,regionId,regionName,remark,phone},upHzb:{name,regionId,regionName,remark,phone}}
         * 4041: CODE_INVALID 验证码过期
         * 4042: CODE_ERROR 验证码输入错误
 3. 取得河长名录，/hzUser/lists,GET
@@ -60,13 +60,7 @@
     }           
 }
 ```
-4. 取得河长详情,/hzUser/info,GET
-   * **app端使用**
-   * **角色：各级河长**
-   * 根据自己河道lists，找到对应的村级河道lists，过滤出所有上级河长，下级河长
-   * 参数：无
-   * 返回：OK,河长详情，管辖的河段，上级河长，下级河长信息，河长办 {name:xx,regionId,regionName,phone:xx,job:xx,type:xx,riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},{...}],upHzUsers:[{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx},{...}], downHzUsers:[{id,name:xx,regionId,regionName:xx,phone:xx,job:xx,type:xx},{...}], hzb:{name,regionId,regionName,remark,phone},upHzb:{name,regionId,regionName,remark,phone}}
-5. 村级河长根据巡河记录发报告给乡级河长办,/hzUser/village/cruise/report,POST
+4. 村级河长根据巡河记录发报告给乡级河长办,/hzUser/village/cruise/report,POST
    * 图片单独上传
    * **app端使用**
    * **角色：村级河长**
@@ -83,7 +77,7 @@
        * OK,报告成功
        * 4010: UNAUTHORIZED,不是村级河长
        * 4021：DATA_NOEXIST,数据不存在,巡河id找不到巡河记录
-6. 村级河长直接发报告给乡级河长办,/hzUser/village/report,POST
+5. 村级河长直接发报告给乡级河长办,/hzUser/village/report,POST
       * 图片单独上传
       * 村级报告type=0
       * **app端使用**
@@ -100,14 +94,14 @@
           * OK,报告成功
           * 4010: UNAUTHORIZED,不是村级和乡级河长
           * 4021：DATA_NOEXIST,数据不存在,匹配不到河段
-7. 村河长取得自己的报告列表, /hzUser/report/village/lists,GET
+6. 村河长取得自己的报告列表, /hzUser/report/village/lists,GET
    * **app端使用**
    * **角色：村级河长**
    * 参数：无
    * 返回：
        * OK,发出自己的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是村级河长
-9. 河长取得发给对应河长办的报告列表,/hzUser/report/receive/lists,GET
+7. 河长取得发给对应河长办的报告列表,/hzUser/report/receive/lists,GET
    * 发给河长办的报告列表，各级河长能看到，报告所有属性
    * **app端使用**
    * **角色：乡，县，市级河长**
@@ -115,7 +109,7 @@
    * 返回：
        * OK,报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是乡,县，市级河长          
-10. 取得河长办报告详情,/hzUser/report/{instanceId}，GET
+8. 取得河长办报告详情,/hzUser/report/{instanceId}，GET
    * **app,web端使用**
    * **角色：村级，乡级河长，县河长办**
    * 如果是村级河长，必须是自己的河长报告
@@ -125,7 +119,7 @@
     * 返回：
         * OK，河长报告所有属性
        * 4010: UNAUTHORIZED,不是属于自己的报告
-11. 村河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
+9. 村河长删除自己的报告，/hzUser/report/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：村级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -134,7 +128,7 @@
    * 返回：
        * OK，删除成功
        * 4010: UNAUTHORIZED,不是属于自己的报告
-13. 村河长编辑自己的报告，/hzUser/report/update,POST
+10. 村河长编辑自己的报告，/hzUser/report/update,POST
    * **app端使用**
    * **角色：村级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -146,7 +140,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是属于自己的报告
-14. 取得河段下的报告列表,/hzUser/report/riverSegment/lists,GET
+11. 取得河段下的报告列表,/hzUser/report/riverSegment/lists,GET
    * **app端使用**
    * **角色：各级级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -155,7 +149,7 @@
    * 返回：
        * OK，返回报告列表
        * 4010: UNAUTHORIZED,不是属于自己河段
-15. 河长发送任务给河长办,/hzUser/task/create,POST
+12. 河长发送任务给河长办,/hzUser/task/create,POST
    * 图片单独上传
    * **app端使用**
    * **角色：市，县，乡级河长**
@@ -165,7 +159,7 @@
        * riverSegmentId,河段id
    * 返回：
        * OK，任务建立成功
-16. 编辑河长办任务，/hzUser/task/update,POST
+13. 编辑河长办任务，/hzUser/task/update,POST
    * **app端使用**
    * **角色：市，县，乡级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -177,7 +171,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是属于自己的任务
-17. 删除河长办任务，/hzUser/task/delete/{instanceId},DELETE
+14. 删除河长办任务，/hzUser/task/delete/{instanceId},DELETE
    * **app端使用**
    * **角色：市，县，乡级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -185,7 +179,8 @@
        * instanceId，报告唯一编码
    * 返回：
        * OK，删除成功
-       * 4010: UNAUTHORIZED,不是属于自己的任务       
+       * 4010: UNAUTHORIZED,不是属于自己的任务
+15.               
 
 ## 二 RiverArchiveController,一河一档控制层
 1. 微信取得一河一档列表,/riverArchive/weChat/lists,GET
@@ -201,9 +196,9 @@
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
     * **app端使用**
     * **角色：各级河长**
-    * 参数：id:河段id
+    * 参数：id:河段
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)，interests:[{id,name,type,coor,address}]}
+        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
         * 4022，DATA_REFUSE，请求的河段不属于自己
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * **app端使用**
@@ -877,7 +872,7 @@
     * 返回:
         * OK,保存成功
 2. 取得河长通报列表,/heNotice/lists,GET
-    * **weChat,web端使用**
+    * **weChat,app,web端使用**
     * **角色：无**    
     * 参数：
         * regionCode：行政区编码
@@ -885,7 +880,7 @@
         * OK，所属行政区的河长通报
         * FAIL，行政区不存在
 3. 取得河长通报详情,/hzNotice/details/{id},GET
-    * **weChat,web端使用**
+    * **weChat,web,app端使用**
     * **角色：无**    
     * 参数：id: 通报id
     * 返回：
@@ -941,8 +936,8 @@
         * OK:登录成功,返回巡河员详情，{name:xxx,location:xxx,phone:xx,riverSegment:{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionId,regionName:xx},upHzUser:{id,name:xx,regionId,regionName:xx.phone:xx,job:xx,type:xx}, hzb:{name,regionId,regionName,remark,phone}}
         * 4041: CODE_INVALID 验证码过期
         * 4042: CODE_ERROR 验证码输入错误
-3. 取得巡河员名录，/hzUser/lists,GET
-    * **weChat,web端使用**
+3. 取得巡河员名录，/patrolUser/lists,GET
+    * **weChat,web, app端使用**
     * **角色：无**
     * 参数：
         * regionCode：行政区编码    
