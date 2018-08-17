@@ -941,18 +941,18 @@
        * 4022，DATA_REFUSE，请求的河段不属于自己
 5. 取得巡河记录列表,/patrolUser/record/lists,GET
     * **app端使用**
-    * **角色：巡河员**
-    * 参数： 无
+    * **角色：巡河员,各级河长**
+    * 参数： id:巡河员id
     * 返回：
        * OK,巡河员记录列表
 6. 取得巡河记录详情，/patrolUser/record/{instanceId},GET
    * **app端使用**
-   * **角色：巡河员**
+   * **角色：巡河员,各级河长**
    * 参数： instanceId,唯一编码
    * 返回：
        * OK,巡河员记录属性，图片url列表
        * 4022，DATA_REFUSE，巡河员记录不属于自己
-7. 河长取得所有所属巡河员列表,GET
+7. 河长取得所有所属巡河员列表,/patrolUser/lists/byHzUser,GET
    * **app端使用**
    * **角色：各级河长**
    * 参数：无
