@@ -592,6 +592,14 @@
 }
 ```
 
+15. **河长取得所管理河段的所有事件列表,/matter/byHzUser/lists,GET`**
+    **web端使用**
+    **角色：河长办用户*
+    * 参数：无
+    * 返回:
+        * OK，列表，事件对象所有属性，不包含文件列表
+
+
 ## 六 ArticleController 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * **weChat,web端使用**
