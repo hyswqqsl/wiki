@@ -192,7 +192,7 @@
     * 参数：无
     * 返回：
         * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数)},{...}]
-3. 移动端原生取得河段的面坐标,riverSegment/android/coors,GET
+3. 移动端原生取得河段的面坐标,/riverSegment/android/coors,GET
     * **app端使用**
     * 参数：
         * id:河段id
@@ -1059,7 +1059,7 @@
 河长云相关图片路径：
     新闻
     qqslimage/hzy/{regionCode}/article/
-    新闻
+    河长通报
     qqslimage/hzy/{regionCode}/hzNotice/    
     河流一河一档图片
     qqslimage/hzy/{regionCode}/riverArchive/
@@ -1067,8 +1067,10 @@
     qqslimage/hzy/{regionCode}/complaint/{unionId}/{instanceId}/
     投诉处理图片
     qqslimage/hzy/{regionCode}/complaint/handle/
-    巡河记录
+    河长巡河记录
     qqsl/hzy/{regionCode}/cruise/record/{instanceId}/
+    巡河员巡河记录
+    qqsl/hzy/{regionCode}/patrol/record/{instanceId}/    
     事件图片
     /qqsl/hzy/{regionCode}/matter/{code}/image/
     事件登记附件
