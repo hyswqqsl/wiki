@@ -153,7 +153,7 @@
        * OK，任务列表
 14. 取得任务详情,/hzUser/task/details/{instanceId},GET
    * **web, app端使用**
-   * **角色：市，县，乡级河长,各级河长办**
+   * **角色：市，县，乡级河长**
    * 河长自己的任务，能取得
    * 河长办上级河长发的任务，能取得
    * 参数：instanceId,唯一编码
@@ -338,7 +338,7 @@
    * 返回：
        * OK,自己发出的报告列表，报告所有属性
        * 4010: UNAUTHORIZED,不是河长办用户    
-13. 取得河长办报告详情,/hzbUser/report/{instanceId},GET
+13. 取得河长办报告详情,/hzbUser/report/details/{instanceId},GET
    * **wen端使用**
    * **角色：各级河长办用户**
    * 报告必须是属于自己河长办，或下级发给自己所属河长办的
@@ -377,7 +377,7 @@
    * 返回：
        * OK,发给自己任务列表
        * 4010: UNAUTHORIZED,不是河长办用户
-17. 河长办取得任务详情,/hzbUser/task/{instanceId},GET
+17. 河长办取得任务详情,/hzbUser/task/details/{instanceId},GET
    * **wen端使用**
    * **角色：各级河长办用户**
    * 参数：
