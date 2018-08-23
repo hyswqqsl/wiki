@@ -299,7 +299,7 @@
    * 参数：无
    * 返回：OK,注销成功
 8. 河长办取得发给自己的报告列表,/hzbUser/report/receive/lists,GET
-   * 河长办取得的是发给自己的河长报告
+   * 河长办取得的是发给自己的报告
    * **web端使用**
    * **角色：各级河长办**
    * 参数：无
@@ -330,7 +330,15 @@
    * 返回：
        * OK,报告成功
        * 4010: UNAUTHORIZED,不是县河长办
-14. 取得河长办报告详情,/hzbUser/report/{instanceId},GET
+12. 河长办取得自己发出的报告，/hzbUser/report/send/lists,POST
+   * 河长办取得的是自己发送给上级的河长办的报告
+   * **web端使用**
+   * **角色：各级河长办**
+   * 参数：无
+   * 返回：
+       * OK,自己发出的报告列表，报告所有属性
+       * 4010: UNAUTHORIZED,不是河长办用户    
+13. 取得河长办报告详情,/hzbUser/report/{instanceId},GET
    * **wen端使用**
    * **角色：各级河长办用户**
    * 报告必须是属于自己河长办，或下级发给自己所属河长办的
@@ -339,7 +347,7 @@
    * 返回：
        * OK，返回报告所有属性
        * 4010: UNAUTHORIZED,不属于自己或下级报告
-15. 河长办删除自己的报告，/hzbUser/report/{instanceId},DELETE
+14. 河长办删除自己的报告，/hzbUser/report/{instanceId},DELETE
    * **app端使用**
    * **角色：乡，县级河长**
    * 只能删除发出后1小时内，且没有处理的报告
@@ -349,7 +357,7 @@
        * OK，删除成功
        * DATA_NOEXIST，不存在
        * 4010: UNAUTHORIZED,不是属于自己的报告
-16. 河长办编辑自己的报告，/hzbUser/report/update,POST
+15. 河长办编辑自己的报告，/hzbUser/report/update,POST
    * **app端使用**
    * **角色：乡，县级河长**
    * 只能编辑发出后1小时内，且没有处理的报告
@@ -361,7 +369,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是自己的报告
-17. 河长办取得发给自己的任务列表,/hzbUser/task/lists,GET
+16. 河长办取得发给自己的任务列表,/hzbUser/task/lists,GET
    * 河长办取得的是发给自己的任务
    * **web端使用**
    * **角色：各级河长办**
@@ -369,7 +377,7 @@
    * 返回：
        * OK,发给自己任务列表
        * 4010: UNAUTHORIZED,不是河长办用户
-18. 河长办取得任务详情,/hzbUser/task/{instanceId},GET
+17. 河长办取得任务详情,/hzbUser/task/{instanceId},GET
    * **wen端使用**
    * **角色：各级河长办用户**
    * 参数：
@@ -377,7 +385,7 @@
    * 返回：
        * OK，返回所有属性，包括任务的图片列表
        * 4010: UNAUTHORIZED,不是发给自己的任务
-19. 河长办回复河长任务，/hzbUser/task/reply,POST
+18. 河长办回复河长任务，/hzbUser/task/reply,POST
    * 回复图片放在编辑器中，不用单独上传
    * **app端使用**
    * **角色：各级河长办**
