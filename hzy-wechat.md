@@ -224,19 +224,28 @@
    * 返回：
        * OK,建立成功
        * 4022，DATA_REFUSE，请求的河段不属于自己
-3. 查询河段所有巡河记录,/cruise/lists/{riverSegmentId},GET
+3. 查询河段所有巡河,/cruise/lists/{riverSegmentId},GET
     * **app端, web端使用**
     * **角色：各级河长, 河长办用户**
     * 参数：riverSegmentId，河道id
     * 返回：
         * OK，河长在这个河段的巡河记录,[{instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)}]
         * 4022，DATA_REFUSE，请求的河段不属于自己
-4. 查看巡河记录详情,/cruise/cruise/{instanceId},GET
+4. 查看巡河详情,/cruise/cruise/{instanceId},GET
     * **app端, web端使用**
     * **角色：各级河长, 河长办用户**
+    * 巡河必须是属于河长或河长办
     * 参数：instanceId，巡河记录标识
     * 返回：
         * OK，{beginTime,content,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
+5. 查看巡河，/cruise/lists/byHzb,GET
+    * **app端, web端使用**
+    * **角色：河长办用户**
+    * 参数：
+        * year，年份
+        * month，月份
+    * 返回：
+        * OK，河长办下所有河段，每个河段下当月的巡河记录,[{riverSegmentId:xx,riverSegmentName:xx,cruise:[{instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},{...}]}, {...}]
 
 ## 四 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
