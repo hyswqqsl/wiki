@@ -184,7 +184,7 @@
     * **角色：各级河长**
     * 参数：id:河段
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,coors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
+        * OK，河段属性：{name,level(河段级别),length,leftCoors,rightCoors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
         * 4022，DATA_REFUSE，请求的河段不属于自己
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * **app端使用**
