@@ -184,7 +184,7 @@
     * **角色：各级河长**
     * 参数：id:河段
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,leftCoors,rightCoors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
+        * OK，河段属性：{name,level(河段级别),length,areaCoors,leftCoors,rightCoors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
         * 4022，DATA_REFUSE，请求的河段不属于自己
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * **app端使用**
@@ -198,14 +198,14 @@
         * id:河段id
         * token:原生访问传递的token
     * 返回：
-        * OK,{coors:[{lat:36.934,lon:102.23,ele:0}, {...}]}
+        * OK,{areaCoors:[{lat:36.934,lon:102.23,ele:0}, {...}], leftCoors:[{...},{...}], rightCoors:[{...},{...}]}
 4. 取得河段列表，/riverSegment/region/lists, GET
     * **webChat使用**
     * **角色：weChat**
     * 参数：
-        * regionCode：行政区编码, 这个regionCode是当先位置的县区级行政编码    
+        * regionCode：行政区编码, 这个regionCode是当先位置的县区级行政编码
     * 返回：
-        * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name        
+        * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
         
 ## 三 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
