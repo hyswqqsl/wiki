@@ -242,8 +242,7 @@
     * **app端, web端使用**
     * **角色：河长办用户**
     * 参数：
-        * year，年份
-        * month，月份
+        * date，long类型，包含正确的年份，月份，日期指定为1号
     * 返回：
         * OK，河长办下所有河段，每个河段下当月的巡河记录,[{riverSegmentId:xx,riverSegmentName:xx,cruise:[{instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},{...}]}, {...}]
 
