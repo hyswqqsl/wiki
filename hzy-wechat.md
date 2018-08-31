@@ -169,7 +169,7 @@
        * regionCode:行政区编码     
     * 返回：
         * OK,返回一河一档列表,每个对象包含所有一河一档属性+兴趣点列表
-2. 河长取得一河一档列表,/riverArchive/hzUser/archive/lists,GET
+2. 河长取得一河一档列表,/riverArchive/archive/lists,GET
     * **app端使用**
     * **角色：各级河长，巡河员**
     * 根据session中的regionCode,取得行政区，如果regionCode为空，使用行政区id，取得市级行政区编码
