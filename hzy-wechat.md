@@ -377,6 +377,7 @@
        * OK，编辑成功
        * DATA_NOEXIST，不存在       
        * 4010: UNAUTHORIZED,不是自己的报告
+       
 16. 河长办取得发给自己的任务列表,/hzbUser/task/lists,GET
    * 河长办取得的是发给自己的任务
    * **web端使用**
@@ -404,7 +405,7 @@
    * 返回：
        * OK,处理成功
        * 4010: UNAUTHORIZED,不是自己的任务  
-13. 编辑器上传报告图片，/report/image/create,POST
+13. 编辑器上传报告图片，/hzbUser/report/image/create,POST
     * 涉及到web端报告编辑器上传的图片
     * **web端使用**
     * **角色：乡，县，市河长办用户**    
@@ -415,7 +416,7 @@
     * 返回:
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL
-14. 编辑器上传报告回复图片，/report/handle/image/create,POST
+14. 编辑器上传报告回复图片，/hzbUser/report/handle/image/create,POST
     * 涉及到web端报告回复编辑器上传的图片
     * **web端使用**
     * **角色：乡，县，市河长办用户**    
@@ -426,7 +427,7 @@
     * 返回:
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL              
-15.  编辑器上传任务回复图片，/task/image/create,POST
+15.  编辑器上传任务回复图片，/hzbUser/task/image/create,POST
     * 涉及到web端任务回复编辑器上传的图片
     * **web端使用**
     * **角色：乡，县，市河长办用户**    
