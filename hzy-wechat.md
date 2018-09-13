@@ -448,8 +448,8 @@
 1. 事件登记,/matter/register,POST
    * **web端使用**
    * **角色：市河长办用户**
-   * 由0-上级交办 3-群众投诉 4-河长报告 5-巡河记录产生的事件，sourceId必传，通过sourceId找到河段id，再找到riverId
-   * 由1-系统推送 2-社会媒体监督产生的事件，riverId必传 
+   * 由0-上级交办 3-群众投诉 4-河长报告 5-巡河记录产生的事件，sourceId必传
+   * 由1-系统推送 2-社会媒体监督产生的事件，sourceId不传
    * 督查督办编号目前由唯一编码方式生成
    * 生成的事件状态是登记
    * hzb外键是空
@@ -458,14 +458,15 @@
        * code: 督查督办编号
        * title: 标题
        * content: 内容
-       * sourceId: 来源id,如果来源是河长报告，那么来源id就是河长报告id,如果来源是投诉，那么来源id就是投诉id
-       * riverId：河流id
+       * @sourceId: 来源id,如果来源是河长报告，那么来源id就是河长报告id,如果来源是投诉，那么来源id就是投诉id
    * 返回：
        * OK，建立成功
 2. 事件交办,/matter/deliver,POST
     * **web端使用**
     * **角色：市河长办用户**
     * 事件状态必须是登记或责任退回才能交办
+    * 有sourceId的，0-上级交办 3-群众投诉 4-河长报告 5-巡河记录产生的事件，通过sourceId找到河段id，再找到riverId，再根据河长办，得到县级河段，存到riverSegmentId
+    * 没有sourceId的，必须由前台传递河流id，得到县级河段，存到riverSegmentId          
     * 事件改为状态是交办
     * 事件的河段id此时确定
     * 如果河流不属于这个市河长办，返回错误    
@@ -475,7 +476,8 @@
         * hzbId: 交办给的县级河长办id
         * requirement: 办理要求
         * deadline: 时限要求
-        * emergency: 紧急程度        
+        * emergency: 紧急程度
+        * riverId：河流id        
       * 返回：
         * OK: 交办成功
         * 4111: MATTER_TYPE_ERROR 事件状态错误
@@ -624,45 +626,6 @@
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办文件list，办结文件list
         * 事件下发,上报列表
-15. 市级直接承办事件,/matter/city/handle,POST
-    * **web端使用**
-    * **角色：市河长办用户**
-   * 事件是登记的，可以进行承办
-   * 事件的河段(市级)id,此时确定
-   * 如果河流不属于这个市河长办，返回错误
-   * 事件改为状态是承办
-   * 承办时可以上传图片，由前台处理
-   * hzb外键还是为空
-   * 参数： 
-       * id: 事件id
-       * organizerId: 承办单位id
-       * description: 承办描述
-    * 返回： 
-       * OK: 承办成功
-       * 4111: MATTER_TYPE_ERROR 事件状态错误
-       * 4022: DATA_REFUSE，事件不属于该河长办，或河流不属于该河长办
-16. 市级事件办结,/matter/city/complete,POST
-    * **web端使用**
-    * **角色：市河长办用户**
-    * 事件状态改为办结
-    * 办结时可以上传图片，由前台处理
-    * 参数：
-        * id：事件id
-        * description: 办结描述
-    * 返回:
-        * OK: 办结成功        
-        * 4111: MATTER_TYPE_ERROR 事件状态错误
-        * 4022: DATA_REFUSE，事件不属于该河长办       
-17. 市级事件归档，/matter/city/archive,POST
-    * **web端使用**
-    * **角色：市河长办用户**
-    * 事件状态改为归档
-    * 参数：
-        * id： 事件id
-        * description: 审核描述 
-    * 返回：
-        * OK: 归档成功
-        * 4111: MATTER_TYPE_ERROR 事件状态错误                
         
 ```
 {code:xxx,title:xxx,...,
@@ -692,7 +655,30 @@
     * 参数：无
     * 返回:
         * OK，列表，事件对象所有属性，不包含文件列表
-
+16. 市级直接承办事件,/matter/city/handle,POST
+    * **web端使用**
+    * **角色：市河长办用户**
+   * 事件是登记的，可以进行承办
+   * 事件的河段(市级)id,此时确定
+    * 有sourceId的，0-上级交办 3-群众投诉 4-河长报告 5-巡河记录产生的事件，通过sourceId找到河段id，再找到riverId，得到市级河段，存到riverSegmentId
+    * 没有sourceId的，必须由前台传递河流id，得到市级河段，存到riverSegmentId          
+    * 事件改为状态是交办
+    * 事件的河段id此时确定
+    * 如果河流不属于这个市河长办，返回错误     
+   * 如果河流不属于这个市河长办，返回错误
+   * 事件改为状态是承办
+   * 承办时可以上传图片，由前台处理
+   * hzb外键还是为空
+   * 参数： 
+       * id: 事件id
+       * organizerId: 承办单位id
+       * description: 承办描述
+       * @riverId：河流id
+    * 返回： 
+       * OK: 承办成功
+       * 4111: MATTER_TYPE_ERROR 事件状态错误
+       * 4022: DATA_REFUSE，事件不属于该河长办，或河流不属于该河长办          
+        
 
 ## 六 ArticleController 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
