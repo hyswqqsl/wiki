@@ -236,13 +236,40 @@
     * 参数：instanceId，巡河记录标识
     * 返回：
         * OK，{beginTime,content,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
-5. 查看巡河，/cruise/lists/byHzb,GET
+5. 查看河长办月巡河列表，/cruise/lists/byHzb,GET
     * **app端, web端使用**
     * **角色：河长办用户**
+    * 列出河长办本级河长，对应的河段月巡河列表
+    * 列出河长办下级河长，对应的河段月巡河列表
     * 参数：
         * date，long类型，包含正确的年份，月份，日期指定为1号
     * 返回：
-        * OK，河长办下所有河段，每个河段下当月的巡河记录,[{riverSegmentId:xx,riverSegmentName:xx,cruise:[{instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},{...}]}, {...}]
+        * OK，河长办本级河长，对应河段月巡河列表,json示例
+
+```
+{
+    // 本级河长列表
+    hzUsers:[
+	{id,name,phone,
+	 // 河段列表
+	 riverSegments: [{id:xx,name:xx,
+			  // 巡河列表
+			  cruise:[
+			      {instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},
+			      {...}]}, {...}]
+	},{...}],
+    // 下级河长列表
+    downHzUsers:[
+	{id,name,phone,
+	 // 河段列表
+	 riverSegments: [{id:xx,name:xx,
+			  // 巡河列表
+			  cruise:[
+			      {instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},
+			      {...}]}, {...}]
+	},{...}]
+}
+```
 
 ## 四 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
@@ -297,7 +324,7 @@
     * 返回河长办属性，河长办管理的所有河段列表，行政区及管理的所有河长列表,下级河长办
     * 参数：
     * 返回：
-       * OK，河长办信息，河长办管理的所有河段列表，下级河长办，行政区及管理的所有河长列表，{id,name:xx,regionName:xx,remark:xx,phone:xx, riverSegments:[{id,name:xx,length:xx,beginStation:xx,endStation:xx,riverName:xx,regionName:xx,hzUserId,hzUserName}, {...}], downHzbs:[{id,name:xx,regionId,regionName:xx,remark:xx,phone:xx}, {...}],regions:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}], childes:[{id:xx,name:xx,code:xx, hzUsers:[{id,name:xx,phone:xx,job:xx,type:xx}, {...}]}, {...}]}]}
+       * OK，河长办信息，河长办管理的所有河段列表，下级河长办，行政区及管理的所有河长列表，返回数据示例见后面附表[获取当前河长办信息json]
        * 4011: NO_SESSION,未登录       
 7. 河长办用户注销,/hzbUser/logout POST
    * **web端使用**
@@ -1174,4 +1201,69 @@
 河长角色：hzUser:city, hzUser:county, hzUser:town, hzUser:village
 河长办角色：hzbUser:city, hzbUser:county, hzbUser:admin
 weChat角色：weChatUser:simple
+```
+
+```
+获取当前河长办信息json
+{
+  "name": "xxx",
+  "phone": "xxx",
+  "roles": "hzbUser:county,hzbUser:simple,hzbUser:admin",
+  "hzb": {
+    "id": 1,
+    "name": "西宁市河长办",
+    "regionId": 13,
+    "regionName": "西宁市",
+    "regionCode": "630100",
+    "hzUsers": [
+      {
+        "id": 27,
+        "name": "王晓",
+        "job": "西宁市委书记",
+        "phone": "18909715522",
+        "type": "总河长",
+        "roles": "hzUser:city,hzUser:simple"
+      },
+      {...}	
+    ]
+  },
+  "riverSegments": [
+    {
+      "id": 1,
+      "name": "湟水河西宁市段",
+      "length": 0.0,
+      "riverName": "湟水河",
+      "riverId": 1,
+      "regionId": 13,
+      "level": "CITY",
+      "regionName": "西宁市",
+      "hzUserId": 29,
+      "hzUserName": "马忠英"
+    },
+    {...}      
+  ],
+  "upHzb": {
+    "hzUsers": []
+  },
+  "downHzbs": [
+    {
+      "id": 2,
+      "name": "湟源县河长办",
+      "regionId": 14,
+      "regionName": "湟源县",
+      "regionCode": "630123",
+      "hzUsers": [
+        {
+          "id": 30,
+          "name": "马建立",
+          "job": "县委书记",
+          "phone": "13997163777",
+          "type": "总河长",
+          "roles": "hzUser:county,hzUser:simple"
+        },
+        {...}
+      ]
+    }
+  ]
+}
 ```
