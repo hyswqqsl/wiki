@@ -235,7 +235,8 @@
     * 巡河必须是属于河长或河长办
     * 参数：instanceId，巡河记录标识
     * 返回：
-        * OK，{beginTime,content,path,duration,length,cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
+        * OK，{beginTime,content,path,duration,length, riverSegmentId, riverSegmentName, hzUserId, hzUserName, hzUserPhone, hzbId, hzbName, hzb
+        Phone, cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
 5. 查看河长办月巡河列表，/cruise/lists/byHzb,GET
     * **app端, web端使用**
     * **角色：河长办用户**
@@ -247,28 +248,10 @@
         * OK，河长办本级河长，对应河段月巡河列表,json示例
 
 ```
-{
-    // 本级河长列表
-    hzUsers:[
-	{id,name,phone,
-	 // 河段列表
-	 riverSegments: [{id:xx,name:xx,
-			  // 巡河列表
-			  cruise:[
-			      {instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},
-			      {...}]}, {...}]
-	},{...}],
-    // 下级河长列表
-    downHzUsers:[
-	{id,name,phone,
-	 // 河段列表
-	 riverSegments: [{id:xx,name:xx,
-			  // 巡河列表
-			  cruise:[
-			      {instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数)},
-			      {...}]}, {...}]
-	},{...}]
-}
+[
+    {instanceId,beginTime,conten,path(巡河路径),duration(巡河时长),length(巡河里长),recordNum(记录数), riverSegmentName, hzUserName},
+    {...}
+]
 ```
 
 ## 四 HzbUserController,河长办用户控制层
