@@ -217,10 +217,10 @@
        * 无
    * 返回：
        * OK，河长办本级河段和下级河段列表，{riverSegments：[{...}, {...}], downRiverSegments:[{...}, {...}], complaints:{...}} 
-6. 取得水利一张图河段详情：
+6. 取得水利一张图河段详情, /riverSegment/hzb/map/details/{id},GET
    * **web端使用**
    * 角色：各级河长办人员
-   * 参数：riverSegmentId:河段id
+   * 参数：id:河段id
    * 返回：
      * OK，返回河段下相关数据列表，年投诉列表、年任务列表，年报告列表，年事件列表，月巡河列表、河段坐标
      * DATA_NOEXIST,河段不存在，
