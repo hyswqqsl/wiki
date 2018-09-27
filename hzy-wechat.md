@@ -181,9 +181,10 @@
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
     * **app端使用**
     * **角色：各级河长**
+    * 增加河段对应的一河一档兴趣点 20180927
     * 参数：id:河段
     * 返回：
-        * OK，河段属性：{name,level(河段级别),length,areaCoors,leftCoors,rightCoors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone)}
+        * OK，河段属性：{name,level(河段级别),length,areaCoors,leftCoors,rightCoors,beginStation,endStation,regionName(行政区名)，hzUser:{name，phone},hzb(name,phone), interests:[{...}]}
         * 4022，DATA_REFUSE，请求的河段不属于自己
 2. 取得河长管辖的河段,/riverSegment/lists,GET
     * **app端使用**
@@ -205,7 +206,24 @@
         * regionCode：行政区编码, 这个regionCode是当先位置的县区级行政编码
     * 返回：
         * OK，行政区下的所有河段，[{id,name},{..}]，如果行政区下没有河道，返回流过市州的所有河流id和name
-        
+5. 河长办通过水利一张图查看河道列表，/riverSegment/hzb/map/lists
+   * **web端使用**
+   * 角色：各级河长办人员
+   * 市级河长办返回河段信息：本级河段，{id，name，coor(中心坐标), complaintNum(年总投诉数量)，complaintUnHandleNum(未处理投诉数), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};下级河段,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)}    
+   * 县级河长办返回河段信息：本级河段，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};下级河段,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)，cruiseNum(本月巡河次数)}       
+   * 乡级河长办返回河段信息：本级河段，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}, 下级河段：{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}
+   * 参数：
+       * 无
+   * 返回：
+       * OK，河长办本级河段和下级河段列表，{riverSegments：[{...}, {...}], downRiverSegments:[{...}, {...}]} 
+6. 取得水利一张图河段详情：
+   * **web端使用**
+   * 角色：各级河长办人员
+   * 参数：riverSegmentId:河段id
+   * 返回：
+     * OK，返回河段下相关数据列表，年投诉列表、年任务列表，年报告列表，年事件列表，月巡河列表、河段坐标
+     * DATA_NOEXIST,河段不存在，
+
 ## 三 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
     * **weChat, app端使用**
@@ -234,10 +252,11 @@
     * **app端, web端使用**
     * **角色：各级河长, 河长办用户**
     * 巡河必须是属于河长或河长办
+    * 增加兴趣点列表 20180927
     * 参数：instanceId，巡河记录标识
     * 返回：
         * OK，{beginTime,content,path,duration,length, riverSegmentId, riverSegmentName, hzUserId, hzUserName, hzUserPhone, hzbId, hzbName, hzb
-        Phone, cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}]}
+        Phone, cruiseRecords:[{type,description,content,coor,address,instanceId,interest:{name,type}},{..}], interests:[{...}, {...}]}
 5. 查看河长办月巡河列表，/cruise/lists/byHzb,GET
     * **app端, web端使用**
     * **角色：河长办用户**
@@ -1055,6 +1074,16 @@
    * 参数：无
    * 返回：
        * OK,根据自己的河段列表，查询每个河段下的巡河员列表，组合起来，每个巡河员下的河段id，河段名也放在json中
+
+## 十五 兴趣点编辑接口,InterestController
+1. 水利一张图取得所有兴趣点接口，/interest/hzb/map/lists GET
+   * **web使用**
+   * **角色：市级，县级，乡级河长办人员**
+   * 如果是市级河长办，返回市级一河一档下所有兴趣点列表，全部属性
+   * 如果是县级河长办，返回县级一河一档下所有兴趣点列表，全部属性
+   * 如果是乡级河长办，返回对应县级一河一档下所有兴趣点列表，全部属性
+   * 参数：无
+   * OK,[{...}, {...}]]
 
 ```     
     巡河记录类型
