@@ -209,9 +209,9 @@
 5. 河长办通过水利一张图查看河道列表，/riverSegment/hzb/map/lists
    * **web端使用**
    * 角色：各级河长办人员
-   * 市级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};**下级河段**,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)}    
-   * 县级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};**下级河段**,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)，cruiseNum(本月巡河次数)}       
-   * 乡级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}, **下级河段**：{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理投诉数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}
+   * 市级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};**下级河段**,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)}    
+   * 县级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， matterNum(年总事件数), matterUnHandleNum(未归档事件数), cruiseNum(本月巡河次数)};**下级河段**,{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)，cruiseNum(本月巡河次数)}       
+   * 乡级河长办返回河段信息：**本级河段**，{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}, **下级河段**：{id，name，coor(中心坐标), taskNum(年总任务数)， taskUnHandleNum(未处理任务数)，reportNum(年总报告数)， reportUnHandleNum(未处理报告数)， cruiseNum(本月巡河次数)}
    * 年投诉列表,complaints
    * 参数：
        * 无
@@ -222,7 +222,7 @@
    * 角色：各级河长办人员
    * 参数：id:河段id
    * 返回：
-     * OK，返回河段下相关数据列表，年投诉列表、年任务列表，年报告列表，年事件列表，月巡河列表、河段坐标
+     * OK，返回河段下相关数据列表，年任务列表，年报告列表，年事件列表，月巡河列表、河段坐标
      * DATA_NOEXIST,河段不存在，
 
 ## 三 CruiseController 巡河控制层
