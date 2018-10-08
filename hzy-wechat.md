@@ -1160,19 +1160,24 @@
      * 河流兴趣点类型
      */
     public enum RiverIntrestType {
-        // 公示牌
-        BILLBOARD,
-        // 灌区
-        IRRIGATION,
-        // 水库
-        RESERVOIR,
-        // 污水处理厂
-        SEWAGE_FACTORY,
-        // 排污口
-        OUTLET,
-        // 水源
-        WATER_SOURCE
-    }    
+        BILLBOARD("公示牌"),
+        RESERVOIR("水库"),
+        IRRIGATION("灌区"),
+        INTAKE("取水口"),
+        DRINKING_WATER_SOURCES("饮用水源地"),
+        OUTLET("排污口"),
+        SEWAGE_FACTORY("污水处理厂"),
+        // 水功能区(水质监测断面)
+        WATER_FUNCTION_AREA("水功能区"),
+        // 水生态区(自然文化资源保护区、国家重点生态功能区、重点风景名胜区")
+        NATURE_RESERVE("水生态区"),
+        WHARF("港口码头"),
+        BANK_PROTECTION("堤岸护坡"),
+        // 涉水工程和设施(拦河闸、泵站、橡胶坝、滚水坝、通航建筑物，水电站)
+        WADING_PROJECT("涉水工程和设施"),
+        // 其他跨河穿河临河建筑物(桥梁、涵洞、隧洞、渡槽等)
+        ACROSS_THE_RIVER("其他跨河穿河临河建筑物");
+    }
 ```
 
 ```    
