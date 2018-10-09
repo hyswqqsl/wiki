@@ -191,7 +191,7 @@
     * **角色：各级河长**
     * 参数：无
     * 返回：
-        * OK,河道列表，[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数)},{...}]
+        * OK,河道列表，河段列表除了本月巡河次数，还有本年事件总数，正在处理的事件数，本年头数总数，正在处理的投诉数,[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数), matterNum(事件总数),matterHandleNum(事件正在处理数),complaintNum(投诉总数),complaintHandleNum(投诉正在处理数)},{...}]
 3. 移动端原生取得河段的面坐标,/riverSegment/android/coors,GET
     * **app端使用**
     * 参数：
@@ -656,6 +656,13 @@
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办文件list，办结文件list
         * 事件下发,上报列表
+15. **`河长根据河段取得办理的事件列表,/matter/riverSegment/handle/lists,GET`**
+   * **web端使用**
+   * **角色：市河长办用户，县河长办用户**
+   * 根据河段id，取得未归档的事件列表
+   * 参数：riverSegmentId:河段id
+   * 返回:
+       * OK，列表，事件对象所有属性，不包含文件列表，包含子对象        
         
 ```
 {code:xxx,title:xxx,...,
@@ -900,6 +907,13 @@
     * 返回:
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL
+9. 河长根据河段取得诉列表，/complaint/riverSegment/weChat/lists,GET
+    * **weChat**
+    * **角色：weChat** 
+    * 参数：
+        * riverSegmentId:河段id
+    * 返回：
+        * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate        
 
 ## 十 weChatController,微信控制层
  1. 根据code取得unionId,/weChat/unionId,GET
