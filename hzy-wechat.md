@@ -191,7 +191,7 @@
     * **角色：各级河长**
     * 参数：无
     * 返回：
-        * OK,河道列表，河段列表除了本月巡河次数，还有本年事件总数，正在处理的事件数，本年头数总数，正在处理的投诉数,[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数), matterNum(事件总数),matterHandleNum(事件正在处理数),complaintNum(投诉总数),complaintHandleNum(投诉正在处理数)},{...}]
+        * OK,河道列表，河段列表除了本月巡河次数，还有本年事件总数，正在处理的事件数，本年投诉总数，正在处理的投诉数,[{id,name,level(河段级别),length,beginStation,endStation,regionName(行政区名),times(本月巡河次数), matterNum(事件总数),matterHandleNum(事件正在处理数),complaintNum(投诉总数),complaintHandleNum(投诉正在处理数)},{...}]
 3. 移动端原生取得河段的面坐标,/riverSegment/android/coors,GET
     * **app端使用**
     * 参数：
