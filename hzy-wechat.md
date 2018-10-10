@@ -656,10 +656,10 @@
         * 事件所有属性，事件图片list
         * 事件处理列表，每个列表中的承办文件list，办结文件list
         * 事件下发,上报列表
-15. **`河长根据河段取得办理的事件列表,/matter/riverSegment/handle/lists,GET`**
-   * **web端使用**
-   * **角色：市河长办用户，县河长办用户**
-   * 根据河段id，取得未归档的事件列表
+15. **`河长根据河段取得事件列表,/matter/riverSegment/lists,GET`**
+   * **app**
+   * **角色：河长**
+   * 根据河段id，取得年内所有事件列表
    * 参数：riverSegmentId:河段id
    * 返回:
        * OK，列表，事件对象所有属性，不包含文件列表，包含子对象        
@@ -907,9 +907,9 @@
     * 返回:
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL
-9. 河长根据河段取得诉列表，/complaint/riverSegment/weChat/lists,GET
-    * **weChat**
-    * **角色：weChat** 
+9. 河长根据河段取得诉列表，/complaint/riverSegment/lists,GET
+    * **app**
+    * **角色：河长** 
     * 参数：
         * riverSegmentId:河段id
     * 返回：
