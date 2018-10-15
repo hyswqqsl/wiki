@@ -200,7 +200,7 @@
     * 返回：
         * OK,{areaCoors:[{lat:36.934,lon:102.23,ele:0}, {...}], leftCoors:[{...},{...}], rightCoors:[{...},{...}]}
 4. 取得河段列表，/riverSegment/region/lists, GET
-    * **webChat使用**
+    * **weChat使用**
     * **角色：weChat**
     * 参数：
         * regionCode：行政区编码, 这个regionCode是当先位置的县区级行政编码
@@ -1099,7 +1099,91 @@
    * 如果是乡级河长办，返回对应县级一河一档下所有兴趣点列表，全部属性
    * 参数：无
    * OK,[{...}, {...}]]
-
+   
+ ## 十六 公众号菜单接口,WeChatMenuController,GET
+ 1. 取得定义的公众号新闻菜单列表,/weChatMenu/articleMenu/define/lists
+     * weChat使用
+     * 返回当前定义的菜单项列表，包含枚举值，英文属性名，中文标题名,[{enum:0, title:州级台账},{...}]           
+     * 参数：regionCode:行政区code
+     * 返回：
+         * OK, 行政区(公众号)下设置的菜单列表,如果没有设置，返回空数组
+2. 新建公众号新闻菜单,/weChatMenu/articleMenu/web/create,POST
+     * web端
+     * 角色，河长办管理员
+     * 新建的菜单中的level必须是没有使用过的，如果使用过返回DATA_EXIST
+     * 参数：
+         * title:菜单标题，如市级动态，市级台账等 
+         * level:菜单枚举0-3数字
+     * 返回：
+         * OK,新建成功
+         * DATA_EXIST,对应菜单已经存在，不能重复新建
+3. 修改公众号新闻菜单,/weChatMenu/articleMenu/web/update,POST
+    * web端
+    * 角色，河长办管理员
+    * 参数：
+         * id:菜单id
+         * title:菜单标题，如市级动态，市级台账等
+    * 返回：
+         * OK,修改成功
+         * DATA_NOEXIST,菜单不存在
+4. 删除公众号新闻菜单,/weChatMenu/articleMenu/web/delete/{id},DELETE
+    * web端
+    * 角色，河长办管理员
+    * 参数：
+         * id:菜单id
+    * 返回：
+         * OK,删除成功
+         * DATA_NOEXIST,菜单不存在                  
+5. 取得系统内新闻菜单项列表, /weChatMenu/articleMenu/lists ,GET
+    * web
+    * 角色，河长办管理员
+    * 返回系统内菜单项列表，包含枚举值，英文属性名，中文默认标题名,[{enum:0, title:市级动态}, {enum:1,title:县级动态}]  
+    * 用于在添加菜单时，显示所有菜单下项          
+    * 参数：无
+    * 返回：
+       * OK,返回菜单项列表     
+6. 取得定义的公众号菜单列表,/weChatMenu/menu/define/lists
+     * weChat使用
+     * 返回当前定义的菜单项列表，包含枚举值，英文属性名，中文标题名,[{enum:2, title:水情信息},{...}] 
+     * 参数：regionCode:行政区code
+     * 返回：
+         * OK, 行政区(公众号)下设置的菜单列表,如果没有设置，返回空数组
+7. 新建公众号菜单,/weChatMenu/menu/web/create,POST
+     * web端
+     * 角色，河长办管理员
+     * 新建的菜单中的level必须是没有使用过的，如果使用过返回DATA_EXIST
+     * 参数：
+         * title:菜单标题，如市级动态，市级台账等 
+         * level:菜单枚举0-3数字
+     * 返回：
+         * OK,新建成功
+         * DATA_EXIST,对应菜单已经存在，不能重复新建
+8. 修改公众号菜单,/weChatMenu/menu/web/update,POST
+    * web端
+    * 角色，河长办管理员
+    * 参数：
+         * id:菜单id
+         * title:菜单标题，如市级动态，市级台账等
+    * 返回：
+         * OK,修改成功
+         * DATA_NOEXIST,菜单不存在
+9. 删除公众号菜单,/weChatMenu/menu/web/delete/{id},DELETE
+    * web端
+    * 角色，河长办管理员
+    * 参数：
+         * id:菜单id
+    * 返回：
+         * OK,删除成功
+         * DATA_NOEXIST,菜单不存在                  
+10. 取得系统内菜单项列表, /weChatMenu/menu/lists ,GET
+    * web
+    * 角色，河长办管理员
+    * 返回系统内菜单项列表，包含枚举值，英文属性名，中文默认标题名,[{enum:0, title:新闻动态},{enum:1, title:河湖信息}]  
+    * 用于在添加菜单时，显示所有菜单下项          
+    * 参数：无
+    * 返回：
+       * OK,返回菜单项列表     
+                        
 ```     
     巡河记录类型
     public enum CruiseRecordType {
