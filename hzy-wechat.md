@@ -1273,9 +1273,16 @@
         NATURE_RESERVE("水生态区"),
         WHARF("港口码头"),
         BANK_PROTECTION("堤岸护坡"),
-        // 涉水工程和设施(拦河闸、泵站、橡胶坝、滚水坝、通航建筑物，水电站)
-        WADING_PROJECT("涉水工程和设施"),
-        // 其他跨河穿河临河建筑物(桥梁、涵洞、隧洞、渡槽等)
+        BARRIER_GATE("拦河闸"),
+        PUMPING_STATION("泵站"),
+        POWER_STATION("水电站"),
+        RUBBER_DAM("橡胶坝"),
+        ROLLING_DAM("滚水坝"),
+        NAVIGATION_BUILDING("通航建筑物"),
+        BRIDGE("桥梁"),
+        CULVERT("涵洞"),
+        TUNNEL("隧洞"),
+        AQUEDUCT("渡槽"),
         ACROSS_THE_RIVER("其他跨河穿河临河建筑物");
     }
 ```
