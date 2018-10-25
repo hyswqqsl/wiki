@@ -1100,9 +1100,8 @@
    * 参数：无
    * OK,[{...}, {...}]]
 
-
- ## 十六 公众号菜单接口,WeChatController,GET
- 1. 取得定义的公众号新闻菜单列表,/weChatMenu/articleMenu/define/lists
+## 十六 公众号菜单接口,WeChatController,GET
+1. 取得定义的公众号新闻菜单列表,/weChatMenu/articleMenu/define/lists
      * weChat使用
      * 返回当前定义的菜单项列表，包含枚举值，英文属性名，中文标题名,[{enum:0, title:州级台账},{...}]           
      * 参数：regionCode:行政区code
