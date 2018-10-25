@@ -1099,7 +1099,8 @@
    * 如果是乡级河长办，返回对应县级一河一档下所有兴趣点列表，全部属性
    * 参数：无
    * OK,[{...}, {...}]]
-   
+
+
  ## 十六 公众号菜单接口,WeChatController,GET
  1. 取得定义的公众号新闻菜单列表,/weChatMenu/articleMenu/define/lists
      * weChat使用
