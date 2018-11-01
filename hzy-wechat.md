@@ -1101,13 +1101,13 @@
    * OK,[{...}, {...}]]
 
 ## 十六 公众号菜单接口,WeChatController,GET
-1. 取得定义的公众号新闻菜单列表,/weChatMenu/articleMenu/define/lists
+1. 取得定义的公众号新闻菜单列表,/weChatMenu/systemAdmin/articleMenu/define/lists
      * weChat使用
      * 返回当前定义的菜单项列表，包含枚举值，英文属性名，中文标题名,[{enum:0, title:州级台账},{...}]           
      * 参数：regionCode:行政区code
      * 返回：
          * OK, 行政区(公众号)下设置的菜单列表,如果没有设置，返回空数组
-2. 新建公众号新闻菜单,/weChatMenu/articleMenu/web/create,POST
+2. 新建公众号新闻菜单,/weChatMenu/systemAdmin/articleMenu/web/create,POST
      * web端
      * 角色，河长办管理员
      * 新建的菜单中的level必须是没有使用过的，如果使用过返回DATA_EXIST
@@ -1118,7 +1118,7 @@
      * 返回：
          * OK,新建成功
          * DATA_EXIST,对应菜单已经存在，不能重复新建
-3. 修改公众号新闻菜单,/weChatMenu/articleMenu/web/update,POST
+3. 修改公众号新闻菜单,/weChatMenu/systemAdmin/articleMenu/web/update,POST
     * web端
     * 角色，河长办管理员
     * 参数：
@@ -1128,7 +1128,7 @@
     * 返回：
          * OK,修改成功
          * DATA_NOEXIST,菜单不存在
-4. 删除公众号新闻菜单,/weChatMenu/articleMenu/web/delete/{id},DELETE
+4. 删除公众号新闻菜单,/weChatMenu/systemAdmin/articleMenu/web/delete/{id},DELETE
     * web端
     * 角色，河长办管理员
     * 参数：
@@ -1136,7 +1136,7 @@
     * 返回：
          * OK,删除成功
          * DATA_NOEXIST,菜单不存在                  
-5. 取得系统内新闻菜单项列表, /weChatMenu/articleMenu/lists ,GET
+5. 取得系统内新闻菜单项列表, /weChatMenu/systemAdmin/articleMenu/lists ,GET
     * web
     * 角色，河长办管理员
     * 返回系统内菜单项列表，包含枚举值，英文属性名，中文默认标题名,[{enum:0, title:菜单0}, {enum:1,title:菜单1},...]  
@@ -1144,13 +1144,13 @@
     * 参数：无
     * 返回：
        * OK,返回菜单项列表     
-6. 取得定义的公众号菜单列表,/weChatMenu/menu/define/lists
+6. 取得定义的公众号菜单列表,/weChatMenu/systemAdmin/menu/define/lists
      * weChat使用
      * 返回当前定义的菜单项列表，包含枚举值，英文属性名，中文标题名,[{enum:2, title:水情信息},{...}] 
      * 参数：regionCode:行政区code
      * 返回：
          * OK, 行政区(公众号)下设置的菜单列表,如果没有设置，返回空数组
-7. 新建公众号菜单,/weChatMenu/menu/web/create,POST
+7. 新建公众号菜单,/weChatMenu/systemAdmin/menu/web/create,POST
      * web端
      * 角色，河长办管理员
      * 新建的菜单中的level必须是没有使用过的，如果使用过返回DATA_EXIST
@@ -1160,7 +1160,7 @@
      * 返回：
          * OK,新建成功
          * DATA_EXIST,对应菜单已经存在，不能重复新建
-8. 修改公众号菜单,/weChatMenu/menu/web/update,POST
+8. 修改公众号菜单,/weChatMenu/systemAdmin/menu/web/update,POST
     * web端
     * 角色，河长办管理员
     * 参数：
@@ -1169,7 +1169,7 @@
     * 返回：
          * OK,修改成功
          * DATA_NOEXIST,菜单不存在
-9. 删除公众号菜单,/weChatMenu/menu/web/delete/{id},DELETE
+9. 删除公众号菜单,/weChatMenu/systemAdmin/menu/web/delete/{id},DELETE
     * web端
     * 角色，河长办管理员
     * 参数：
@@ -1177,15 +1177,36 @@
     * 返回：
          * OK,删除成功
          * DATA_NOEXIST,菜单不存在                  
-10. 取得系统内菜单项列表, /weChatMenu/menu/lists ,GET
+10. 取得系统内菜单项列表, /weChatMenu/systemAdmin/menu/lists ,GET
     * web
     * 角色，河长办管理员
     * 返回系统内菜单项列表，包含枚举值，英文属性名，中文默认标题名,[{enum:0, title:新闻动态},{enum:1, title:河湖信息}]  
     * 用于在添加菜单时，显示所有菜单下项          
     * 参数：无
     * 返回：
-       * OK,返回菜单项列表     
-                        
+       * OK,返回菜单项列表         
+
+## 十七 系统管理员，SystemAdminController 
+1. 登录发送验证码: /systemAdmin/login/getLoginVerify,GET
+          * **web端使用**
+          * **角色：无**
+          * 系统管理员登录时，取得验证码
+          * 参数：
+              * phone:登录手机号
+          * 返回：
+              * OK:发送成功
+              * DATA_NOEXIST:手机号不存在
+      2. 登录：/systemAdmin/login,POST
+          * **web端使用**
+          * **角色：无**
+          * 每次登录都是用动态验证码    
+          * 参数：
+              * code:验证码
+          * 返回:
+            * OK:成功成功
+              * 4041: CODE_INVALID 验证码过期
+              * 4042: CODE_ERROR 验证码输入错误
+                                
 ```     
     巡河记录类型
     public enum CruiseRecordType {
