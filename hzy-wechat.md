@@ -1188,24 +1188,24 @@
 
 ## 十七 系统管理员，SystemAdminController 
 1. 登录发送验证码: /systemAdmin/login/getLoginVerify,GET
-          * **web端使用**
-          * **角色：无**
-          * 系统管理员登录时，取得验证码
-          * 参数：
-              * phone:登录手机号
-          * 返回：
-              * OK:发送成功
-              * DATA_NOEXIST:手机号不存在
-      2. 登录：/systemAdmin/login,POST
-          * **web端使用**
-          * **角色：无**
-          * 每次登录都是用动态验证码    
-          * 参数：
-              * code:验证码
-          * 返回:
-            * OK:成功成功
-              * 4041: CODE_INVALID 验证码过期
-              * 4042: CODE_ERROR 验证码输入错误
+   * **web端使用**
+   * **角色：无**
+   * 系统管理员登录时，取得验证码
+       * 参数：
+       * phone:登录手机号
+   * 返回：
+       * OK:发送成功
+       * DATA_NOEXIST:手机号不存在
+2. 登录：/systemAdmin/login,POST
+   * **web端使用**
+   * **角色：无**
+   * 每次登录都是用动态验证码    
+   * 参数：
+       * code:验证码
+   * 返回:
+       * OK:成功成功
+       * 4041: CODE_INVALID 验证码过期
+       * 4042: CODE_ERROR 验证码输入错误
                                 
 ```     
     巡河记录类型
