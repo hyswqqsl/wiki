@@ -177,7 +177,7 @@
     * 返回：
         * OK,返回一河一档列表,每个对象包含所有一河一档属性+兴趣点列表 
         
-## 二 RiverSegmentController 河段控制层
+## 三 RiverSegmentController 河段控制层
 1. 取得河段详情, /riverSegment/riverSegment/{id},GET
     * **app端使用**
     * **角色：各级河长**
@@ -225,7 +225,7 @@
      * OK，返回河段下相关数据列表，年任务列表，年报告列表，年事件列表，月巡河列表、河段坐标
      * DATA_NOEXIST,河段不存在，
 
-## 三 CruiseController 巡河控制层
+## 四 CruiseController 巡河控制层
 1. 取得河段巡河记录类型,/cruise/recordType,GET
     * **weChat, app端使用**
     * **角色：weChat, 各级河长**
@@ -275,7 +275,7 @@
 ]
 ```
 
-## 四 HzbUserController,河长办用户控制层
+## 五 HzbUserController,河长办用户控制层
 1. 河长办用户登录,/hzbUser/login,POST
     * **web端使用**
     * **角色：无**
@@ -468,7 +468,7 @@
         * OK,数据：{"fileName":"文件名.文件格式","url":"上传成功后得资源路径url"} ,资源路径url是阿里云的路径
         * FAIL                     
 
-## 五 MatterController，事件管理
+## 六 MatterController，事件管理
 
     * 前台事件图片上传
     * 事件状态：0-登记 1-交办 2-责任退回 3-承办 4-重办 5-办结 6-审核退回 7-归档
@@ -717,7 +717,7 @@
        * 4022: DATA_REFUSE，事件不属于该河长办，或河流不属于该河长办          
         
 
-## 六 ArticleController 新闻动态和政策方案 
+## 七 ArticleController 新闻动态和政策方案 
 1. 取得新闻动态列表,/article/newses,GET
     * **weChat,web端使用**
     * **角色：无**    
@@ -784,7 +784,7 @@
         * OK,删除成功
         * 4022，DATA_REFUSE，文章不属于自己
                         
-## 七 StationController 测站
+## 八 StationController 测站
 1. 取得测站列表：/station/lists
     * **weChat, web端使用**
     * **角色：无**   
@@ -803,7 +803,7 @@
         * OK，仪表当日数据
         * FAIL,仪表编码不存在        
 
-## 八 PanoramaController，全景
+## 九 PanoramaController，全景
 1. 取得全景列表，/panorama/lists,GET
     * **weChat, web端使用**
     * **角色：无** 
@@ -812,7 +812,7 @@
     * 返回：
         * OK，行政区下的全景列表,包含name，createDate(建立时间),instanceId(唯一编码),thumbUrl(缩略图)，coor(坐标)，address(位置)
 
-## 九 ComplaintControler，投诉
+## 十 ComplaintControler，投诉
 1. 公众号提交投诉,/complaint/weChat/submit,POST
     * **weChat使用**
     * **角色：weChat** 
@@ -915,7 +915,7 @@
     * 返回：
         * OK，返回投诉列表，只需返回id，createDate, title，imageUrl，riverSegmentName, status,handleName, handleDate        
 
-## 十 weChatController,微信控制层
+## 十一 weChatController,微信控制层
  1. 根据code取得unionId,/weChat/unionId,GET
     * **weChat使用**
     * **角色：无**  
