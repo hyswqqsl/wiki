@@ -124,4 +124,5 @@
 >
 * 4111: MATTER_TYPE_ERROR 事件状态错误
 * 4112: MATTER_TIMEOUT 交办超时，不能责任退回
+* 4113: RIVER_REGION_ERROR 河流最高行政区设置错误
 
