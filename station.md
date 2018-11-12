@@ -1,9 +1,7 @@
 ## 水位站接口设计
 ### 一. 涉及对象
 
-<div align="center">
-   <img src="http://112.124.104.190:10001/soft/wiki/uploads/cc01c724b094a678eeeb2595409764fd/station.png" width="680px" />
-</div>
+![2C129532-1B0B-477B-8A55-A6997D18939B](/uploads/b8bafb180882d5b3c9d982e9a7a9e4c0/2C129532-1B0B-477B-8A55-A6997D18939B.png)
 
 
 ### 二. 后台stationController接口 
