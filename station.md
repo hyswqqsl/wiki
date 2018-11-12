@@ -14,63 +14,153 @@
 2. **获取测站列表包括分享的测站:/station/list,GET**
     * 返回：OK(jsonObjectList)
     * jsonObjectList里包含测站所有信息(河道模型，流量曲线)，仪表和摄像头, 如果没有河道模型，返回空数组
-3. **修改测站：/station/edit,POST**
-    * 参数：坐标必须是合法的,测站照片名是固定的，所以不用传递给后台
-    * 返回：OK，添加成功，FAIL，参数有误，NO_AUTH：不是自己的测站
-    * 测站图片由前台上传到阿里云，测站照片名是固定的，所以不用传递给后台
-4. **添加仪表：/station/addSensor，POST**
-    * 参数：唯一编码，激活码必须，安装高度必须是浮点数，限制在0-100.0f，电话必须合法
-    * 返回：OK，添加成功，FAIL，参数有误,EXIT:已存在，NO_AUTH：不是自己的测站
-5. **添加摄像头：/station/addCamera,POST**
-    * 参数：电话必须合法,播放url合法
-    * 返回：OK，添加成功，FAIL，参数有误,EXIT:已存在，NO_AUTH：不是自己的测站
-6. **编辑仪表：/station/editSensor，POST**
-    * 参数：唯一编码，激活码必须，安装高度必须是浮点数，限制在0-200.0f，电话必须合法
-    * 返回：OK，添加成功，FAIL，参数有误,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-7. **编辑摄像头：/station/editCamera,POST**
-    * 参数：电话必须合法,播放url合法
-    * 返回：OK，添加成功，FAIL，参数有误,EXIT:仪表不存在，，NO_AUTH：不是自己的测站
-8. **删除仪表：/station/deleteSensor,DELTE**
-    * 参数：id
-    * 返回：OK,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-9. **删除摄像头：/station/deleteCamera，DELTEE**
-    * 参数：id
-    * 返回：OK,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-10. **上传模型：/station/uploadModel，POST**
-    * 参数：id：测站id，file: 文件
-    * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-11. **下载模型：/station/downloadModel,GET**
-    * 参数：id：测站id，file: 文件
-    * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-12. **参数设置：/station/editParameter,POST**
-    * 参数：液位上下限：限制在0-100.0f，电话：合法
-    * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-13. **请求token：/station/token,GET,前台获取的用于和检测系统沟通，取得数据**
-    * 有问题，请求token应该放在这个控制层，而不是sensorController??
-    * 参数：
-    * 返回：OK(token字符串)
-14. **监测取得测站参数：/station/getParameters，GET**
-    * 这是监测系统取得所有已改变的参数列表
-    * 参数：token
-    * 返回：OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：`[{instanceId:xx,sensors:[{code:xx},{code:xx}],参数1:值1,参数2:值2}, {...}]`
-15. **测站分享：/station/shares，POST**
-    * 参数：userIds:欲分享的用户(id用‘，’隔开)，stationIds:欲分享的测站(id用‘，’隔开)
-    * 返回：OK
-16. **取消测站分享：/station/unShare POST**
-    * 参数：Long stationId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
-    * 返回：OK
-    * 后台修改内容,station实体类添加share字段，在实体Station包下增加Share,ShareVisit类，和project分享的实体类Share,ShareVisit类似
-17. 独立水文用户新建站点,/station/hydrol/create,POST
+3. 安布雷拉水文用户新建站点,/station/abll/create,POST
     * 独立水文用户建立站点时，不用判断套餐先限制
     * 每个独立水文用户最多建立1000个测站
-    * 后台生成唯一编码 
+    * 后台生成唯一编码, 过期时间2099
     * 参数：
         * name: 测站名称
+        * type: 普通类型
         * remark: 测站描述
     * 返回： 
         * OK： 新建成功
         * DATA_LOCK: 测站数量超限
-        * UNAUTHORIZED: 不是独立水文用户     
+        * UNAUTHORIZED: 不是安布雷拉用户      
+4. **修改测站：/station/edit,POST**
+    * 测站图片由前台上传到阿里云，测站照片路径是固定的，所以不用传递给后台
+    * 参数：
+        * id，测站id
+        * name: 测站名
+        * type: 默认传递普通测站
+        * description:描述
+        * address: 行政区地址
+        * coor: 坐标
+    * 返回：
+        * OK，添加成功，
+        * FAIL，参数有误
+        * DATA_REFUSE：不是自己的测站
+5. **添加仪表：/station/addSensor，POST**
+    * 参数：
+        * id 测站id
+        * name: 仪表名
+        * code 仪表编码
+        * ciphertext 激活码
+        * type 仪表类型
+    * 返回：
+        * OK，添加成功
+        * FAIL，参数有误
+        * DATA_EXIST: 编码已存在
+        * DATA_REFUSE：不是自己的测站
+6. **添加摄像头：/station/addCamera,POST**
+    * 参数：
+        * id: 测站id
+        * name: 摄像头名
+        * code: 摄像头编码
+        * password: 密码 
+    * 返回：
+        * OK: 添加成功
+        * FAIL: 参数有误
+        * DATA_EXIST: 编码已存在
+        * DATA_REFUSE：不是自己的测站
+7. **编辑仪表：/station/editSensor，POST**
+    * 编码,activate不可修改
+    * isChanged，由后台设置保存
+    * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中 
+    * 参数：
+        * id: 仪表id
+        * name： 仪表名
+        * description： 仪表描述
+        * type：类型
+        * factory: 厂家
+        * contact: 联系人
+        * phone: 电话
+        * settingHeight: 安装高度
+        * settingElevation: 安装海拔
+        * settingAddress：安装地点
+        * measureRange: 测量范围
+        * maxValue: 测量上限
+        * isMaxValueNote: 超过测量上限是否发送短信
+        * minValue: 测量下限
+        * isMinValueNote: 低于测量下限是否发送短信
+        * extraParameters: 扩展属性，[{id:xxx,value:xxx},{...}]
+     * 返回：
+        * OK，添加成功
+        * FAIL，参数有误
+        * DATA_NOEXIST: 仪表或扩展属性不存在
+        * DATA_REFUSE：不是自己的仪表
+8. 仪表添加自定义属性：/station/sensor/extra/create,POST
+    * 自定义扩展属性最多添加20个
+    * 添加的类型自动是自定义类型
+    * 自定义扩展属性都是字符串格式
+    * 自定义属性名使用displayName
+    * 参数：
+       * id：仪表id
+       * displayName: 属性名
+     * 返回：
+        * OK，添加成功
+        * DATA_REFUSE：不是自己的仪表
+        * DATA_LOCK: 属性超多20个，不能再添加
+9. 仪表删除自定义属性: /station/sensor/extra/delete,DELETE
+    * 参数：
+       * id：自定义属性id
+     * 返回：
+        * OK，添加成功
+        * DATA_REFUSE：不是自己的仪表属性
+        * DATA_LOCK: 属性类型是系统属性，不能删除
+10. **编辑摄像头：/station/editCamera,POST**
+    * 编码不可修改
+    * 参数：
+        * id: 摄像头id
+        * name: 摄像头名
+        * description: 描述
+        * factory：厂家
+        * contact: 联系人
+        * phone: 电话
+        * settingAddress：安装地点
+        * password: 密码         
+    * 返回：
+        * OK，添加成功
+        * FAIL，参数有误
+        * DATA_NOEXIST: 摄像头不存在
+11. **删除仪表：/station/deleteSensor,DELTE**
+   * 删除仪表时，需要经扩展属性删除
+    * 参数：id
+    * 返回：
+        * OK,EXIT:仪表不存在
+        * DATA_REFUSE：不是自己的仪表
+12. **删除摄像头：/station/deleteCamera，DELTEE**
+    * 参数：id
+    * 返回：
+        * OK,EXIT:仪表不存在
+        * DATA_REFUSE：不是自己的摄像头
+13. **上传模型：/station/uploadModel，POST**
+    * 参数：
+        * id：测站id
+        * file: 文件
+    * 返回：
+        * OK 上传成功
+        * FIAL：格式错误
+        * DATA_REFUSE：不是自己的测站
+14. **下载模型：/station/downloadModel,GET**
+    * 参数：
+        * id：测站id
+        * file: 文件
+    * 返回：
+        * OK 上传成功
+        * FIAL：格式错误
+        * DATA_REFUSE：不是自己的测站        
+15. **请求token：/station/token,GET,前台获取的用于和检测系统沟通，取得数据**
+    * 有问题，请求token应该放在这个控制层
+    * 参数：
+    * 返回：OK(token字符串)
+16. **监测取得测站参数：/station/getParameters，GET**
+    * 监测子系统更改取得仪表参数，用于报警，报警只针对仪表，更简单
+    * 这是监测系统取得所有已改变的参数列表
+    * 参数：token
+    * 返回：
+        * OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：
+        [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]
+17. 测站分享和协同不变，参见[[http://112.124.104.190:10001/soft/wiki/wikis/share](分享接口)]
 
 ### 二. 后台TradeController接口
 >

@@ -149,23 +149,54 @@
     * 返回：OK(用户对象)，包含昵称、手机号，身份认证状态，企业认证状态，绑定微信的昵称，微信openid等
 16. web端登录：/user/web/login POST
     * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
-    * 参数：code：登录凭证，手机号或邮箱；password:密码；cookie：cookie
-    * 返回：OK(用户对象):登录成功；FAIL：密码错误；EXIST:用户不存在;OTHER:需要验证码，UNKNOWN:用户已锁定
+    * 判断用户角色，只有拥有user:simple角色的用户才能登录
+    * 参数：
+        * code：登录凭证，手机号或邮箱
+        * password:密码
+        * cookie：cookie
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码错误
+        * EXIST:用户不存在
+        * OTHER:需要验证码
+        * UNKNOWN:用户已锁定
+        * UNAUTHORIZED： 不是水利云用户，无访问权限
 17. 移动端登录：/user/phone/login POST
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
-    * 参数：code：登录凭证，手机号或邮箱；password:密码
-    * 返回：OK(用户对象):登录成功；FAIL：密码错误；EXIST:用户不存在,UNKNOWN:用户已锁定
+    * 判断用户角色，只有拥有user:simple角色的用户才能登录
+    * 参数：
+        * code：登录凭证，手机号或邮箱
+        * password:密码
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码错误
+        * EXIST:用户不存在
+        * UNKNOWN:用户已锁定
+        * UNAUTHORIZED： 不是水利云用户，无访问权限        
 18. 微信公众号登录：/user/wechat/login POST
     * 微信公众号登录，微信号和用户站好会绑定
-    * 参数：code：登录凭证，手机号或邮箱；password:密码
-    * 返回：OK(用户对象):登录成功；FAIL：密码错误；EXIST:用户不存在,UNKNOWN:用户已锁定
+    * 判断用户角色，只有拥有user:simple角色的用户才能登录
+    * 参数：
+        * code：登录凭证，手机号或邮箱
+        * password:密码
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码错误；EXIST:用户不存在
+        * UNKNOWN:用户已锁定
+        * UNAUTHORIZED： 不是水利云用户，无访问权限        
 19. 微信公众号自动登录：/user/wechat/autoLogin POST
     * 参数：code：微信公众号回传的标识码
     * 返回：OK(用户对象):登录成功；EXIST:用户不存在
 20. web端验证码登录：/user/web/loginByVerify POST
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
+    * 判断用户角色，只有拥有user:simple角色的用户才能登录
     * 参数：password:密码；verification:验证码
-    * 返回：OK(用户对象):登录成功；FAIL：密码或验证码错误；UNKNOWN:用户已锁定；INVALID:请重新获取验证码
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码或验证码错误
+        * UNKNOWN:用户已锁定
+        * INVALID:请重新获取验证码
+        * UNAUTHORIZED： 不是水利云用户，无访问权限        
 21. 判断输入的用户密码是否正确：/user/checkPassword,POST
     * 进入账号管理时，要求输入密码，保证安全
     * 参数：password:密码
@@ -199,17 +230,17 @@
    * 返回：     
        * OK:修改成功
        * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
-26. 修改独立水文用户用户公司名称,/user/hydrol/updateUserName    
-   * 独立水文用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+26. 修改安布雷拉水文监测用户公司名称,/user/abll/updateUserName    
+   * 安布雷拉水文监测用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
    * 长度不超过36字符
-   * 保证有user:hydrol角色
+   * 保证有user:abll角色
    * 参数：userName:xxx
    * 返回：     
        * OK:修改成功
        * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
-       * UNAUTHORIZED: 不是独立水文用户
-27. 独立水文用户注册，/user/hydrol/register
-   * 独立水文用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+       * UNAUTHORIZED: 不是安布雷拉水文监测用户
+27. 安布雷拉水文监测用户注册，/user/abll/register
+   * 安布雷拉水文监测用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
    * 长度不超过36字符
    * 参数：
        * userName:公司名称
@@ -218,7 +249,31 @@
    * 返回：
        * OK:注册成功
        * INVALID:请重新获取验证码
-       * FAIL:验证码错误        
+       * FAIL:验证码错误     
+28. 安布雷拉水文监测用户web端登录：/user/abll/web/login POST
+        * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
+        * 判断用户角色，只有拥有user:abll角色的用户才能登录
+        * 参数：
+            * code：登录凭证，手机号或邮箱
+            * password:密码
+            * cookie：cookie
+        * 返回：
+            * OK(用户对象):登录成功
+            * FAIL：密码错误
+            * EXIST:用户不存在
+            * OTHER:需要验证码
+            * UNKNOWN:用户已锁定
+            * UNAUTHORIZED： 不是安布雷拉用户，无访问权限
+29. web端验证码登录：/user/abll/web/loginByVerify POST
+        * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
+        * 判断用户角色，只有拥有user:abll角色的用户才能登录
+        * 参数：password:密码；verification:验证码
+        * 返回：
+            * OK(用户对象):登录成功
+            * FAIL：密码或验证码错误
+            * UNKNOWN:用户已锁定
+            * INVALID:请重新获取验证码
+            * UNAUTHORIZED： 不是安布雷拉用户，无访问权限                           
        
 ```
     /** 真实姓名 */
@@ -291,7 +346,7 @@
   public enum Type {
       /** 项目协同 */
       COOPERATE_PROJECT,
-      /** 反馈回复 */
+      /** 反馈回复 */p
       FEEDBACK,
       /** 测站协同 */
       COOPERATE_STATION
