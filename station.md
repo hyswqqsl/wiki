@@ -174,60 +174,20 @@
     * 返回：OK(订单对象):成功；FAIL:参数错误
 
 ### 四. 前台与检测系统的接口
->
-1. 取得宏电数据：www.qingqingshuili.cn:8080/irtu/{code} GET
-2. 取得仪表数据：www.qingqingshuili.cn:8080/sensor/{code} GET
-3. 取得重点河流数据：www.qingqingshuili.cn:8080/sensor/{code} GET
-4. 取得仪表报警日志：www.qingqingshuili.cn:8080/station/warning/{instanceId} GET ??
-    
+参见监测子系统:[[http://112.124.104.190:10001/soft/wiki/wikis/%E6%A3%80%E6%B5%8B%E5%AD%90%E7%B3%BB%E7%BB%9F]]
+
 ### 五. 后台调用检测系统接口
->
-1. **取得仪表列表：www.qingqingshuili.cn:8080/sensors，GET ??**
-    * 参数：token
-    * 返回：OK(仪表列表)
+取得仪表列表, /sensor/lists, GET
+参见监测子系统:[[http://112.124.104.190:10001/soft/wiki/wikis/%E6%A3%80%E6%B5%8B%E5%AD%90%E7%B3%BB%E7%BB%9F]]
 
 ### 六. 相关后台实体类
 ```java
-// 测站
-public class Station extends BaseEntity {
-
-    private static final long serialVersionUID = 1753324356353389598L;
-    /** 站名 */
-    private String name;
-    /** 描述 */
-    private String description;
-    /** 站类型 */
-    private CommonEnum.StationType type;
-    /** 坐标 */
-    private String coor;
-    /** 位置 */
-    private String address;
-    /** 河道模型 */
-    private String riverModel;
-    /** 流量曲线 */
-    private String flowModel;
-    /** 参数 */
-    private String parameter;
-    /** 测站唯一标识 */
-    private String instanceId;
-    /** 测站分享 */
-    private String shares;
-    /** 是否修改过 */
-    private boolean transform;
-    /** 到期时间 */
-    private Date expireDate;
-    /** 测站图片(阿里云图片路径) */
-    private String  picture;
-
-    private User user;
-
-    /** 河底高程*/
-    private Double bottomElevation;
-}
 /**
  * 测站类型
  */
 public enum StationType{
+    /** 普通测站 */  
+    NORMAL_STATION,
     /** 水文站 */
     HYDROLOGIC_STATION,
     /** 雨量站 */
@@ -236,33 +196,6 @@ public enum StationType{
     WATER_LEVEL_STATION,
     /** 水质站 */
     WATER_QUALITY_STATION
-}
-// 仪表
-public class Sensor extends BaseEntity {
-
-    private static final long serialVersionUID = -3097083860247123817L;
-    /** 唯一编码 */
-    private String code;
-    /** 类型 */
-    private Type type;
-    /**　是否激活 */
-    private boolean activate;
-    /** 厂家factroy，联系人contact，电话phone等Json */
-    private String info;
-    /** 摄像头 */
-    private String cameraUrl;
-
-    private Station station;
-    /** 安装高度*/
-    private Double settingHeight;
-}
-// 摄像头
-public class Camera {
-    private Station station;
-    /** 摄像头 */
-    private String cameraUrl;
-    /** 厂家factroy，联系人contact，电话phone等Json */
-    private String info;    
 }
 ```
 
