@@ -119,6 +119,8 @@
     * 参数：email:邮箱
     * 返回：OK:发送成功,FAIL:email不合法，EXIST：邮箱不存在
 7. 注册用户：/user/register
+   * 水利云用户注册时填写的userName是昵称，都是英文字符和数字，用于在未实名时显示用户名称，在新建项目时使用昵称建立项目编号
+   * 长度不超过36字符
     * 参数：userName:昵称，password:密码，验证码：verification:验证码
     * 返回：OK:注册成功，INVALID:请重新获取验证码，FAIL:验证码错误  
 8. 手机找回密码:/user/phone/getbackPassord，忘记密码时找回密码
@@ -179,18 +181,45 @@
     * 返回：
         * OK:新建成功
         * DATA_EXIST:子账号已存在，不能重复添加。子账号手机号已存在，不能重复添加添加相同的手机号  
-23. 用户编辑子账号：/account/update,POST
+23. 用户编辑子账号：/user/account/update,POST
       * 参数：id(子账号id),name, department, remark
       * 返回：
         * OK:编辑成功
         * FAIL:子账号不属于当前用户,session中的user和参数中的userId不一致，这个处理防止其他用户误操作
-24. 删除子账号：/account/delete,POST
+24. 删除子账号：/user/account/delete,POST
     * 删除子账号，相当于企业删除员工一样；删除前循环监测所有项目中有无协同内容，删除之
     * 参数：id(子账号id)
     * 返回：     
         * OK:删除成功
         * FAIL: 子账号不属于该企业，不能删除
-
+25. 修改用户昵称，/user/updateUserName        
+   * 水利云用户注册时填写的userName是昵称，都是英文字符和数字，用于在未实名时显示用户名称，在新建项目时使用昵称建立项目编号
+   * 长度不超过36字符
+   * 参数：userName:xxx
+   * 返回：     
+       * OK:修改成功
+       * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
+26. 修改独立水文用户用户公司名称,/user/hydrol/updateUserName    
+   * 独立水文用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+   * 长度不超过36字符
+   * 保证有user:hydrol角色
+   * 参数：userName:xxx
+   * 返回：     
+       * OK:修改成功
+       * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
+       * UNAUTHORIZED: 不是独立水文用户
+27. 独立水文用户注册，/user/hydrol/register
+   * 独立水文用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+   * 长度不超过36字符
+   * 参数：
+       * userName:公司名称
+       * password:密码
+       * verification:验证码
+   * 返回：
+       * OK:注册成功
+       * INVALID:请重新获取验证码
+       * FAIL:验证码错误        
+       
 ```
     /** 真实姓名 */
     private String name;

@@ -6,60 +6,71 @@
 </div>
 
 
-### 二. 后台stationCtroller接口 
+### 二. 后台stationController接口 
 >
-1. **获取测站列表包括分享的测站:/list,GET**
+1. **获取测站列表包括分享的测站:/station/list,GET**
     * 返回：OK(jsonObjectList)
     * jsonObjectList里包含测站所有信息(河道模型，流量曲线)，仪表和摄像头, 如果没有喝到模型，返回空数组
-2. **获取测站列表包括分享的测站:/list,GET**
+2. **获取测站列表包括分享的测站:/station/list,GET**
     * 返回：OK(jsonObjectList)
     * jsonObjectList里包含测站所有信息(河道模型，流量曲线)，仪表和摄像头, 如果没有河道模型，返回空数组
-3. **修改测站：/edit,POST**
+3. **修改测站：/station/edit,POST**
     * 参数：坐标必须是合法的,测站照片名是固定的，所以不用传递给后台
     * 返回：OK，添加成功，FAIL，参数有误，NO_AUTH：不是自己的测站
     * 测站图片由前台上传到阿里云，测站照片名是固定的，所以不用传递给后台
-4. **添加仪表：addSensor，POST**
+4. **添加仪表：/station/addSensor，POST**
     * 参数：唯一编码，激活码必须，安装高度必须是浮点数，限制在0-100.0f，电话必须合法
     * 返回：OK，添加成功，FAIL，参数有误,EXIT:已存在，NO_AUTH：不是自己的测站
-5. **添加摄像头：addCamera,POST**
+5. **添加摄像头：/station/addCamera,POST**
     * 参数：电话必须合法,播放url合法
     * 返回：OK，添加成功，FAIL，参数有误,EXIT:已存在，NO_AUTH：不是自己的测站
-6. **编辑仪表：editSensor，POST**
+6. **编辑仪表：/station/editSensor，POST**
     * 参数：唯一编码，激活码必须，安装高度必须是浮点数，限制在0-200.0f，电话必须合法
     * 返回：OK，添加成功，FAIL，参数有误,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-7. **编辑摄像头：editCamera,POST**
+7. **编辑摄像头：/station/editCamera,POST**
     * 参数：电话必须合法,播放url合法
     * 返回：OK，添加成功，FAIL，参数有误,EXIT:仪表不存在，，NO_AUTH：不是自己的测站
-8. **删除仪表：deleteSensor,DELTE**
+8. **删除仪表：/station/deleteSensor,DELTE**
     * 参数：id
     * 返回：OK,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-9. **删除摄像头：deleteCamera，DELTEE**
+9. **删除摄像头：/station/deleteCamera，DELTEE**
     * 参数：id
     * 返回：OK,EXIT:仪表不存在，NO_AUTH：不是自己的测站
-10. **上传模型：uploadModel，POST**
+10. **上传模型：/station/uploadModel，POST**
     * 参数：id：测站id，file: 文件
     * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-11. **下载模型：downloadModel,GET**
+11. **下载模型：/station/downloadModel,GET**
     * 参数：id：测站id，file: 文件
     * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-12. **参数设置：editParameter,POST**
+12. **参数设置：/station/editParameter,POST**
     * 参数：液位上下限：限制在0-100.0f，电话：合法
     * 返回：OK 上传成功，FIAL：格式错误，NO_AUTH：不是自己的测站
-13. **请求token：token,GET,前台获取的用于和检测系统沟通，取得数据**
+13. **请求token：/station/token,GET,前台获取的用于和检测系统沟通，取得数据**
     * 有问题，请求token应该放在这个控制层，而不是sensorController??
     * 参数：
     * 返回：OK(token字符串)
-14. **监测取得测站参数：getParameters，GET**
+14. **监测取得测站参数：/station/getParameters，GET**
     * 这是监测系统取得所有已改变的参数列表
     * 参数：token
     * 返回：OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：`[{instanceId:xx,sensors:[{code:xx},{code:xx}],参数1:值1,参数2:值2}, {...}]`
-15. **测站分享：shares，POST**
+15. **测站分享：/station/shares，POST**
     * 参数：userIds:欲分享的用户(id用‘，’隔开)，stationIds:欲分享的测站(id用‘，’隔开)
     * 返回：OK
 16. **取消测站分享：/station/unShare POST**
     * 参数：Long stationId，欲取消分享的仪表，String userIds，用逗号隔开，示例("12,34,24")
     * 返回：OK
     * 后台修改内容,station实体类添加share字段，在实体Station包下增加Share,ShareVisit类，和project分享的实体类Share,ShareVisit类似
+17. 独立水文用户新建站点,/station/hydrol/create,POST
+    * 独立水文用户建立站点时，不用判断套餐先限制
+    * 每个独立水文用户最多建立1000个测站
+    * 后台生成唯一编码 
+    * 参数：
+        * name: 测站名称
+        * remark: 测站描述
+    * 返回： 
+        * OK： 新建成功
+        * DATA_LOCK: 测站数量超限
+        * UNAUTHORIZED: 不是独立水文用户     
 
 ### 二. 后台TradeController接口
 >
