@@ -147,7 +147,31 @@
         * OK 上传成功
         * FIAL：格式错误
         * DATA_REFUSE：不是自己的测站        
-15. 测站分享和协同不变，参见[[http://112.124.104.190:10001/soft/wiki/wikis/share]]
+15. 获取token,/station/token,GET
+    * 前台访问水利云后台
+    * 这个接口返回的token包含用户信息，可以在水云端验证用户身份
+    * 参数：无
+    * 返回：
+        * ok,data:{"token":"","noticeStr":""}
+        * NO_SESSION   
+16. 效验token,/station/intendedEffectToken,GET
+    * 监测访问水利云后台
+    * 参数：
+        * code：仪表唯一编码
+        * token：token
+        * noticeStr：随机码
+    * 返回：
+        * OK：成功
+        * UNAUTHORIZED：无权限             
+17. **监测取得测站参数：/station/sensor/getParameters，GET**
+    * 监测访问水利云后台
+    * 监测子系统更改取得仪表参数，用于报警，报警只针对仪表，更简单
+    * 这是监测系统取得所有已改变的参数列表
+    * 参数：token
+    * 返回：
+        * OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：
+        [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]        
+18. 测站分享和协同不变，参见[[http://112.124.104.190:10001/soft/wiki/wikis/share]]
 
 ### 二. 后台TradeController接口
 >
