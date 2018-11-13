@@ -197,5 +197,19 @@ public enum StationType{
 }
 ```
 
+```
+oss图片地址：
+station（测站）
+ |
+ |->[测站唯一编码]
+     |
+     |->[图片唯一编码].jpd
+sensor(仪表)
+ |
+ |->[仪表code]
+     |
+     |->[图片唯一编码].jpd      
+```
+
 
 
