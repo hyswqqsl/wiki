@@ -1,11 +1,6 @@
 ## 水位站接口设计
-### 一. 涉及对象
 
-![2C129532-1B0B-477B-8A55-A6997D18939B](/uploads/b8bafb180882d5b3c9d982e9a7a9e4c0/2C129532-1B0B-477B-8A55-A6997D18939B.png)
-
-
-### 二. 后台stationController接口 
->
+### 一. 后台stationController接口 
 1. **获取测站列表包括分享的测站:/station/list,GET**
     * 返回：OK(jsonObjectList)
     * jsonObjectList里包含测站所有信息(河道模型，流量曲线)，仪表和摄像头, 如果没有喝到模型，返回空数组
@@ -184,14 +179,7 @@
     * 参数：instanceId：测站编码
     * 返回：OK(订单对象):成功；FAIL:参数错误
 
-### 四. 前台与检测系统的接口
-参见监测子系统:[[http://112.124.104.190:10001/soft/wiki/wikis/%E6%A3%80%E6%B5%8B%E5%AD%90%E7%B3%BB%E7%BB%9F]]
-
-### 五. 后台调用检测系统接口
-取得仪表列表, /sensor/lists, GET
-参见监测子系统:[[http://112.124.104.190:10001/soft/wiki/wikis/%E6%A3%80%E6%B5%8B%E5%AD%90%E7%B3%BB%E7%BB%9F]]
-
-### 六. 相关后台实体类
+### 二. 相关后台实体类
 ```java
 /**
  * 测站类型
@@ -210,18 +198,20 @@ public enum StationType{
 }
 ```
 
-```
-oss图片地址：
-station（测站）
- |
- |->[测站唯一编码]
+````
+oss图片地址
+qqsl bucket
+  |
+  |->station（测站）
      |
-     |->[图片唯一编码].jpd
-sensor(仪表)
- |
- |->[仪表code]
+     |->[测站唯一编码]
+       |
+       |->[图片唯一编码].jpd
+  sensor(仪表)
      |
-     |->[图片唯一编码].jpd      
+     |->[仪表code]
+       |
+       |->[图片唯一编码].jpd      
 ```
 
 
