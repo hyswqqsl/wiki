@@ -241,6 +241,7 @@
        * UNAUTHORIZED: 不是安布雷拉水文监测用户
 27. 安布雷拉水文监测用户注册，/user/abll/register
    * 安布雷拉水文监测用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+   * 注册完拥有user:abll角色
    * 长度不超过36字符
    * 参数：
        * userName:公司名称
@@ -251,29 +252,29 @@
        * INVALID:请重新获取验证码
        * FAIL:验证码错误     
 28. 安布雷拉水文监测用户web端登录：/user/abll/web/login POST
-        * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
-        * 判断用户角色，只有拥有user:abll角色的用户才能登录
-        * 参数：
-            * code：登录凭证，手机号或邮箱
-            * password:密码
-            * cookie：cookie
-        * 返回：
-            * OK(用户对象):登录成功
-            * FAIL：密码错误
-            * EXIST:用户不存在
-            * OTHER:需要验证码
-            * UNKNOWN:用户已锁定
-            * UNAUTHORIZED： 不是安布雷拉用户，无访问权限
+    * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
+    * 判断用户角色，只有拥有user:abll角色的用户才能登录
+    * 参数：
+        * code：登录凭证，手机号或邮箱
+        * password:密码
+        * cookie：cookie
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码错误
+        * EXIST:用户不存在
+        * OTHER:需要验证码
+        * UNKNOWN:用户已锁定
+        * UNAUTHORIZED： 不是安布雷拉用户，无访问权限
 29. web端验证码登录：/user/abll/web/loginByVerify POST
-        * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
-        * 判断用户角色，只有拥有user:abll角色的用户才能登录
-        * 参数：password:密码；verification:验证码
-        * 返回：
-            * OK(用户对象):登录成功
-            * FAIL：密码或验证码错误
-            * UNKNOWN:用户已锁定
-            * INVALID:请重新获取验证码
-            * UNAUTHORIZED： 不是安布雷拉用户，无访问权限                           
+    * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
+    * 判断用户角色，只有拥有user:abll角色的用户才能登录
+    * 参数：password:密码；verification:验证码
+    * 返回：
+        * OK(用户对象):登录成功
+        * FAIL：密码或验证码错误
+        * UNKNOWN:用户已锁定
+        * INVALID:请重新获取验证码
+        * UNAUTHORIZED： 不是安布雷拉用户，无访问权限                           
        
 ```
     /** 真实姓名 */
