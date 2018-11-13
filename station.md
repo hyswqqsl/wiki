@@ -165,8 +165,8 @@
     * 参数：token
     * 返回：
         * OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：
-        [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]        
-18. 测站分享和协同不变，参见
+  [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]        
+18. 测站分享和协同不变，参见:  
   [[http://112.124.104.190:10001/soft/wiki/wikis/share]]
 
 ### 二. 后台TradeController接口
