@@ -92,6 +92,10 @@
     上传的坐标excel文件格式错误，文件损坏，excel文件格式不是预期的，excel数据不是预期的。
 *   4073: COOR_TYPE_ERROR
     上传时选择的坐标类型和excel数据不一致，比如选择的是WGS84的度类型，上传的是WGS84的度分秒格    式，返回这个错误。
+*   4074 COOR_UNKONW_SHEET_TYPE
+    sheet类型不能对应到枚举		
+*   4075 COOR_RETURN_PROMPT
+    上传时返回相应提示信息
     
 **[408x订单相关错误]**
 >

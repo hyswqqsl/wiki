@@ -116,7 +116,7 @@
         * FAIL，参数有误
         * DATA_NOEXIST: 摄像头不存在
 11. **删除仪表：/station/deleteSensor,DELTE**
-   * 删除仪表时，需要经扩展属性删除
+   * 删除仪表时，需要删除扩展属性
     * 参数：id
     * 返回：
         * OK,EXIT:仪表不存在
