@@ -14,17 +14,17 @@
     * 参数：
         * name: 测站名称
         * type: 普通类型
-        * remark: 测站描述
+        * description: 测站描述
     * 返回： 
         * OK： 新建成功
         * DATA_LOCK: 测站数量超限
         * UNAUTHORIZED: 不是安布雷拉用户      
 4. **修改测站：/station/edit,POST**
     * 测站图片由前台上传到阿里云，测站照片路径是固定的，所以不用传递给后台
+    * 测站不可修改类型
     * 参数：
         * id，测站id
         * name: 测站名
-        * type: 默认传递普通测站
         * description:描述
         * address: 行政区地址
         * coor: 坐标
@@ -33,12 +33,12 @@
         * FAIL，参数有误
         * DATA_REFUSE：不是自己的测站
 5. **添加仪表：/station/addSensor，POST**
+    * 添加仪表时，不用传类型，由监测子系统传递时确定
     * 参数：
         * id 测站id
         * name: 仪表名
         * code 仪表编码
         * ciphertext 激活码
-        * type 仪表类型
     * 返回：
         * OK，添加成功
         * FAIL，参数有误
@@ -58,12 +58,12 @@
 7. **编辑仪表：/station/editSensor，POST**
     * 编码,activate不可修改
     * isChanged，由后台设置保存
-    * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中 
+    * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中
+    * 仪表类型不可修改 
     * 参数：
         * id: 仪表id
         * name： 仪表名
         * description： 仪表描述
-        * type：类型
         * factory: 厂家
         * contact: 联系人
         * phone: 电话
