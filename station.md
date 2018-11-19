@@ -2,17 +2,17 @@
 
 ### 一. 后台stationController接口 
 1. **获取测站列表包括分享的测站:/station/list,GET**
-    * 返回的应是zTree结构json，结构式所有站点->站点->仪表
-    * 根节点是"所有站点"，如果没有站点，仅返回根节点
-    * 返回：OK，根节点下目前没有属性，每个站点属性有id,pid,name,open(是否打开,默认true),type(top/station/sensor/camera四种类型)
-2. 取得站点详情: /station/details/{id},GET
-    * 取得站点所有属性，包括，riverModel，flowModel
-    * 参数： id：站点id
+    * 返回的应是zTree结构json，结构式所有测站->测站->仪表
+    * 根节点是"所有测站"，如果没有测站，仅返回根节点
+    * 返回：OK，根节点下目前没有属性，每个测站属性有id,pid,name,open(是否打开,默认true),type(top/station/sensor/camera四种类型)
+2. 取得测站详情: /station/details/{id},GET
+    * 取得测站所有属性，包括，riverModel，flowModel
+    * 参数： id：测站id
     * 返回：
        * OK，返回json，包含所有属性
-        * DATA_REFUSE：不是自己的站点
+        * DATA_REFUSE：不是自己的测站
 3. 取得仪表详情：/station/sensor/details/{id},GET
-    * 取得站点所有属性
+    * 取得测站所有属性
     * 参数： id：仪表id
     * 返回：
        * OK，返回json，包含所有属性
@@ -23,8 +23,8 @@
     * 返回：
        * OK，返回json，包含所有属性
         * DATA_REFUSE：不是自己的摄像头                
-5. 安布雷拉水文用户新建站点,/station/abll/create,POST
-    * 独立水文用户建立站点时，不用判断套餐先限制
+5. 安布雷拉水文用户新建测站,/station/abll/create,POST
+    * 独立水文用户建立测站时，不用判断套餐先限制
     * 每个独立水文用户最多建立1000个测站
     * 后台生成唯一编码, 过期时间2099
     * 参数：
@@ -35,9 +35,10 @@
         * OK： 新建成功
         * DATA_LOCK: 测站数量超限
         * UNAUTHORIZED: 不是安布雷拉用户      
-6. **修改测站：/station/edit,POST**
+6. **编辑测站：/station/edit,POST**
     * 测站图片由前台上传到阿里云，测站照片路径是固定的，所以不用传递给后台
     * 测站不可修改类型
+    * pictureUrl由单独接口编辑，这里不传递
     * 参数：
         * id，测站id
         * name: 测站名
@@ -74,6 +75,7 @@
 9. **编辑仪表：/station/editSensor，POST**
     * 编码,activate不可修改
     * isChanged，由后台设置保存
+    * pictureUrl由单独接口编辑，这里不传递
     * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中
     * 仪表类型不可修改 
     * 参数：
@@ -181,8 +183,24 @@
     * 参数：token
     * 返回：
         * OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：
-  [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]        
-20. 测站分享和协同不变，参见:  
+  [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]
+20. 编辑测站封面照片,/station/pictureUrl/edit,POST
+   * 前台传递一个oss图片地址，后台保存到测站pictureURl属性
+   * 参数：
+      * id：测站id
+      * pictureUrl：封面图片oss地址
+   * 返回：
+      * OK
+      * DATA_REFUSE：不是自己的测站
+21. 编辑仪表封面照片,/station/sensor/pictureUrl/edit,POST
+   * 前台传递一个oss图片地址，后台保存到仪表pictureURl属性
+   * 参数：
+      * id：测站id
+      * pictureUrl：封面图片oss地址
+   * 返回：
+      * OK
+      * DATA_REFUSE：不是自己的仪表
+22. 测站分享和协同不变，参见:  
   [[http://112.124.104.190:10001/soft/wiki/wikis/share]]
 
 ### 二. 后台TradeController接口
