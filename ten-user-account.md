@@ -231,13 +231,13 @@
        * OK:修改成功
        * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
 26. 修改安布雷拉水文监测用户公司名称,/user/abll/updateUserName, POST    
-   * 安布雷拉水文监测用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
+   * 安布雷拉水文监测用户注册时填写的userName是公司名称，数字英文中文均可，用在界面显示公司名称
    * 长度不超过36字符
    * 保证有user:abll角色
    * 参数：userName:xxx
    * 返回：     
        * OK:修改成功
-       * PARAMETER_ERROR: 用户名包含中文和特殊字符,或长度超过36个字符
+       * PARAMETER_ERROR: 用户名包含特殊字符,或长度超过36个字符
        * UNAUTHORIZED: 不是安布雷拉水文监测用户
 27. 安布雷拉水文监测用户注册，/user/abll/register, POST
    * 安布雷拉水文监测用户注册时填写的userName是公司名称，英文中文均可，用在界面显示公司名称
