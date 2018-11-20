@@ -64,7 +64,7 @@
         * code 仪表编码
         * ciphertext 激活码
     * 返回：
-        * OK，添加成功
+        * OK，添加成功,返回值id，name
         * FAIL，参数有误
         * DATA_EXIST: 编码已存在
         * DATA_REFUSE：不是自己的测站
@@ -75,7 +75,7 @@
         * code: 摄像头编码
         * password: 密码 
     * 返回：
-        * OK: 添加成功
+        * OK: 添加成功 返回值id，name
         * FAIL: 参数有误
         * DATA_EXIST: 编码已存在
         * DATA_REFUSE：不是自己的测站
