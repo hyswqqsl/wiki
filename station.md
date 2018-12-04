@@ -114,6 +114,7 @@
     * 参数：
        * id：仪表id
        * displayName: 属性名
+       * value: 值
      * 返回：
         * OK，添加成功
         * DATA_REFUSE：不是自己的仪表
