@@ -83,7 +83,6 @@
     * 编码,activate不可修改
     * isChanged，由后台设置保存
     * pictureUrl由单独接口编辑，这里不传递
-    * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中
     * 仪表类型不可修改 
     * 参数：
         * id: 仪表id
@@ -100,13 +99,23 @@
         * isMaxValueNote: 超过测量上限是否发送短信
         * minValue: 测量下限
         * isMinValueNote: 低于测量下限是否发送短信
-        * extraParameters: 扩展属性，[{id:xxx,value:xxx},{...}]
      * 返回：
-        * OK，添加成功
+        * OK，编辑成功
         * FAIL，参数有误
         * DATA_NOEXIST: 仪表或扩展属性不存在
         * DATA_REFUSE：不是自己的仪表
-11. 仪表添加自定义属性：/station/sensor/extra/create,POST
+11. 编辑仪表自定义属性：/station/sensor/extra/edit，POST**
+    * 前台判断扩展属性是否有修改，修改了把扩展属性加到extraParameters数组中
+    * 判断sensorId，是否属于用户
+    * 判断扩展属性中的id是否属于仪表
+    * 参数：
+       * sensorId: 仪表id
+       * extraParameters: 扩展属性，[{id:xxx,value:xxx},{...}]
+    * 返回：
+        * OK，编辑成功
+        * DATA_NOEXIST: 仪表或扩展属性不存在
+        * DATA_REFUSE：不是自己的仪表或扩展属性       
+12. 仪表添加自定义属性：/station/sensor/extra/create,POST
     * 自定义扩展属性最多添加20个
     * 添加的类型自动是自定义类型
     * 自定义扩展属性都是字符串格式
@@ -119,14 +128,14 @@
         * OK，添加成功
         * DATA_REFUSE：不是自己的仪表
         * DATA_LOCK: 属性超多20个，不能再添加
-12. 仪表删除自定义属性: /station/sensor/extra/delete,DELETE
+13. 仪表删除自定义属性: /station/sensor/extra/delete/{id},DELETE
     * 参数：
        * id：自定义属性id
      * 返回：
         * OK，添加成功
         * DATA_REFUSE：不是自己的仪表属性
         * DATA_LOCK: 属性类型是系统属性，不能删除
-13. **编辑摄像头：/station/editCamera,POST**
+14. **编辑摄像头：/station/editCamera,POST**
     * 编码不可修改
     * 参数：
         * id: 摄像头id
@@ -141,18 +150,18 @@
         * OK，添加成功
         * FAIL，参数有误
         * DATA_NOEXIST: 摄像头不存在
-14. **删除仪表：/station/deleteSensor,DELTE**
+15. **删除仪表：/station/deleteSensor,DELTE**
    * 删除仪表时，需要删除扩展属性
     * 参数：id
     * 返回：
         * OK,EXIT:仪表不存在
         * DATA_REFUSE：不是自己的仪表
-15. **删除摄像头：/station/deleteCamera，DELTEE**
+16. **删除摄像头：/station/deleteCamera，DELTEE**
     * 参数：id
     * 返回：
         * OK,EXIT:仪表不存在
         * DATA_REFUSE：不是自己的摄像头
-16. **上传模型：/station/uploadModel，POST**
+17. **上传模型：/station/uploadModel，POST**
     * 参数：
         * id：测站id
         * file: 文件
@@ -160,7 +169,7 @@
         * OK 上传成功
         * FIAL：格式错误
         * DATA_REFUSE：不是自己的测站
-17. **下载模型：/station/downloadModel,GET**
+18. **下载模型：/station/downloadModel,GET**
     * 参数：
         * id：测站id
         * file: 文件
@@ -168,14 +177,14 @@
         * OK 上传成功
         * FIAL：格式错误
         * DATA_REFUSE：不是自己的测站        
-18. 获取token,/station/token,GET
+19. 获取token,/station/token,GET
     * 前台访问水利云后台
     * 这个接口返回的token包含用户信息，可以在水云端验证用户身份
     * 参数：无
     * 返回：
         * ok,data:{"token":"","noticeStr":""}
         * NO_SESSION   
-19. 效验token,/station/intendedEffectToken,GET
+20. 效验token,/station/intendedEffectToken,GET
     * 监测访问水利云后台
     * 参数：
         * code：仪表唯一编码
@@ -184,7 +193,7 @@
     * 返回：
         * OK：成功
         * UNAUTHORIZED：无权限             
-20. **监测取得仪表参数：/station/sensor/getParameters，GET**
+21. **监测取得仪表参数：/station/sensor/getParameters，GET**
     * 监测访问水利云后台
     * 监测子系统更改取得仪表参数，用于报警，报警只针对仪表，更简单
     * 这是监测系统取得所有已改变的参数列表
@@ -192,7 +201,7 @@
     * 返回：
         * OK：返回包含测站唯一编码，所有仪表编码，以及参数，格式：
   [{code:xxx,maxValue:xxx,isMaxValueWaring,minValue:xxx,isMinValueWaring,contact:xxx,phone:xxx}]
-21. 编辑测站封面照片,/station/pictureUrl/edit,POST
+22. 编辑测站封面照片,/station/pictureUrl/edit,POST
    * 前台传递一个oss图片地址，后台保存到测站pictureURl属性
    * 参数：
       * id：测站id
@@ -200,7 +209,7 @@
    * 返回：
       * OK
       * DATA_REFUSE：不是自己的测站
-22. 编辑仪表封面照片,/station/sensor/pictureUrl/edit,POST
+23. 编辑仪表封面照片,/station/sensor/pictureUrl/edit,POST
    * 前台传递一个oss图片地址，后台保存到仪表pictureURl属性
    * 参数：
       * id：测站id
@@ -208,7 +217,7 @@
    * 返回：
       * OK
       * DATA_REFUSE：不是自己的仪表
-23. 测站分享和协同不变，参见:  
+24. 测站分享和协同不变，参见:  
   [[http://112.124.104.190:10001/soft/wiki/wikis/share]]
 
 ### 二. 后台TradeController接口
