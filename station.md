@@ -1,16 +1,21 @@
 ## 水位站接口设计
 
 ### 一. 后台stationController接口 
-1. **获取测站列表包括分享的测站:/station/list,GET**
+1. **获取测站zTree结构的列表，包括分享的测站:/station/zTree/list,GET**
     * 返回的应是zTree结构json，结构式所有测站->测站->仪表
     * 根节点是"所有测站"，如果没有测站，仅返回根节点
-    * 返回：OK，根节点下目前没有属性，每个测站属性有id,pid,name,open(是否打开,默认true),type(top/station/sensor/camera四种类型)
-2. 取得测站详情: /station/details/{id},GET
+    * 返回：OK，根节点下目前没有属性，每个节点属性有id,pid,name,open(是否打开,默认true),type(top/station/sensor/camera四种类型)
+1. 获取测站列表,包括分享的测站,/station/list,GET
+    * 返回普通测站列表json，同时还有测站下的仪表列表
+    * 参数：无
+    * 返回:
+       * OK,返回json，[{id:xxx, name:xxx, type:xxx, coor:xxx, picture:xxx, sensors:[{id:xxx, name:xxx, code:xxx}, {...}], {...}}]
+ 2. 取得测站详情: /station/details/{id},GET
     * 取得测站所有属性，包括，riverModel，flowModel
     * 参数： id：测站id
     * 返回：
        * OK，返回json，包含所有属性
-        * DATA_REFUSE：不是自己的测站
+       * DATA_REFUSE：不是自己的测站
 3. 取得仪表详情：/station/sensor/details/{id},GET
     * 取得测站所有属性
     * 参数： id：仪表id
