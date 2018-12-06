@@ -9,7 +9,7 @@
     * 返回普通测站列表json，同时还有测站下的仪表列表
     * 参数：无
     * 返回:
-       * OK,返回json，[{id:xxx, name:xxx, type:xxx, coor:xxx, picture:xxx, sensors:[{id:xxx, name:xxx, code:xxx}, {...}], {...}}]
+       * OK,返回json，[{id:xxx, name:xxx, type:xxx, coor:xxx, picture:xxx, sensors:[{id:xxx, name:xxx, code:xxx}, {...}], cameras:[{id:xxx,name:xxx,code:xxx}, {...}]}, {...}}]
  2. 取得测站详情: /station/details/{id},GET
     * 取得测站所有属性，包括，riverModel，flowModel
     * 参数： id：测站id
