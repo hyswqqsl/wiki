@@ -76,7 +76,6 @@
         * id: 测站id
         * name: 摄像头名
         * code: 摄像头编码
-        * password: 密码 
     * 返回：
         * OK: 添加成功 返回值id，name
         * FAIL: 参数有误
@@ -139,7 +138,7 @@
         * contact: 联系人
         * phone: 电话
         * settingAddress：安装地点
-        * password: 密码         
+        * code: 摄像头编码
     * 返回：
         * OK，添加成功
         * FAIL，参数有误
