@@ -7,6 +7,6 @@
  [监测子系统接口设计](http://112.124.104.190:10001/soft/wiki/wikis/%E6%A3%80%E6%B5%8B%E5%AD%90%E7%B3%BB%E7%BB%9F) | [安布雷拉监测系统测站相关接口] (http://112.124.104.190:10001/soft/wiki/wikis/station) | [安布雷拉用户登录注册接口] (http://112.124.104.190:10001/soft/wiki/wikis/ten-user-account)
 
 ### 河长云新架构
-[河长云新架构接口]()
+[河长云新架构接口](http://112.124.104.190:10001/soft/wiki/wikis/%E6%B2%B3%E9%95%BF%E4%BA%91%E6%96%B0%E6%9E%B6%E6%9E%84)
 
 
