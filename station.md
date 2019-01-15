@@ -15,19 +15,16 @@
     * 参数： id：测站id
     * 返回：
        * OK，返回json，包含所有属性
-       * DATA_REFUSE：不是自己的测站
 3. 取得仪表详情：/station/sensor/details/{id},GET
     * 取得测站所有属性
     * 参数： id：仪表id
     * 返回：
        * OK，返回json，包含所有属性
-        * DATA_REFUSE：不是自己的仪表
 4. 取得摄像头详情: /station/camera/details/{id},GET
     * 取得摄像头所有属性
     * 参数： id：摄像头id
     * 返回：
        * OK，返回json，包含所有属性
-        * DATA_REFUSE：不是自己的摄像头                
 5. 新建测站,/station/create,POST
     * 每个独立水文用户最多建立1000个测站
     * 后台生成唯一编码, 过期时间2099
