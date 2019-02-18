@@ -1,3 +1,20 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [套餐接口设计](#%E5%A5%97%E9%A4%90%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一. tradeController 订单控制层](#%E4%B8%80-tradecontroller-%E8%AE%A2%E5%8D%95%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [二. turnoverController 流水控制层](#%E4%BA%8C-turnovercontroller-%E6%B5%81%E6%B0%B4%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [三.  WXPayController 微信支付控制层](#%E4%B8%89--wxpaycontroller-%E5%BE%AE%E4%BF%A1%E6%94%AF%E4%BB%98%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [四. aliPayController 支付宝控制层](#%E5%9B%9B-alipaycontroller-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [五. modelControlelr 模板控制层](#%E4%BA%94-modelcontrolelr-%E6%A8%A1%E6%9D%BF%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [六. packageController 水利云配置控制层](#%E5%85%AD-packagecontroller-%E6%B0%B4%E5%88%A9%E4%BA%91%E9%85%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [七. 套餐过期](#%E4%B8%83-%E5%A5%97%E9%A4%90%E8%BF%87%E6%9C%9F)
+  - [八. 套餐限制](#%E5%85%AB-%E5%A5%97%E9%A4%90%E9%99%90%E5%88%B6)
+  - [九. 相关实体类](#%E4%B9%9D-%E7%9B%B8%E5%85%B3%E5%AE%9E%E4%BD%93%E7%B1%BB)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 套餐接口设计
 
 <div align="center">

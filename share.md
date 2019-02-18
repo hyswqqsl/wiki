@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [分享接口设计](#%E5%88%86%E4%BA%AB%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一. 项目分享设计](#%E4%B8%80-%E9%A1%B9%E7%9B%AE%E5%88%86%E4%BA%AB%E8%AE%BE%E8%AE%A1)
+  - [二. 项目协同设计,ProjectController](#%E4%BA%8C-%E9%A1%B9%E7%9B%AE%E5%8D%8F%E5%90%8C%E8%AE%BE%E8%AE%A1projectcontroller)
+  - [三. 测站共享设计 StationController](#%E4%B8%89-%E6%B5%8B%E7%AB%99%E5%85%B1%E4%BA%AB%E8%AE%BE%E8%AE%A1-stationcontroller)
+  - [四. 测站协同设计 StationController](#%E5%9B%9B-%E6%B5%8B%E7%AB%99%E5%8D%8F%E5%90%8C%E8%AE%BE%E8%AE%A1-stationcontroller)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 分享接口设计
 ### 一. 项目分享设计
 >

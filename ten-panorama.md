@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [全景接口设计](#%E5%85%A8%E6%99%AF%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一 查看全景](#%E4%B8%80-%E6%9F%A5%E7%9C%8B%E5%85%A8%E6%99%AF)
+  - [二 新建全景](#%E4%BA%8C-%E6%96%B0%E5%BB%BA%E5%85%A8%E6%99%AF)
+  - [三. 全景其他操作](#%E4%B8%89-%E5%85%A8%E6%99%AF%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C)
+  - [四. ossController接口](#%E5%9B%9B-osscontroller%E6%8E%A5%E5%8F%A3)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # 全景接口设计
 设计PanoramaController控制层，把以前在InterestController中关于全景的代码删除。所有接口起始名字都是/panorama。
 请注意：4000(PARAMETER_ERROR参数错误)，表示服务器收到的参数不合法，这个错误每个接口都可能发生，就不每个接口写了。

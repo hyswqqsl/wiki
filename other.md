@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [坐标转换,全景等操作接口设计](#%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2%E5%85%A8%E6%99%AF%E7%AD%89%E6%93%8D%E4%BD%9C%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一. ossController接口](#%E4%B8%80-osscontroller%E6%8E%A5%E5%8F%A3)
+  - [二. fieldController接口(filed)，坐标转换](#%E4%BA%8C-fieldcontroller%E6%8E%A5%E5%8F%A3filed%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2)
+  - [三. 全景和兴趣点接口,interestController(/interest)](#%E4%B8%89-%E5%85%A8%E6%99%AF%E5%92%8C%E5%85%B4%E8%B6%A3%E7%82%B9%E6%8E%A5%E5%8F%A3interestcontrollerinterest)
+  - [四. 项目操作接口,projectController(/project)](#%E5%9B%9B-%E9%A1%B9%E7%9B%AE%E6%93%8D%E4%BD%9C%E6%8E%A5%E5%8F%A3projectcontrollerproject)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 坐标转换,全景等操作接口设计
 ### 一. ossController接口
 >

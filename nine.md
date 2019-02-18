@@ -1,3 +1,19 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [青清水利第九次迭代接口设计](#%E9%9D%92%E6%B8%85%E6%B0%B4%E5%88%A9%E7%AC%AC%E4%B9%9D%E6%AC%A1%E8%BF%AD%E4%BB%A3%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [涉及接口](#%E6%B6%89%E5%8F%8A%E6%8E%A5%E5%8F%A3)
+  - [一. 用户角色](#%E4%B8%80-%E7%94%A8%E6%88%B7%E8%A7%92%E8%89%B2)
+  - [二. 项目特殊权限](#%E4%BA%8C-%E9%A1%B9%E7%9B%AE%E7%89%B9%E6%AE%8A%E6%9D%83%E9%99%90)
+  - [三. 套餐过期](#%E4%B8%89-%E5%A5%97%E9%A4%90%E8%BF%87%E6%9C%9F)
+  - [四. 套餐限制](#%E5%9B%9B-%E5%A5%97%E9%A4%90%E9%99%90%E5%88%B6)
+  - [五. 后台标签](#%E4%BA%94-%E5%90%8E%E5%8F%B0%E6%A0%87%E7%AD%BE)
+  - [六. 关于日志](#%E5%85%AD-%E5%85%B3%E4%BA%8E%E6%97%A5%E5%BF%97)
+  - [七. 坐标转换](#%E4%B8%83-%E5%9D%90%E6%A0%87%E8%BD%AC%E6%8D%A2)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 青清水利第九次迭代接口设计
 ### 涉及接口
 

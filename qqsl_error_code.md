@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [青清水利错误码定义](#%E9%9D%92%E6%B8%85%E6%B0%B4%E5%88%A9%E9%94%99%E8%AF%AF%E7%A0%81%E5%AE%9A%E4%B9%89)
+    - [一. 2xxx：成功返回](#%E4%B8%80-2xxx%E6%88%90%E5%8A%9F%E8%BF%94%E5%9B%9E)
+    - [二. 4xxx：客户端错误,这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理。服务器就应该返回一个解释当前错误码。除了4000在GET和POST请求可能返回，其他的客户端错误码都是针对POST请求的。前两个xx代表错误分类，最后一个x代表具体错误类型。](#%E4%BA%8C-4xxx%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF%E8%BF%99%E7%B1%BB%E7%9A%84%E7%8A%B6%E6%80%81%E7%A0%81%E4%BB%A3%E8%A1%A8%E4%BA%86%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9C%8B%E8%B5%B7%E6%9D%A5%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9F%E4%BA%86%E9%94%99%E8%AF%AF%E5%A6%A8%E7%A2%8D%E4%BA%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%A4%84%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B0%B1%E5%BA%94%E8%AF%A5%E8%BF%94%E5%9B%9E%E4%B8%80%E4%B8%AA%E8%A7%A3%E9%87%8A%E5%BD%93%E5%89%8D%E9%94%99%E8%AF%AF%E7%A0%81%E9%99%A4%E4%BA%864000%E5%9C%A8get%E5%92%8Cpost%E8%AF%B7%E6%B1%82%E5%8F%AF%E8%83%BD%E8%BF%94%E5%9B%9E%E5%85%B6%E4%BB%96%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF%E7%A0%81%E9%83%BD%E6%98%AF%E9%92%88%E5%AF%B9post%E8%AF%B7%E6%B1%82%E7%9A%84%E5%89%8D%E4%B8%A4%E4%B8%AAxx%E4%BB%A3%E8%A1%A8%E9%94%99%E8%AF%AF%E5%88%86%E7%B1%BB%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AAx%E4%BB%A3%E8%A1%A8%E5%85%B7%E4%BD%93%E9%94%99%E8%AF%AF%E7%B1%BB%E5%9E%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # 青清水利错误码定义
 ### 一. 2xxx：成功返回
 

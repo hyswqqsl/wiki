@@ -1,3 +1,22 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [优化-用户与子账号、消息、日志相关接口](#%E4%BC%98%E5%8C%96-%E7%94%A8%E6%88%B7%E4%B8%8E%E5%AD%90%E8%B4%A6%E5%8F%B7%E6%B6%88%E6%81%AF%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3)
+  - [一. 子账号信息说明](#%E4%B8%80-%E5%AD%90%E8%B4%A6%E5%8F%B7%E4%BF%A1%E6%81%AF%E8%AF%B4%E6%98%8E)
+  - [二. AccountController 子账号控制层](#%E4%BA%8C-accountcontroller-%E5%AD%90%E8%B4%A6%E5%8F%B7%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [三. UserMessage用户消息](#%E4%B8%89-usermessage%E7%94%A8%E6%88%B7%E6%B6%88%E6%81%AF)
+  - [四. AccountMessage子账号消息](#%E5%9B%9B-accountmessage%E5%AD%90%E8%B4%A6%E5%8F%B7%E6%B6%88%E6%81%AF)
+  - [五. 项目日志](#%E4%BA%94-%E9%A1%B9%E7%9B%AE%E6%97%A5%E5%BF%97)
+    - [用户在项目编辑页面，可以查看此项目的日志，ProjectController接口：](#%E7%94%A8%E6%88%B7%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%BC%96%E8%BE%91%E9%A1%B5%E9%9D%A2%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B%E6%AD%A4%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%97%A5%E5%BF%97projectcontroller%E6%8E%A5%E5%8F%A3)
+  - [六. 套餐详情](#%E5%85%AD-%E5%A5%97%E9%A4%90%E8%AF%A6%E6%83%85)
+    - [用户可以按时间段查询，UserController提供查询接口：](#%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5%E6%8C%89%E6%97%B6%E9%97%B4%E6%AE%B5%E6%9F%A5%E8%AF%A2usercontroller%E6%8F%90%E4%BE%9B%E6%9F%A5%E8%AF%A2%E6%8E%A5%E5%8F%A3)
+  - [七. 地图定制图例](#%E4%B8%83-%E5%9C%B0%E5%9B%BE%E5%AE%9A%E5%88%B6%E5%9B%BE%E4%BE%8B)
+  - [八. 前台gulp压缩html和js](#%E5%85%AB-%E5%89%8D%E5%8F%B0gulp%E5%8E%8B%E7%BC%A9html%E5%92%8Cjs)
+  - [九. 讨论一下](#%E4%B9%9D-%E8%AE%A8%E8%AE%BA%E4%B8%80%E4%B8%8B)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 优化-用户与子账号、消息、日志相关接口
 
 ### 一. 子账号信息说明

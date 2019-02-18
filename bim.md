@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [BIM参数传递](#bim%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92)
+  - [一. 消力池](#%E4%B8%80-%E6%B6%88%E5%8A%9B%E6%B1%A0)
+  - [二. 检查井](#%E4%BA%8C-%E6%A3%80%E6%9F%A5%E4%BA%95)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## BIM参数传递
 unity程序发布为webgl后，可以接收到前台发送的参数，使用的接口是：
 ```

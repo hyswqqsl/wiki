@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [千寻位置接口设计](#%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [QXWZController 千寻位置控制层](#qxwzcontroller-%E5%8D%83%E5%AF%BB%E4%BD%8D%E7%BD%AE%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [AuthentController 权限控制层](#authentcontroller-%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6%E5%B1%82)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 千寻位置接口设计
 ### QXWZController 千寻位置控制层
 >

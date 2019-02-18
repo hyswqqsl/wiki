@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [水位站接口设计](#%E6%B0%B4%E4%BD%8D%E7%AB%99%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一. 后台stationController接口](#%E4%B8%80-%E5%90%8E%E5%8F%B0stationcontroller%E6%8E%A5%E5%8F%A3)
+  - [二. 后台TradeController接口](#%E4%BA%8C-%E5%90%8E%E5%8F%B0tradecontroller%E6%8E%A5%E5%8F%A3)
+  - [二. 相关后台实体类](#%E4%BA%8C-%E7%9B%B8%E5%85%B3%E5%90%8E%E5%8F%B0%E5%AE%9E%E4%BD%93%E7%B1%BB)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 水位站接口设计
 
 ### 一. 后台stationController接口 

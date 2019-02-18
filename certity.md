@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [认证接口设计](#%E8%AE%A4%E8%AF%81%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+  - [一. 认证说明](#%E4%B8%80-%E8%AE%A4%E8%AF%81%E8%AF%B4%E6%98%8E)
+  - [二. userController 用户控制层](#%E4%BA%8C-usercontroller-%E7%94%A8%E6%88%B7%E6%8E%A7%E5%88%B6%E5%B1%82)
+  - [三. certifyController 认证控制层](#%E4%B8%89-certifycontroller-%E8%AE%A4%E8%AF%81%E6%8E%A7%E5%88%B6%E5%B1%82)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 认证接口设计
 
 

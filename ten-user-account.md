@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [子账号号改为一对多接口设计](#%E5%AD%90%E8%B4%A6%E5%8F%B7%E5%8F%B7%E6%94%B9%E4%B8%BA%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1)
+    - [一. 子账号信息说明](#%E4%B8%80-%E5%AD%90%E8%B4%A6%E5%8F%B7%E4%BF%A1%E6%81%AF%E8%AF%B4%E6%98%8E)
+    - [二. AccountController 子账号控制层](#%E4%BA%8C-accountcontroller-%E5%AD%90%E8%B4%A6%E5%8F%B7%E6%8E%A7%E5%88%B6%E5%B1%82)
+    - [三. 用戶信息說明](#%E4%B8%89-%E7%94%A8%E6%88%B6%E4%BF%A1%E6%81%AF%E8%AA%AA%E6%98%8E)
+    - [四. userController 用户控制层](#%E5%9B%9B-usercontroller-%E7%94%A8%E6%88%B7%E6%8E%A7%E5%88%B6%E5%B1%82)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # 子账号号改为一对多接口设计
 ### 一. 子账号信息说明
 1. 子账号没有认证流程，没有注册；子账号和用户之间改为一对多，由用户添加、编辑、删除，用户和子账号关系就是企业与员工的关系
