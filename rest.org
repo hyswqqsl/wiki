@@ -1,0 +1,80 @@
+## 十九 河长办信息管理控制层,hzbDataManageController
+* 模块角色：河长办管理员
+1. 取得行政区zTree，/hzbDataManage/region/tree,GET
+   * 得到前台显示用的region属性结构json串
+   * 只取各自行政区下的zTree接口,比如市级河长办返回市县乡村各级行政区，县级河长办返回县乡村行政区
+   * 参数：无
+   * 返回：
+	 * OK，zTree的json串
+	 * DATA_NOEXIST 平台不存在
+2. 取得行政区详情，/hzbDataManage/region/details/{id},GET
+   * 参数：id,行政区id
+   * 返回:
+	 * OK,行政区所有属性,河长列表，成员单位列表
+	 * DATA_NOEXIST,行政区不存在
+	 * DATA_REFUSE,不是本平台的行政区，不能查看
+3. 新建河长，/hzbDataManage/hzUser/create,POST
+   * code,phone必须唯一
+   * 参数：
+	 * name
+	 * code，人员编码
+	 * phone，手机号
+	 * type，类型
+	 * nremark，备注
+	 * regionId，行政区id
+   * 返回：
+	 * OK，新建成功
+	 * DATA_EXIST,code或手机号已使用
+	 * DATA_REFUSE,不是河长办管辖的行政区
+4. 编辑河长，/hzbDataManage/hzUser/update,POST
+   * 参数：
+	 * id 河长id
+	 * name 姓名
+	 * ncode，人员编码
+	 * phone，手机号
+	 * type，类型
+	 * remark，备注
+   * 返回：
+	 * OK，修改成功
+	 * DATA_NOEXIST，河长不存在
+	 * DATA_EXIST,code或手机号已使用
+	 * DATA_REFUSE,不是河长办管辖的行政区
+5. 删除河长,/hzbDataManage/hzUser/delete/{id},DELETE
+   * 参数：id
+   * 返回：
+	 * OK，删除成功
+	 * DATA_NOEXIST
+	 * DATA_REFUSE,不是河长办管辖的行政区	 
+6. 取得河长详情,/hzbDataManage/hzUser/details/{id},GET
+   * 参数：id
+   * 返回：
+	 * OK，{id:xxx, name:xxx, phone:xxx, job:xxx, type,typeC,remark:xxx, segments:[{{id:xxx, name:xxx, reginName:xxx, beginStation,endStation,beginCoor,endCoor}, {...}]}
+7. 河长加入河段河段管理，/hzbDataManage/hzUser/segmnet/join,POST
+   * 参数：
+	 * hzUserIds:多个河长id数组
+	 * segmentId:河段id
+   * 返回:
+	 * OK,加入成功
+	 * DATA_REFUSE,河长和河段不在同一个行政区，拒绝加入
+. 取得河湖段信息，/hzbDataManage/segment/info,GET
+   * 参数：
+	 * id，河段id
+   * 返回：
+	 * OK,返回河湖段基本属性，河湖段下的河长，行政区下责任河长(包括巡河员),
+	 {id:xxx, name:xxx, beginStation,endStation,beginCoor,endCoor,segmentHzUsers:[{id:xxx,name:xxx,job:xxx,type:xxx},{...}],regionHzUsers:[...]}
+ 
+
+## 二十 行政区管理控制层,regionManageController
+* 模块角色：系统管理员
+1. 新建河长办管理员，/regionManage/hzbAdmin/create,POST
+   * 参数：
+	 * unitId:河长办id
+	 * phone:手机号
+	 * code:编号
+	 * name:姓名
+	 * job:职务
+   * 返回：
+	 * OK, 新建成功
+	 * DATA_NOEXIST：河长办不存在
+	 * DATA_EXIST:手机号已存在
+
