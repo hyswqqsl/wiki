@@ -180,7 +180,7 @@
         * code：登录凭证，手机号或邮箱
         * password:密码
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回{name:xx,phone:xx, qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误
         * EXIST:用户不存在
         * UNKNOWN:用户已锁定
