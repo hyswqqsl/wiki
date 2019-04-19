@@ -35,7 +35,10 @@
 3. web端登录发送验证码: /account/login/getLoginVerify,GET
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，如果手机号注册，发送手机验证码；如果是email，如果邮箱绑定，发送邮箱验证码
     * 参数：code:登录凭证
-    * 返回：OK:发送成功,FAIL:手机号/邮箱不合法，EXIST：账号不存在
+    * 返回：
+	  * OK:发送成功
+	  * FAIL:手机号/邮箱不合法
+	  * DATA_NOEXIST：账号不存在
 4. email绑定时发送验证码:/account/email/getBindVerify,GET
     * 参数：email:手机号
     * 返回：OK:发送成功,FAIL:邮箱不合法，EXIST：邮箱已存在
@@ -67,7 +70,7 @@
     * 取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：code：登录凭证，手机号或邮箱；password:密码；cookie：cookie
     * 返回：
-        * OK(用户对象):登录成功；
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误；
         * EXIST:用户不存在;
         * OTHER:需要验证码，
@@ -77,7 +80,7 @@
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
     * 参数：code：登录凭证，手机号或邮箱；password:密码
     * 返回：
-        * OK(用户对象):登录成功；
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误；
         * EXIST:用户不存在,
         * UNKNOWN:用户已锁定
@@ -86,7 +89,7 @@
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：password:密码；verification:验证码
     * 返回：
-        * OK(用户对象):登录成功；
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码或验证码错误；
         * UNKNOWN:用户已锁定；
         * INVALID:请重新获取验证码
@@ -167,20 +170,21 @@
         * password:密码
         * cookie：cookie
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误
         * EXIST:用户不存在
         * OTHER:需要验证码
         * UNKNOWN:用户已锁定
         * UNAUTHORIZED： 不是水利云用户，无访问权限
 17. 移动端登录：/user/phone/login POST
-    * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
+    * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；
+	如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
     * 判断用户角色，只有拥有user:simple角色的用户才能登录
     * 参数：
         * code：登录凭证，手机号或邮箱
         * password:密码
     * 返回：
-		* OK:登录成功,返回{name:xx,phone:xx, qqslBucket:xxx, qqslimageBucket:xxx}
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误
         * EXIST:用户不存在
         * UNKNOWN:用户已锁定
@@ -192,19 +196,21 @@
         * code：登录凭证，手机号或邮箱
         * password:密码
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误；EXIST:用户不存在
         * UNKNOWN:用户已锁定
         * UNAUTHORIZED： 不是水利云用户，无访问权限        
 19. 微信公众号自动登录：/user/wechat/autoLogin POST
     * 参数：code：微信公众号回传的标识码
-    * 返回：OK(用户对象):登录成功；EXIST:用户不存在
+    * 返回：
+ 	  * OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
+	  * DATA_NOEXIST:用户不存在
 20. web端验证码登录：/user/web/loginByVerify POST
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 判断用户角色，只有拥有user:simple角色的用户才能登录
     * 参数：password:密码；verification:验证码
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码或验证码错误
         * UNKNOWN:用户已锁定
         * INVALID:请重新获取验证码
@@ -271,7 +277,7 @@
         * password:密码
         * cookie：cookie
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误
         * EXIST:用户不存在
         * OTHER:需要验证码
@@ -282,7 +288,7 @@
     * 判断用户角色，只有拥有user:abll角色的用户才能登录
     * 参数：password:密码；verification:验证码
     * 返回：
-        * OK(用户对象):登录成功
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码或验证码错误
         * UNKNOWN:用户已锁定
         * INVALID:请重新获取验证码
