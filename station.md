@@ -85,6 +85,8 @@
         * name: 摄像头名
         * code: 摄像头web编码
 		* appCode: 摄像头app编码
+        * appKey:摄像头appkey
+		* secret:摄像头secret
     * 返回：
         * OK: 添加成功 返回值id，name
         * FAIL: 参数有误
@@ -149,6 +151,8 @@
         * settingAddress：安装地点
         * code: 摄像头web编码
 		* appCode: 摄像头app编码
+        * appKey:摄像头appkey
+		* secret:摄像头secret		
     * 返回：
         * OK，添加成功
         * FAIL，参数有误
