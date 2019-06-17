@@ -72,6 +72,7 @@
     * 参数：
         * id 测站id
         * name: 仪表名
+		* factory: 厂家
 		* type: 仪表类型(枚举名-英文)
         * code 仪表编码
         * ciphertext 激活码
@@ -84,6 +85,7 @@
     * 参数：
         * id: 测站id
         * name: 摄像头名
+		* factory: 厂家
         * code: 摄像头web编码
 		* appCode: 摄像头app编码
         * appKey:摄像头appkey
@@ -228,6 +230,11 @@
       * DATA_REFUSE：不是自己的仪表
 23. 测站分享和协同不变，参见:  
   [[http://112.124.104.190:10001/soft/wiki/wikis/share]]
+24. 取得测站类型列表
+  * 参数：无
+  * 返回
+	* OK 取得成功 [{type:xxx, typeC:xxx}, {...}]
+	
 
 ### 二. 后台TradeController接口
 >
