@@ -46,7 +46,7 @@
     * 返回： 
         * OK： 新建成功
         * DATA_LOCK: 测站数量超限
-6. **编辑测站：/station/edit,POST**
+. **编辑测站：/station/edit,POST**
     * 测站图片由前台上传到阿里云，测站照片路径是固定的，所以不用传递给后台
     * 测站不可修改类型
     * pictureUrl由单独接口编辑，这里不传递
@@ -72,6 +72,7 @@
     * 参数：
         * id 测站id
         * name: 仪表名
+		* type: 仪表类型(枚举名-英文)
         * code 仪表编码
         * ciphertext 激活码
     * 返回：
@@ -101,6 +102,7 @@
     * 参数：
         * id: 仪表id
         * name： 仪表名
+		* type： 仪表类型
         * description： 仪表描述
         * factory: 厂家
         * contact: 联系人
