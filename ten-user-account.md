@@ -292,7 +292,41 @@
         * FAIL：密码或验证码错误
         * UNKNOWN:用户已锁定
         * INVALID:请重新获取验证码
-        * UNAUTHORIZED： 不是安布雷拉用户，无访问权限                           
+        * UNAUTHORIZED： 不是安布雷拉用户，无访问权限
+30. 取得附加用户列表:/user/attach/user/lists,GET
+	* 参数：无
+	* 返回
+	  * OK，附加用户列表，所有属性
+31. 新建附加用户: /user/attach/user/create POST
+	* 附加用户，可以登录到主账号，但敏感操作没有权限，如新建，删除项目，编辑要素等
+	* 新建时要判断，附加用户和用户下有无重复的手机号，如果有，返回DATA_EXIST
+	* 密码MD5加密后出传递
+	* 参数：
+	  * userName:名字
+	  * phone:手机号
+	  * password:密码
+	  * department:部门名称
+	* 返回
+	  * OK,新建成功
+	  * DATA_EXIST,手机号已存在
+32. 编辑附加用户: /user/attach/user/update POST	  
+	* 编辑时，除自己外，附加用户和用户下有无重复的手机号，如果有，返回DATA_EXIST
+	* 密码MD5加密后出传递
+	* 参数：
+	  * id:id
+	  * userName:名字
+	  * phone:手机号
+	  * password:密码
+	  * department:部门名称	
+	* 返回
+	  * OK,新建成功
+	  * DATA_EXIST,手机号已存在
+33. 删除附加用户：/user/attach/user/delete/{id},DELETE
+	* 删除附加用户
+	* 参数：
+	  * id:id
+	* 返回
+	  * OK,删除成功  
        
 ```
     /** 真实姓名 */
