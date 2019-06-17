@@ -230,7 +230,7 @@
       * DATA_REFUSE：不是自己的仪表
 23. 测站分享和协同不变，参见:  
   [[http://112.124.104.190:10001/soft/wiki/wikis/share]]
-24. 取得测站类型列表
+24. 取得测站类型列表,/station/type/lists
   * 参数：无
   * 返回
 	* OK 取得成功 [{type:xxx, typeC:xxx}, {...}]
