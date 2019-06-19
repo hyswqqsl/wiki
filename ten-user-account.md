@@ -76,16 +76,7 @@
         * OTHER:需要验证码，
         * UNKNOWN:用户已锁定
         * ACCOUNT_NO_CONFIRMED:子账号未确认
-13. 移动端登录：/account/phone/login POST
-    * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
-    * 参数：code：登录凭证，手机号或邮箱；password:密码
-    * 返回：
-		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
-        * FAIL：密码错误；
-        * EXIST:用户不存在,
-        * UNKNOWN:用户已锁定
-        * ACCOUNT_NO_CONFIRMED:子账号未确认 
-14. web端验证码登录：改为 /account/web/loginByVerify POST 
+13. web端验证码登录：改为 /account/web/loginByVerify POST 
     * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码，cookie；如果是email，通过email取得用户，验证用户密码，cookie
     * 参数：password:密码；verification:验证码
     * 返回：
@@ -94,10 +85,20 @@
         * UNKNOWN:用户已锁定；
         * INVALID:请重新获取验证码
         * ACCOUNT_NO_CONFIRMED:子账号未确认
-15. 判断输入的用户密码是否正确：/account/checkPassword,POST
+14. 判断输入的用户密码是否正确：/account/checkPassword,POST
     * 进入账号管理时，要求输入密码，保证安全
     * 参数：password:密码
     * 返回：OK:密码正确；FAIL：密码错误
+15. 移动端登录：/account/phone/login POST
+    * 每次登录都是用动态验证码    
+    * 参数：
+        * verification:验证码 
+    * 返回：
+		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
+        * FAIL：密码错误；
+        * EXIST:用户不存在,
+        * UNKNOWN:用户已锁定
+        * ACCOUNT_NO_CONFIRMED:子账号未确认
     
 ###  三. 用戶信息說明
 >
@@ -177,12 +178,10 @@
         * UNKNOWN:用户已锁定
         * UNAUTHORIZED： 不是水利云用户，无访问权限
 17. 移动端登录：/user/phone/login POST
-    * 用户登录支持手机号和邮箱两种方式，如果登录凭证是手机号，通过手机号取得用户，验证用户密码；
-	如果是email，通过email取得用户，验证用户密码,微信第一次登录也是这个
     * 判断用户角色，只有拥有user:simple角色的用户才能登录
+    * 每次登录都是用动态验证码    	
     * 参数：
-        * code：登录凭证，手机号或邮箱
-        * password:密码
+        * verification 验证码
     * 返回：
 		* OK:登录成功,返回用户信息+ qqslBucket:xxx, qqslimageBucket:xxx}
         * FAIL：密码错误
