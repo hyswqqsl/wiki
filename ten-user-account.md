@@ -293,6 +293,7 @@
         * INVALID:请重新获取验证码
         * UNAUTHORIZED： 不是安布雷拉用户，无访问权限
 30. 取得附加用户列表:/user/attach/user/lists,GET
+    * 根据session取得主账号下的附加用户
 	* 参数：无
 	* 返回
 	  * OK，附加用户列表，所有属性
